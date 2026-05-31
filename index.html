@@ -1,0 +1,1980 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sup. — 悩みを「動かすべき数値」に翻訳するサプリメント診断</title>
+<meta name="description" content="5分の問診で、あなたの悩みを「型」に診断し、動かすべき数値・効く成分・推奨サプリまで一気通貫で提案します。知的生産者の身体メンテのためのエビデンスベース・セルフケアガイド。">
+<meta name="theme-color" content="#0f5b3e">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="Sup.">
+<meta property="og:title" content="Sup. — 悩みを「動かすべき数値」に翻訳するサプリメント診断">
+<meta property="og:description" content="5分の問診で、悩み → 型 → 動かす数値 → 効く成分 → サプリまで。知的生産者のためのエビデンスベース・セルフケア。">
+<meta property="og:url" content="https://sup-app.com/">
+<meta property="og:locale" content="ja_JP">
+
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Sup. — 悩みを動かす数値に翻訳するサプリ診断">
+<meta name="twitter:description" content="5分の問診で、悩みを型に診断 → 動かす数値 → 効く成分 → サプリまで一気通貫。">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' fill='%230f5b3e' rx='20'/%3E%3Ctext x='50' y='68' text-anchor='middle' fill='white' font-size='56' font-weight='700' font-family='-apple-system,sans-serif'%3ES%3C/text%3E%3C/svg%3E">
+
+<style>
+html { scroll-behavior: smooth; }
+:root {
+  --bg: #FAFAF7;
+  --card-bg: #ffffff;
+  --text-main: #0e0e0e;
+  --text-sub: #6b7280;
+  --text-soft: #9ca3af;
+  --accent: #0f5b3e;
+  --accent-light: #e8f0eb;
+  --accent-dark: #0a4530;
+  --border: #ebe8e2;
+  --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+}
+* { box-sizing: border-box; margin: 0; padding: 0; }
+html, body { background: var(--bg); }
+body {
+  font-family: -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Segoe UI", sans-serif;
+  color: var(--text-main);
+  line-height: 1.7;
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+.container { max-width: 720px; margin: 0 auto; padding: 32px 24px 80px; }
+
+.brand { display: flex; align-items: baseline; gap: 12px; margin-bottom: 48px; }
+.brand-logo { font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
+.brand-logo .dot { color: var(--accent); }
+.brand-tagline { font-size: 12px; color: var(--text-sub); letter-spacing: 0.02em; }
+
+.hero { margin-bottom: 36px; }
+.hero-title { font-size: 30px; font-weight: 700; line-height: 1.45; margin-bottom: 14px; letter-spacing: -0.02em; }
+.hero-sub { color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+
+.category-section { margin-bottom: 32px; }
+.category-header {
+  display: flex;
+  align-items: baseline;
+  gap: 10px;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  padding-bottom: 8px;
+  border-bottom: 1px solid var(--border);
+}
+.category-code {
+  font-size: 10px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  color: var(--accent);
+  letter-spacing: 0.18em;
+  font-weight: 600;
+}
+.category-name {
+  font-size: 17px;
+  font-weight: 700;
+  color: var(--text-main);
+  letter-spacing: -0.01em;
+}
+.category-desc {
+  font-size: 12px;
+  color: var(--text-sub);
+}
+.problem-list { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; }
+@media (max-width: 600px) { .problem-list { grid-template-columns: 1fr; } }
+.problem-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 24px;
+  cursor: pointer;
+  transition: all 0.15s;
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  text-align: left;
+  width: 100%;
+  font-family: inherit;
+  color: var(--text-main);
+}
+.problem-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-1px);
+  box-shadow: var(--shadow);
+}
+.problem-icon { font-size: 28px; flex-shrink: 0; line-height: 1; }
+.problem-text { flex: 1; }
+.problem-title { font-weight: 600; font-size: 16px; margin-bottom: 4px; }
+.problem-sub { color: var(--text-sub); font-size: 13px; line-height: 1.5; }
+.problem-arrow { color: var(--text-soft); font-size: 18px; flex-shrink: 0; }
+
+.footer-note {
+  margin-top: 36px;
+  padding: 16px 20px;
+  background: var(--accent-light);
+  border-radius: 10px;
+  font-size: 12px;
+  color: var(--accent-dark);
+  line-height: 1.7;
+}
+
+.q-progress { display: flex; gap: 4px; margin-bottom: 24px; }
+.q-progress-item { flex: 1; height: 3px; background: var(--border); border-radius: 2px; transition: background 0.2s; }
+.q-progress-item.done { background: var(--accent); }
+.q-progress-item.current { background: var(--accent); opacity: 0.5; }
+
+.q-step-label {
+  font-size: 11px;
+  color: var(--text-sub);
+  margin-bottom: 12px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.1em;
+}
+.q-text { font-size: 22px; font-weight: 600; line-height: 1.55; margin-bottom: 28px; letter-spacing: -0.01em; }
+.q-options { display: grid; gap: 10px; }
+.q-option {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px 20px;
+  cursor: pointer;
+  font-size: 15px;
+  text-align: left;
+  font-family: inherit;
+  transition: all 0.12s;
+  width: 100%;
+  color: var(--text-main);
+  line-height: 1.55;
+}
+.q-option:hover {
+  border-color: var(--accent);
+  background: var(--accent-light);
+}
+.q-back {
+  margin-top: 24px;
+  background: none;
+  border: none;
+  color: var(--text-sub);
+  font-size: 13px;
+  cursor: pointer;
+  padding: 8px 0;
+  font-family: inherit;
+}
+.q-back:hover { color: var(--text-main); }
+
+.result-tag {
+  display: inline-block;
+  background: var(--accent-light);
+  color: var(--accent);
+  font-size: 11px;
+  padding: 4px 12px;
+  border-radius: 100px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+  margin-bottom: 14px;
+}
+.result-title { font-size: 28px; font-weight: 700; margin-bottom: 18px; letter-spacing: -0.02em; line-height: 1.4; }
+.result-summary {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  font-size: 15px;
+  color: var(--text-main);
+  margin-bottom: 8px;
+  line-height: 1.75;
+}
+.section-label {
+  font-size: 11px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.12em;
+  color: var(--text-sub);
+  margin-bottom: 12px;
+  margin-top: 36px;
+}
+
+.supp-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 20px 22px;
+  margin-bottom: 10px;
+}
+.supp-name { font-weight: 600; font-size: 16px; margin-bottom: 6px; line-height: 1.4; }
+.supp-dosage {
+  font-size: 12px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  color: var(--accent);
+  margin-bottom: 10px;
+  letter-spacing: 0.02em;
+}
+.supp-reason { font-size: 14px; color: var(--text-sub); line-height: 1.7; margin-bottom: 14px; }
+.supp-links { display: flex; flex-wrap: wrap; gap: 8px; }
+.supp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 500;
+  border: 1px solid var(--accent);
+  transition: all 0.15s;
+}
+.supp-link:hover { background: var(--accent-dark); }
+.supp-link.secondary { background: var(--card-bg); color: var(--accent); }
+.supp-link.secondary:hover { background: var(--accent-light); }
+
+.metric-card {
+  background: linear-gradient(135deg, var(--accent-light) 0%, #f3f7f4 100%);
+  border: 1px solid var(--accent);
+  border-radius: 14px;
+  padding: 22px 24px;
+}
+.metric-header { display: flex; align-items: center; gap: 14px; margin-bottom: 14px; }
+.metric-direction {
+  font-size: 22px;
+  font-weight: 700;
+  color: var(--accent);
+  background: white;
+  width: 42px;
+  height: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  border: 1px solid var(--accent);
+}
+.metric-action {
+  font-size: 10px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.15em;
+  color: var(--accent);
+  margin-bottom: 3px;
+  font-weight: 600;
+}
+.metric-label {
+  font-size: 17px;
+  font-weight: 600;
+  color: var(--text-main);
+  line-height: 1.4;
+}
+.metric-description {
+  font-size: 13px;
+  color: var(--text-main);
+  line-height: 1.7;
+  opacity: 0.85;
+}
+.ingredient-list {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 6px 22px;
+}
+.ingredient-item {
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.ingredient-item:last-child { border-bottom: none; }
+.ingredient-name {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 4px;
+  color: var(--accent-dark);
+}
+.ingredient-mechanism {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.65;
+}
+.lifestyle-list {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px 18px 40px;
+}
+.lifestyle-list li { margin-bottom: 10px; font-size: 14px; line-height: 1.75; }
+.lifestyle-list li:last-child { margin-bottom: 0; }
+
+.disclaimer {
+  margin-top: 40px;
+  padding: 14px 18px;
+  background: #f4f0e8;
+  border-radius: 10px;
+  font-size: 11px;
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+.action-row { margin-top: 28px; display: flex; gap: 10px; flex-wrap: wrap; }
+.action-btn {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  color: var(--text-main);
+  padding: 11px 18px;
+  border-radius: 10px;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  transition: all 0.12s;
+}
+.action-btn:hover { border-color: var(--accent); }
+.action-btn.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.action-btn.primary:hover { background: var(--accent-dark); }
+
+.hero-eyebrow {
+  font-size: 11px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+  margin-bottom: 16px;
+  font-weight: 600;
+}
+.hero-cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 24px;
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  padding: 14px 28px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 600;
+  transition: all 0.15s;
+  border: 1px solid var(--accent);
+}
+.hero-cta:hover { background: var(--accent-dark); transform: translateY(-1px); }
+
+.lp-section { margin: 72px 0; }
+.lp-title {
+  font-size: 24px;
+  font-weight: 700;
+  margin: 8px 0 20px;
+  line-height: 1.4;
+  letter-spacing: -0.02em;
+}
+.lp-text { margin-bottom: 28px; }
+.lp-text p {
+  margin-bottom: 14px;
+  font-size: 15px;
+  line-height: 1.85;
+  color: var(--text-main);
+}
+.lp-text p:last-child { margin-bottom: 0; }
+.lp-text strong { color: var(--accent-dark); font-weight: 600; }
+
+.feature-grid, .steps-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+.feature-card, .step-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 20px;
+}
+.feature-num, .step-num {
+  font-size: 11px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  color: var(--accent);
+  letter-spacing: 0.12em;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+.feature-name, .step-name {
+  font-size: 15px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  line-height: 1.4;
+}
+.feature-desc, .step-desc {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.7;
+}
+
+.faq-list { display: grid; gap: 10px; }
+.faq-item {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 18px 22px;
+}
+.faq-item summary {
+  font-weight: 600;
+  font-size: 14px;
+  cursor: pointer;
+  list-style: none;
+  position: relative;
+  padding-right: 28px;
+  line-height: 1.5;
+}
+.faq-item summary::-webkit-details-marker { display: none; }
+.faq-item summary::after {
+  content: "+";
+  position: absolute;
+  right: 0;
+  top: -2px;
+  font-size: 22px;
+  color: var(--accent);
+  transition: transform 0.2s;
+  line-height: 1;
+}
+.faq-item[open] summary::after { transform: rotate(45deg); }
+.faq-item p {
+  margin-top: 14px;
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+
+.lp-footer {
+  margin-top: 80px;
+  padding-top: 32px;
+  border-top: 1px solid var(--border);
+}
+.lp-footer-title {
+  font-weight: 600;
+  font-size: 14px;
+  margin-bottom: 10px;
+}
+.lp-footer-section { margin-bottom: 20px; }
+.lp-footer-section p {
+  font-size: 13px;
+  color: var(--text-sub);
+  line-height: 1.8;
+}
+.disclaimer-lp {
+  background: #f4f0e8;
+  border-radius: 10px;
+  padding: 14px 18px;
+  font-size: 11px;
+  color: var(--text-sub);
+  line-height: 1.75;
+  margin-top: 28px;
+}
+
+@media (max-width: 600px) {
+  .container { padding: 24px 18px 60px; }
+  .hero-title { font-size: 24px; }
+  .q-text { font-size: 19px; }
+  .result-title { font-size: 23px; }
+  .brand { margin-bottom: 36px; }
+  .feature-grid, .steps-grid { grid-template-columns: 1fr; }
+  .lp-section { margin: 56px 0; }
+  .lp-title { font-size: 21px; }
+}
+</style>
+</head>
+<body>
+<div class="container" id="app"></div>
+<script>
+// ------------------------------------------------------------
+// アフィリリンク生成 (Amazon + iHerb の2系統)
+// ------------------------------------------------------------
+const AMAZON_TAG = 'YOUR_TAG-22'; // ← Amazonアソシエイトタグに差し替え
+const IHERB_RCODE = 'YOUR_RCODE'; // ← iHerb rcode (Rewards Program) に差し替え
+const KW_JA = {
+  'chromium picolinate': 'クロム ピコリン酸',
+  'berberine': 'ベルベリン',
+  'alpha lipoic acid': 'αリポ酸',
+  'heme iron': 'ヘム鉄',
+  'vitamin c': 'ビタミンC',
+  'vitamin b12 folate': 'ビタミンB12 葉酸',
+  'magnesium glycinate': 'マグネシウム グリシネート',
+  'rhodiola rosea': 'ロディオラ',
+  'ashwagandha': 'アシュワガンダ',
+  'lactase enzyme': 'ラクターゼ 酵素',
+  'whey protein isolate unflavored': 'WPI プロテイン 無添加',
+  'probiotic 100 billion': 'プロバイオティクス 乳酸菌',
+  'digestive enzymes protease': '消化酵素 サプリ',
+  'l-glutamine powder': 'L-グルタミン パウダー',
+  'unflavored whey protein': 'ホエイプロテイン 無添加',
+  'probiotic multi strain 100 billion': 'プロバイオティクス 複合',
+  'inulin powder': 'イヌリン パウダー',
+  'glycine powder': 'グリシン パウダー',
+  'multivitamin': 'マルチビタミン',
+  'b complex 50': 'ビタミンB B-50',
+  'vitamin d3 2000': 'ビタミンD3 2000IU',
+  'omega 3 EPA DHA': 'オメガ3 EPA DHA',
+  'creatine monohydrate': 'クレアチン モノハイドレート',
+  'lions mane mushroom': 'ヤマブシタケ サプリ',
+  'l-theanine 200mg': 'L-テアニン',
+  'l-tyrosine': 'L-チロシン',
+  'alpha gpc': 'アルファGPC',
+  'melatonin 0.5mg': 'メラトニン 低用量',
+  '5-htp 100mg': '5-HTP セロトニン',
+  'zinc picolinate': '亜鉛 ピコリン酸',
+  'vitamin k2 mk7': 'ビタミンK2 MK-7',
+  'ubiquinol 100mg': 'ユビキノール CoQ10',
+  'nmn 500mg': 'NMN',
+  'omega 3 high EPA': 'オメガ3 高EPA',
+  'psyllium husk': 'サイリウム オオバコ',
+  'plant sterols': 'プラントステロール',
+  'bergamot extract': 'ベルガモット',
+  'niacin no flush': 'ナイアシン B3',
+  'milk thistle silymarin': 'シリマリン マリアアザミ',
+  'nac n-acetyl cysteine': 'NAC アセチルシステイン',
+  'curcumin high absorption': 'クルクミン 高吸収',
+  'anserine': 'アンセリン',
+  'potassium citrate': 'クエン酸カリウム'
+};
+function amazonLink(kw) {
+  const q = KW_JA[kw] || kw;
+  return `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}&tag=${AMAZON_TAG}`;
+}
+function iherbLink(kw) {
+  return `https://www.iherb.com/search?kw=${encodeURIComponent(kw)}&rcode=${IHERB_RCODE}`;
+}
+
+// ------------------------------------------------------------
+// カテゴリ: 4つの強化軸
+// ------------------------------------------------------------
+const CATEGORIES = [
+  { id: 'performance', name: '集中力強化', code: 'PERFORMANCE', description: 'パフォーマンスを上げる' },
+  { id: 'recovery',    name: '回復力強化', code: 'RECOVERY',    description: '疲れと睡眠を立て直す' },
+  { id: 'stability',   name: '安定性強化', code: 'STABILITY',   description: '心と腸のぶれを減らす' },
+  { id: 'bloodwork',   name: '数値改善',   code: 'BLOODWORK',   description: '健診の数字を動かす' }
+];
+
+// ------------------------------------------------------------
+// 論点ツリー: 7つの悩み × 4カテゴリ
+// ------------------------------------------------------------
+const PROBLEMS = {
+  sleepiness: {
+    id: 'sleepiness',
+    category: 'performance',
+    title: '食後の眠気',
+    subtitle: 'ランチ後、午後イチで意識が飛びそうになる',
+    icon: '😴',
+    questions: [
+      {
+        id: 'when',
+        text: '一番眠くなるのはどんな食事の後?',
+        options: [
+          { value: 'carb', label: '炭水化物中心の食事(丼物・パスタ・ラーメン・パン)' },
+          { value: 'volume', label: '量が多い食事 / 食べ過ぎた時' },
+          { value: 'any', label: '内容問わず食後はだいたい眠い' },
+          { value: 'protein', label: 'タンパク質中心の食事の後でも眠い' }
+        ]
+      },
+      {
+        id: 'time',
+        text: '一日の中で食後の眠気が最も強い時間帯は?',
+        options: [
+          { value: 'lunch', label: '昼食後だけ(午後イチが最悪)' },
+          { value: 'all', label: '朝も昼も夕も全部眠くなる' },
+          { value: 'morning', label: '朝食後が最も眠い' },
+          { value: 'dinner', label: '夕食後' }
+        ]
+      },
+      {
+        id: 'morning_fatigue',
+        text: '起床時の倦怠感はある?',
+        options: [
+          { value: 'yes', label: 'よくある(目覚めが悪い)' },
+          { value: 'sometimes', label: 'たまに' },
+          { value: 'no', label: 'ない' }
+        ]
+      },
+      {
+        id: 'gender',
+        text: '性別を教えてください(鉄不足判定用)',
+        options: [
+          { value: 'female', label: '女性' },
+          { value: 'male', label: '男性' },
+          { value: 'na', label: '答えたくない' }
+        ]
+      },
+      {
+        id: 'eating_speed',
+        text: '食事のスピードは?',
+        options: [
+          { value: 'fast', label: '早食い気味(15分以内に食べ終わる)' },
+          { value: 'medium', label: '普通(20-25分)' },
+          { value: 'slow', label: 'ゆっくり(30分以上)' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.morning_fatigue === 'yes' && a.time === 'all') return 'adrenal';
+      if (a.gender === 'female' && a.morning_fatigue !== 'no') return 'iron';
+      if (a.morning_fatigue === 'yes' && a.time !== 'lunch') return 'adrenal';
+      return 'bloodSugar';
+    },
+    types: {
+      bloodSugar: {
+        name: '血糖値スパイク型',
+        summary: 'ランチで丼ものや麺を食べた1時間後にまぶたが落ちる、あの現象。血糖が一気に上がって、その反動で急降下が起きてる「反応性低血糖」です。あなたの答え方は、この典型タイプ。',
+        targetMetric: {
+          label: '食後血糖値の急上昇(グルコーススパイク)',
+          direction: 'down',
+          description: '食後30-60分のピークを抑え、上下幅をなだらかにする必要があります。CGMで「鋭い山」が見えるタイプ。'
+        },
+        activeIngredients: [
+          { name: 'クロム', mechanism: 'インスリン感受性を高め、糖の取り込みを促進。' },
+          { name: 'ベルベリン', mechanism: 'AMPK活性化を介した血糖降下作用。メトホルミン類似。' },
+          { name: 'αリポ酸', mechanism: 'インスリン感受性改善 + 抗酸化。' },
+          { name: '水溶性食物繊維', mechanism: '小腸での糖の吸収を物理的に遅らせる。' }
+        ],
+        supplements: [
+          { name: 'クロム(Chromium picolinate)', dosage: '200-400μg / 食前', reason: 'インスリン感受性を高め、食後血糖の安定が報告される。最初の一本として実績あり。', kw: 'chromium picolinate' },
+          { name: 'ベルベリン', dosage: '500mg / 食前30分', reason: 'メトホルミンに匹敵する血糖降下作用が複数のメタ解析で確認されている注目成分。', kw: 'berberine' },
+          { name: 'αリポ酸', dosage: '300-600mg / 朝食前', reason: '抗酸化作用 + インスリン感受性改善。クロムと併用するケースも。', kw: 'alpha lipoic acid' }
+        ],
+        lifestyle: [
+          '食事順序を変える: 野菜 → タンパク質 → 炭水化物 の順で食べると食後血糖スパイクが2-3割減ることがメタ解析で示されている',
+          '食前にサイリウム(水溶性食物繊維)を水に溶かして飲む — 糖の吸収を緩やかにする',
+          '昼食を「主食半分・タンパク質1.5倍・野菜2倍」のルールに変える(ご飯丼を半盛りにするだけで体感が変わる)',
+          '早食いの自覚があるなら、一口30回噛む or 箸を一口ごとに置く'
+        ]
+      },
+      iron: {
+        name: '鉄不足型(隠れ貧血)',
+        summary: '女性は月経で鉄がじわじわ抜けていきます。ヘモグロビンは正常でも、貯蔵鉄(フェリチン)が枯れているケースが多い。朝の倦怠感 + 女性、というあなたの答えは、ここに当てはまるはず。',
+        targetMetric: {
+          label: 'フェリチン値(貯蔵鉄)',
+          direction: 'up',
+          description: '健診のヘモグロビンが正常でも、貯蔵鉄であるフェリチンが低い「隠れ貧血」が多い。目標は50ng/mL以上(理想は100)。'
+        },
+        activeIngredients: [
+          { name: 'ヘム鉄', mechanism: '吸収率が非ヘム鉄の3-5倍。胃腸負担も少ない。' },
+          { name: 'ビタミンC', mechanism: '鉄の吸収を倍増させる。' },
+          { name: 'ビタミンB12 + 葉酸', mechanism: '造血のもう一方の柱。鉄だけでは血が作れない。' }
+        ],
+        supplements: [
+          { name: 'ヘム鉄', dosage: '10-20mg / 1日1回 食後', reason: '非ヘム鉄より吸収率が3-5倍高く、胃腸障害も少ない。鉄サプリは「ヘム鉄」を選ぶのが鉄則。', kw: 'heme iron' },
+          { name: 'ビタミンC', dosage: '500mg / 鉄と同時', reason: '鉄の吸収を倍増させる。鉄サプリと必ずセットで。', kw: 'vitamin c' },
+          { name: 'ビタミンB12 + 葉酸', dosage: 'B12: 1000μg / 葉酸: 400μg', reason: '造血のもう一方の柱。鉄だけ補っても作れないケースをカバー。', kw: 'vitamin b12 folate' }
+        ],
+        lifestyle: [
+          'まず一度「フェリチン値」を病院で測ることを推奨(健診のヘモグロビンでは見えない)',
+          'コーヒー・緑茶・紅茶は鉄の吸収を阻害するので、サプリ摂取の前後30分は避ける',
+          '赤身肉・レバー・かつお・あさりを週2-3回',
+          '改善には3ヶ月程度かかる(フェリチン値の上昇は緩慢)'
+        ]
+      },
+      adrenal: {
+        name: '副腎・自律神経型',
+        summary: 'ずっとストレス下にいて、覚醒と眠気のリズムそのものが乱れているタイプ。朝もしんどい、昼も眠い、夜は妙にハイ、みたいな状態。サプリよりまず、睡眠の立て直しが本丸です。',
+        targetMetric: {
+          label: 'コルチゾール覚醒反応(CAR)',
+          direction: 'stabilize',
+          description: '正常では起床後30-45分でピーク → 夕方に低下するリズム。これが乱れると「全時間帯の眠気 + 起床時の倦怠感」が出る。'
+        },
+        activeIngredients: [
+          { name: 'マグネシウム', mechanism: '副腎機能サポート、神経興奮鎮静。' },
+          { name: 'ロディオラ', mechanism: 'アダプトゲン。ストレス耐性・疲労回復のRCTあり。' },
+          { name: 'アシュワガンダ', mechanism: 'コルチゾール低下のRCTが多数。' }
+        ],
+        supplements: [
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '副腎をサポート、深い眠りを促進。日本人の8割以上が不足している。', kw: 'magnesium glycinate' },
+          { name: 'ロディオラ(Rhodiola)', dosage: '200-400mg / 朝', reason: 'アダプトゲンの代表格。ストレス耐性と疲労回復のRCTエビデンスあり。', kw: 'rhodiola rosea' },
+          { name: 'アシュワガンダ', dosage: '300-600mg / 就寝前', reason: 'コルチゾール低下作用が複数のRCTで確認。ストレス起因の不眠・疲労に最も効きやすい。', kw: 'ashwagandha' }
+        ],
+        lifestyle: [
+          '就寝・起床時刻を固定する(平日休日±30分以内が理想)',
+          '朝起きて10分以内に日光を浴びる — コルチゾールリズムのリセット効果が大きい',
+          'カフェインを午後2時以降は摂らない(半減期6時間)',
+          '夜のブルーライト・強い照明を就寝90分前から落とす'
+        ]
+      }
+    }
+  },
+
+  protein: {
+    id: 'protein',
+    category: 'stability',
+    title: 'プロテインで便がゆるい',
+    subtitle: 'タンパク質を増やすと、お腹が崩れる',
+    icon: '💪',
+    questions: [
+      {
+        id: 'type',
+        text: '使ってるプロテインの種類は?',
+        options: [
+          { value: 'wpc', label: 'ホエイ(WPC / 普通のホエイ)' },
+          { value: 'wpi', label: 'ホエイ(WPI / アイソレート)' },
+          { value: 'casein', label: 'カゼイン' },
+          { value: 'plant', label: 'ソイ / ピー / 植物性' },
+          { value: 'unknown', label: '種類は意識してない' }
+        ]
+      },
+      {
+        id: 'milk',
+        text: '牛乳を飲むとお腹を壊す?',
+        options: [
+          { value: 'yes', label: 'はい(下痢 or お腹が張る)' },
+          { value: 'no', label: 'いいえ' },
+          { value: 'rarely', label: 'あまり飲まないので分からない' }
+        ]
+      },
+      {
+        id: 'amount',
+        text: '1回のプロテイン摂取量は?',
+        options: [
+          { value: 'low', label: '20g以下' },
+          { value: 'medium', label: '21-30g' },
+          { value: 'high', label: '31g以上' }
+        ]
+      },
+      {
+        id: 'sweetener',
+        text: '使っているプロテインに人工甘味料(アセスルファムK・スクラロース・マルチトール等)は入っている?',
+        options: [
+          { value: 'yes', label: '入っている' },
+          { value: 'no', label: '入っていない(WPI無添加・無加糖など)' },
+          { value: 'unknown', label: '不明' }
+        ]
+      },
+      {
+        id: 'fermented',
+        text: '発酵食品(ヨーグルト・納豆・キムチ・ぬか漬け)の摂取頻度は?',
+        options: [
+          { value: 'daily', label: 'ほぼ毎日' },
+          { value: 'weekly', label: '週2-3回' },
+          { value: 'rare', label: 'あまり食べない' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.milk === 'yes' && (a.type === 'wpc' || a.type === 'casein' || a.type === 'unknown')) return 'lactose';
+      if (a.amount === 'high') return 'overdose';
+      if (a.sweetener === 'yes') return 'sweetener';
+      return 'gut';
+    },
+    types: {
+      lactose: {
+        name: '乳糖不耐症型',
+        summary: '日本人の約7割は乳糖不耐性傾向と言われます。WPCには乳糖が残っており、これがお腹をゆるくする主犯。「牛乳でも下痢する + WPC使用」は典型像。',
+        targetMetric: {
+          label: 'ラクターゼ酵素活性 / 乳糖の消化能',
+          direction: 'up',
+          description: '乳糖を分解する酵素(ラクターゼ)の活性が低いため、未消化の乳糖が腸を刺激します。酵素補充 or 乳糖の少ない原料への切替が解。'
+        },
+        activeIngredients: [
+          { name: 'ラクターゼ酵素', mechanism: '乳糖を直接分解する酵素を外部から補充。' },
+          { name: 'WPI(原料切替)', mechanism: '乳糖を除去したホエイ。原料側で問題を解消。' },
+          { name: 'プロバイオティクス', mechanism: '腸内乳酸菌の補充で乳糖耐性を多少改善。' }
+        ],
+        supplements: [
+          { name: 'ラクターゼ酵素', dosage: 'プロテイン摂取直前', reason: '乳糖を分解する酵素。WPCをそのまま使い続けるなら必須の併用。', kw: 'lactase enzyme' },
+          { name: 'WPI(製品の切替)', dosage: '20-30g / 1回', reason: 'アイソレートは乳糖をほぼ除去している。製品を変えるだけで根治するケースが多い。', kw: 'whey protein isolate unflavored' },
+          { name: 'プロバイオティクス', dosage: '100億cfu以上 / 1日', reason: '腸内環境を整え、乳糖耐性を多少改善する効果も報告される。', kw: 'probiotic 100 billion' }
+        ],
+        lifestyle: [
+          '一番効くのは「製品の切替」 — WPC → WPI に変えるだけで治る人が多い',
+          '植物性プロテイン(ピー / ソイ / 玄米)も有力候補。乳糖が元からない',
+          'プロテインを牛乳で割っているなら、お湯・水・無調整豆乳に変える',
+          '改善が遅ければ、半年程度プロテインから離れて腸を休めるのも一手'
+        ]
+      },
+      overdose: {
+        name: '一回量過多型',
+        summary: '体が一度に処理できるタンパク質には限界があり、1回30g超は消化吸収が追いつかず腸に負担。「量を減らすだけで解決」が一番多いパターン。',
+        targetMetric: {
+          label: '一度に消化吸収できるタンパク質量',
+          direction: 'stabilize',
+          description: '体が一度に処理できる量(約20-25g)を超えると、未消化分が腸に残り下痢を起こします。「量を分ける」が本筋。'
+        },
+        activeIngredients: [
+          { name: 'プロテアーゼ(消化酵素)', mechanism: 'タンパク質の分解を補助し、消化負担を軽減。' },
+          { name: 'グルタミン', mechanism: '腸粘膜の主要エネルギー源。バリア機能を維持。' },
+          { name: 'プロバイオティクス', mechanism: '腸内菌叢のバランス維持。' }
+        ],
+        supplements: [
+          { name: '消化酵素(プロテアーゼ)', dosage: 'プロテイン摂取時', reason: 'タンパク質の分解を補助し、消化負担を軽減する。', kw: 'digestive enzymes protease' },
+          { name: 'グルタミン', dosage: '5g / 1日', reason: '腸粘膜の主要なエネルギー源。腸壁の修復・バリア機能の維持に。', kw: 'l-glutamine powder' },
+          { name: 'プロバイオティクス', dosage: '100億cfu以上 / 1日', reason: '高タンパク食で乱れがちな腸内菌叢のバランスを支える。', kw: 'probiotic 100 billion' }
+        ],
+        lifestyle: [
+          '1回30g → 1回20g × 2回 に分割するだけで解消するケースが多い',
+          '空腹時の一気飲みを避ける(食後 or 他の食事と一緒に)',
+          'プロテインの「スプーン1.5杯」を「1杯」にしてみる(ラベル通りの量が必ずしも合うとは限らない)',
+          '高タンパクを増やす時は食物繊維も比例して増やす(タンパク質1g増やすごとに繊維0.3-0.5g)'
+        ]
+      },
+      sweetener: {
+        name: '人工甘味料型',
+        summary: '安価なプロテインに含まれる糖アルコール(マルチトール等)や人工甘味料が腸を刺激しているパターン。これは「タンパク質」ではなく「添加物」が犯人。',
+        targetMetric: {
+          label: '腸の炎症レベル / 菌叢バランス',
+          direction: 'stabilize',
+          description: '糖アルコール・人工甘味料が腸内炎症と菌叢の乱れを引き起こしています。「タンパク質」ではなく「添加物」が原因。'
+        },
+        activeIngredients: [
+          { name: '無添加プロテイン(原料切替)', mechanism: '原因物質を排除。最短ルート。' },
+          { name: 'プロバイオティクス', mechanism: '乱れた菌叢の修復。' },
+          { name: 'グルタミン', mechanism: '炎症で荒れた腸粘膜の修復。' }
+        ],
+        supplements: [
+          { name: '無添加プロテイン(製品の切替)', dosage: '20-30g', reason: '原材料がホエイ/ソイのみのシンプル製品に切り替えるのが最短ルート。', kw: 'unflavored whey protein' },
+          { name: 'プロバイオティクス', dosage: '100億cfu以上 / 1日', reason: '甘味料で乱れた菌叢を整える。', kw: 'probiotic 100 billion' },
+          { name: 'グルタミン', dosage: '5g / 1日', reason: '荒れた腸粘膜の修復に。', kw: 'l-glutamine powder' }
+        ],
+        lifestyle: [
+          'まず「無添加プロテイン」or「WPI(無加糖)」に切り替えてみる(これだけで治ることが多い)',
+          '味付けは自分でカカオパウダー・きなこ・蜂蜜などで',
+          'プロテインバー・市販ヨーグルトの「人工甘味料」も同じ理由で要注意',
+          '「ゼロカロリー」食品全般を一度棚卸しすると、原因が複合的に見える'
+        ]
+      },
+      gut: {
+        name: '腸内環境ディスバイオシス型',
+        summary: '高タンパク食は悪玉菌のエサにもなりやすく、菌叢バランスが崩れることがある。発酵食品摂取が少ない場合の典型パターン。',
+        targetMetric: {
+          label: '腸内善玉菌 / 短鎖脂肪酸産生',
+          direction: 'up',
+          description: '高タンパク食で悪玉菌が優位になると、短鎖脂肪酸(腸の燃料)が減って便がゆるくなります。善玉菌の増加が目標。'
+        },
+        activeIngredients: [
+          { name: 'プロバイオティクス(複数株)', mechanism: '善玉菌の直接補充。' },
+          { name: 'プレバイオティクス(イヌリン)', mechanism: '善玉菌のエサ。発酵で短鎖脂肪酸を産生。' },
+          { name: 'グルタミン', mechanism: '腸粘膜の修復。' }
+        ],
+        supplements: [
+          { name: 'プロバイオティクス(複数株)', dosage: '100-300億cfu / 1日', reason: '善玉菌の補充。複数株(ラクトバチルス + ビフィドバクテリウム)入りが望ましい。', kw: 'probiotic multi strain 100 billion' },
+          { name: '水溶性食物繊維(イヌリン)', dosage: '5-10g / 1日', reason: '善玉菌のエサ(プレバイオティクス)。プロバイオティクスとセットで効果増。', kw: 'inulin powder' },
+          { name: 'グルタミン', dosage: '5g / 1日', reason: '腸粘膜の修復・腸壁バリア機能に。', kw: 'l-glutamine powder' }
+        ],
+        lifestyle: [
+          '発酵食品(キムチ・納豆・無糖ヨーグルト・ぬか漬け)を毎日',
+          '食物繊維を1日25g以上 — タンパク質を増やすなら食物繊維も比例して増やす',
+          'タンパク源を「ホエイだけ」にせず「肉・魚・大豆・卵」に分散させる',
+          '抗生物質を使った後の3ヶ月は腸内環境が乱れやすい — 心当たりあれば要注意'
+        ]
+      }
+    }
+  },
+
+  focus: {
+    id: 'focus',
+    category: 'performance',
+    title: '脱カフェインの集中力',
+    subtitle: 'コーヒー無しで頭をクリアに保ちたい',
+    icon: '🧠',
+    questions: [
+      {
+        id: 'when',
+        text: '集中が切れやすい時間帯は?',
+        options: [
+          { value: 'morning', label: '午前(朝イチから既にしんどい)' },
+          { value: 'afternoon', label: '午後(2-4時の魔の時間帯)' },
+          { value: 'evening', label: '夕方以降' },
+          { value: 'always', label: '時間帯問わず常に集中力が低い' }
+        ]
+      },
+      {
+        id: 'sleep',
+        text: '睡眠の質はどう?',
+        options: [
+          { value: 'bad', label: '悪い(寝つき悪い / 中途覚醒 / 目覚め悪い のどれか)' },
+          { value: 'ok', label: 'まあまあ' },
+          { value: 'good', label: '良い(7時間以上 + 目覚めスッキリ)' }
+        ]
+      },
+      {
+        id: 'exercise',
+        text: '運動習慣は?',
+        options: [
+          { value: 'rare', label: '週1回以下' },
+          { value: 'sometimes', label: '週2-3回' },
+          { value: 'regular', label: '週4回以上' }
+        ]
+      },
+      {
+        id: 'diet',
+        text: '食事の規則性は?',
+        options: [
+          { value: 'irregular', label: '不規則(時間バラバラ / 抜くこと多い)' },
+          { value: 'regular_simple', label: '時間は規則的だがコンビニ等が中心' },
+          { value: 'regular_balanced', label: '規則的でバランスも意識している' }
+        ]
+      },
+      {
+        id: 'tried',
+        text: 'これまでに試したことのあるサプリは?(直感で一番近いもの)',
+        options: [
+          { value: 'none', label: '特になし' },
+          { value: 'theanine', label: 'L-テアニン' },
+          { value: 'omega3', label: 'オメガ3 / 魚油' },
+          { value: 'b_iron', label: 'ビタミンB / 鉄' },
+          { value: 'multi', label: 'マルチビタミン' },
+          { value: 'other', label: 'その他' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.sleep === 'bad') return 'sleep';
+      if (a.diet === 'irregular' && a.exercise === 'rare') return 'nutrition';
+      if (a.when === 'always') return 'inflammation';
+      return 'neurotransmitter';
+    },
+    types: {
+      sleep: {
+        name: '睡眠起因型',
+        summary: '集中力の最大の敵は睡眠不足。「カフェイン以外で集中力を上げる」の本丸はここ。サプリで睡眠を立て直すと集中力は劇的に変わります。',
+        targetMetric: {
+          label: '深睡眠比率 / 総睡眠時間',
+          direction: 'up',
+          description: '集中力低下の最大要因は睡眠負債。深睡眠(ノンレム3-4)を増やすと日中の集中力が劇的に変わります。'
+        },
+        activeIngredients: [
+          { name: 'マグネシウム(グリシネート)', mechanism: '神経安定 + 深い眠りの促進。' },
+          { name: 'グリシン', mechanism: '深部体温低下 + ノンレム睡眠増加。' },
+          { name: 'アシュワガンダ', mechanism: 'コルチゾール低下による睡眠改善。' }
+        ],
+        supplements: [
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '神経の興奮を鎮め、深い眠りを促す。日本人の大多数が不足。', kw: 'magnesium glycinate' },
+          { name: 'グリシン', dosage: '3g / 就寝30分前', reason: '深部体温を下げ、ノンレム睡眠を増やす。日本のRCTでも効果が確認されている。', kw: 'glycine powder' },
+          { name: 'アシュワガンダ', dosage: '300-600mg / 就寝前', reason: 'コルチゾール低下による睡眠改善。ストレス起因の不眠に最有力。', kw: 'ashwagandha' }
+        ],
+        lifestyle: [
+          '寝る90分前のブルーライトカット / 寝室温度を18-20度に',
+          '朝起きて10分以内に日光を浴びる(体内時計のリセット = 夜の入眠改善)',
+          'カフェインは「14時カットオフ」が鉄則(半減期6時間)',
+          '睡眠が整えば、上記サプリ自体が不要になる人も多い'
+        ]
+      },
+      nutrition: {
+        name: '栄養不足型',
+        summary: '不規則な食生活で必須栄養素が慢性的に不足し、集中力の土台が弱っている状態。サプリより食事の見直しが本筋ですが、サプリで底上げできる。',
+        targetMetric: {
+          label: '不足栄養素(ビタミンD / B群 / 鉄)の血中濃度',
+          direction: 'up',
+          description: '集中力の土台となる栄養素が慢性的に不足。底上げで土台を作る。'
+        },
+        activeIngredients: [
+          { name: 'マルチビタミン・ミネラル', mechanism: '不足全般の底上げ。' },
+          { name: 'ビタミンB-Complex', mechanism: 'エネルギー代謝の鍵、不足で集中力が落ちる。' },
+          { name: 'ビタミンD3', mechanism: '脳機能・気分・エネルギーに必須。日本人の半数が不足。' }
+        ],
+        supplements: [
+          { name: 'マルチビタミン・ミネラル', dosage: '1日量(製品指定)', reason: '不足栄養素全般の底上げ。最初の一本として無難。', kw: 'multivitamin' },
+          { name: 'ビタミンB-Complex', dosage: 'B-50 / 1日', reason: 'エネルギー代謝の鍵。不足時に集中力が一気に落ちる。', kw: 'b complex 50' },
+          { name: 'ビタミンD3', dosage: '2000-4000IU / 1日', reason: '日本人の約半数が不足。脳機能・気分にも効く。', kw: 'vitamin d3 2000' }
+        ],
+        lifestyle: [
+          '朝食に「タンパク質20g」を入れる(目玉焼き2個 + プロテイン or 納豆 + 卵 など)',
+          'コンビニ昼食でも「鶏胸肉サラダ + ゆで卵」のように選ぶ',
+          '昼にナッツ一掴みを常備(マグネシウム + 良質脂質)',
+          '食事を整える方が長期的にはサプリより効くので、サプリは「移行期の補助」と捉える'
+        ]
+      },
+      inflammation: {
+        name: '脳血流・抗炎症型',
+        summary: '慢性的な低集中の背景には、脳の慢性炎症や血流低下があることが多い。デスクワーク主体で運動不足の人にも該当しやすい。',
+        targetMetric: {
+          label: 'オメガ3指数 / 全身炎症マーカー(CRP)',
+          direction: 'stabilize',
+          description: '慢性炎症が脳機能を低下させる。抗炎症と脳血流改善で、クリアな思考を取り戻す。'
+        },
+        activeIngredients: [
+          { name: 'オメガ3(EPA/DHA)', mechanism: '脳細胞膜の主成分 + 抗炎症作用。' },
+          { name: 'クレアチン', mechanism: '脳のATP産生を増やす。認知機能効果のメタ解析あり。' },
+          { name: 'ライオンズメイン(NGF)', mechanism: '神経成長因子(NGF)産生を促進。' }
+        ],
+        supplements: [
+          { name: 'オメガ3(EPA/DHA)', dosage: 'EPA + DHA 合計 1000-2000mg / 1日', reason: '脳細胞膜の主成分 + 抗炎症作用。集中力・認知のエビデンスは強固。', kw: 'omega 3 EPA DHA' },
+          { name: 'クレアチン(モノハイドレート)', dosage: '5g / 1日', reason: '筋肉だけでなく、脳のエネルギー(ATP)産生にも効く。2024-25のメタ解析で認知機能効果が再注目。', kw: 'creatine monohydrate' },
+          { name: 'ライオンズメイン(ヤマブシタケ)', dosage: '500-1000mg / 1日', reason: '神経成長因子(NGF)の産生促進。長期使用で認知機能改善のRCTあり。', kw: 'lions mane mushroom' }
+        ],
+        lifestyle: [
+          '週3回×20-30分の有酸素運動(脳血流改善は即効性が高い)',
+          '青魚を週2-3回(サバ・イワシ・サーモン)',
+          '長時間座位を避ける — 45分ごとに2-3分立って動く',
+          '慢性炎症には食事の総量より質(加工食品 / 砂糖 / 揚げ物の頻度)が効く'
+        ]
+      },
+      neurotransmitter: {
+        name: '神経伝達型(午後の集中切れ)',
+        summary: '午後の集中切れは、神経伝達物質(アセチルコリン・ドーパミン)の枯渇が一因。前駆体を補給すると体感しやすい。あなたが探している「カフェインの次」の本命カテゴリ。',
+        targetMetric: {
+          label: 'ドーパミン / アセチルコリン / セロトニン',
+          direction: 'up',
+          description: '午後の集中切れは神経伝達物質の枯渇が原因。前駆体を補給して産生をサポート。'
+        },
+        activeIngredients: [
+          { name: 'L-テアニン', mechanism: 'α波増加によるリラックス × 集中。即効性。' },
+          { name: 'L-チロシン', mechanism: 'ドーパミン・ノルアドレナリンの前駆体。' },
+          { name: 'アルファGPC', mechanism: 'アセチルコリン前駆体。記憶・注意。' }
+        ],
+        supplements: [
+          { name: 'L-テアニン', dosage: '200mg / 集中したい時', reason: 'リラックスしながら集中(α波増加)。即効性あり、副作用ほぼゼロ。コーヒー代替の最有力候補。', kw: 'l-theanine 200mg' },
+          { name: 'L-チロシン', dosage: '500-1500mg / 朝', reason: 'ドーパミン・ノルアドレナリンの前駆体。ストレス下の認知パフォーマンス維持。', kw: 'l-tyrosine' },
+          { name: 'アルファGPC', dosage: '300-600mg / 朝', reason: 'アセチルコリン前駆体。短期記憶・注意のエビデンス豊富。', kw: 'alpha gpc' }
+        ],
+        lifestyle: [
+          '午後の眠気のピーク(13-15時)に10分のパワーナップ(20分以上は逆効果)',
+          '会議の合間に2-3分の早歩き(脳血流のリセット)',
+          'まず L-テアニン200mg を「カフェインの代わり」として試してみる価値がある',
+          '完全脱カフェインを目指すなら2-3週間の離脱期があると想定しておく'
+        ]
+      }
+    }
+  },
+
+  sleep: {
+    id: 'sleep',
+    category: 'recovery',
+    title: 'ベッドに入っても熟睡できない',
+    subtitle: '寝つきが悪い / 夜中に目が覚める / 眠りが浅い',
+    icon: '🌙',
+    questions: [
+      {
+        id: 'main_issue',
+        text: '睡眠の悩みで最も当てはまるものは?',
+        options: [
+          { value: 'falling_asleep', label: '寝つきが悪い(30分以上かかる)' },
+          { value: 'mid_wake', label: '夜中に目が覚める(中途覚醒)' },
+          { value: 'early_wake', label: '早朝に目が覚めて再入眠できない' },
+          { value: 'unrefreshed', label: '寝ても疲れが取れない / 目覚めが悪い' }
+        ]
+      },
+      {
+        id: 'before_bed',
+        text: '寝る直前の状態は?',
+        options: [
+          { value: 'mind_racing', label: '頭が冴えてしまう / 考えごとが止まらない' },
+          { value: 'anxious', label: '不安・焦り・緊張がある' },
+          { value: 'tired_body', label: '体は疲れてるが眠れない' },
+          { value: 'after_meal', label: '食後すぐに寝てしまう' }
+        ]
+      },
+      {
+        id: 'caffeine',
+        text: 'カフェイン摂取の習慣は?',
+        options: [
+          { value: 'late', label: '午後3時以降にも飲む' },
+          { value: 'morning', label: '午前中のみ' },
+          { value: 'none', label: 'ほぼ摂らない' }
+        ]
+      },
+      {
+        id: 'stress',
+        text: '日中のストレスレベルは?',
+        options: [
+          { value: 'high', label: '高い(常に緊張)' },
+          { value: 'medium', label: '普通' },
+          { value: 'low', label: '低い' }
+        ]
+      },
+      {
+        id: 'environment',
+        text: '寝室の環境は?',
+        options: [
+          { value: 'bad', label: '明るい / 騒音あり / 暑い・寒い' },
+          { value: 'ok', label: '普通' },
+          { value: 'good', label: '暗く静かで温度適正(18-20度)' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.main_issue === 'falling_asleep' && (a.before_bed === 'mind_racing' || a.before_bed === 'anxious')) return 'stress_insomnia';
+      if (a.main_issue === 'falling_asleep') return 'sleep_onset';
+      if (a.main_issue === 'mid_wake' || a.main_issue === 'early_wake') return 'mid_wake';
+      return 'shallow_sleep';
+    },
+    types: {
+      sleep_onset: {
+        name: '入眠困難型',
+        summary: 'ベッドに入っても眠りに落ちるまで時間がかかるパターン。メラトニン分泌が遅れているか、就寝前の環境刺激が強い可能性。',
+        targetMetric: {
+          label: '夜のメラトニン分泌量',
+          direction: 'up',
+          description: '体内時計が遅れているとメラトニン(睡眠ホルモン)が夜になっても出にくくなります。正常リズムに戻すのがゴール。'
+        },
+        activeIngredients: [
+          { name: 'メラトニン(または前駆体5-HTP)', mechanism: '直接または間接的にメラトニン量を補充し、入眠スイッチを入れる。' },
+          { name: 'グリシン', mechanism: '深部体温を下げ、入眠を促進。日本のRCTで効果確認。' },
+          { name: 'マグネシウム', mechanism: '神経の興奮を鎮め、自然な眠気を引き出す。' }
+        ],
+        supplements: [
+          { name: 'メラトニン(低用量)', dosage: '0.5-1mg / 就寝30分前', reason: '体内時計のずれを補正。少量で十分効くため過剰摂取は不要。日本では海外品個人輸入。', kw: 'melatonin 0.5mg' },
+          { name: 'グリシン', dosage: '3g / 就寝30分前', reason: '深部体温を下げ、ノンレム睡眠への移行を早める。', kw: 'glycine powder' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '神経の興奮鎮静。日本人の大多数が不足。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '就寝90分前のブルーライト遮断(画面 / 強い照明)',
+          '朝起きて10分以内に日光を浴びる(夜のメラトニン分泌を促す)',
+          '寝室温度を18-20度に',
+          '就寝1時間前に40度のお風呂15分(深部体温の上下が入眠を促進)'
+        ]
+      },
+      stress_insomnia: {
+        name: 'ストレス起因型(頭が冴える)',
+        summary: '就寝時にも交感神経が抜けず、頭の中で思考が止まらないパターン。コルチゾールが下がりきらず、自律神経が緊張モードのまま。',
+        targetMetric: {
+          label: '夜間のコルチゾール / 交感神経活動',
+          direction: 'down',
+          description: '夜にコルチゾールが下がらないと、メラトニンが出ても眠れません。就寝時の副交感神経への切替が本丸。'
+        },
+        activeIngredients: [
+          { name: 'アシュワガンダ', mechanism: 'コルチゾールを有意に低下させるRCTが多数。アダプトゲンの代表格。' },
+          { name: 'L-テアニン', mechanism: 'α波を増やしリラックス。即効性あり。' },
+          { name: 'マグネシウム', mechanism: '神経興奮を鎮静、脳の過活動を抑える。' }
+        ],
+        supplements: [
+          { name: 'アシュワガンダ', dosage: '300-600mg / 就寝前', reason: 'コルチゾール低下による睡眠改善のエビデンス強固。ストレス性不眠の第一選択。', kw: 'ashwagandha' },
+          { name: 'L-テアニン', dosage: '200mg / 就寝前', reason: 'α波増加 + リラックス。アシュワガンダと併用◎。', kw: 'l-theanine 200mg' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '副腎サポート + 神経興奮鎮静。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '就寝1時間前に「明日のToDo」を書き出す(頭の中を吐き出す)',
+          '4-7-8呼吸法 or ヨガニドラを就寝前',
+          'カフェインは「14時カットオフ」(半減期6時間)',
+          '就寝前にニュース / SNS / 仕事メールを見ない'
+        ]
+      },
+      mid_wake: {
+        name: '中途覚醒型',
+        summary: '深夜2-4時に目が覚めて再入眠が難しいパターン。コルチゾールの早期上昇 or 夜間低血糖が原因のことが多い。',
+        targetMetric: {
+          label: '深夜のコルチゾール早期上昇 / 夜間血糖の安定',
+          direction: 'down',
+          description: 'コルチゾールが本来上がるべき時刻より早く分泌されると深夜に覚醒します。または夜間低血糖でも覚醒します。'
+        },
+        activeIngredients: [
+          { name: 'アシュワガンダ', mechanism: 'コルチゾールリズムを正常化。' },
+          { name: 'マグネシウム', mechanism: '副腎機能のサポート + 神経安定。' },
+          { name: '5-HTP', mechanism: 'セロトニン → メラトニン経路を強化。夜間の睡眠継続をサポート。' }
+        ],
+        supplements: [
+          { name: 'アシュワガンダ', dosage: '300-600mg / 就寝前', reason: 'コルチゾール正常化で深夜覚醒が減少。', kw: 'ashwagandha' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '副腎・神経系の安定化。', kw: 'magnesium glycinate' },
+          { name: '5-HTP', dosage: '50-100mg / 就寝前', reason: 'セロトニン経路を介したメラトニン補充。SSRI服用中は併用不可。', kw: '5-htp 100mg' }
+        ],
+        lifestyle: [
+          '夕食を就寝3時間前までに済ませる',
+          '就寝前に少量のタンパク質(ナッツ一掴み等)で夜間低血糖を予防',
+          'アルコールを控える(中途覚醒を強烈に悪化させる)',
+          '寝室を暗く保ち、夜中の光刺激を遮る'
+        ]
+      },
+      shallow_sleep: {
+        name: '浅い睡眠型(目覚めが悪い)',
+        summary: '寝てるはずなのに疲れが取れない、目覚めがどんよりするパターン。深睡眠(ノンレム3-4段階)の比率が低い可能性。',
+        targetMetric: {
+          label: '深睡眠(ノンレム3-4)の比率',
+          direction: 'up',
+          description: '深睡眠は身体回復・記憶定着・成長ホルモン分泌に必要。総睡眠時間の20-25%が理想。Apple Watch / Oura で計測可能。'
+        },
+        activeIngredients: [
+          { name: 'グリシン', mechanism: '深部体温を下げ、深睡眠比率を上げる。' },
+          { name: 'マグネシウム(グリシネート)', mechanism: '神経安定 + 深睡眠促進。' },
+          { name: '亜鉛', mechanism: '深睡眠維持に必要。不足で目覚めが悪化。' }
+        ],
+        supplements: [
+          { name: 'グリシン', dosage: '3g / 就寝30分前', reason: '深睡眠比率の増加が日本のRCTで確認。', kw: 'glycine powder' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '深睡眠促進。グリシンと相性◎。', kw: 'magnesium glycinate' },
+          { name: '亜鉛', dosage: '15-30mg / 就寝前', reason: '深睡眠の維持・テストステロン産生にも関与。', kw: 'zinc picolinate' }
+        ],
+        lifestyle: [
+          '寝室温度を18-20度に厳密に管理',
+          '就寝1時間前に入浴 → 深部体温の下降幅を作る',
+          '寝具(マットレス・枕)が体に合っているか見直す',
+          '就寝前のアルコール厳禁(深睡眠を破壊する)'
+        ]
+      }
+    }
+  },
+
+  fatigue: {
+    id: 'fatigue',
+    category: 'recovery',
+    title: '目が覚めても立ち上がれない',
+    subtitle: '起きてから2時間しんどい / 寝ても抜けない',
+    icon: '🥱',
+    questions: [
+      {
+        id: 'symptom',
+        text: '朝の疲労感の主な症状は?',
+        options: [
+          { value: 'heavy_body', label: '体が重い / 起き上がれない' },
+          { value: 'mental_fog', label: '頭が回らない / 思考が遅い' },
+          { value: 'mood_down', label: '気分が落ち込む / やる気が出ない' },
+          { value: 'all', label: '全部当てはまる' }
+        ]
+      },
+      {
+        id: 'sleep_hours',
+        text: '平均睡眠時間は?',
+        options: [
+          { value: 'short', label: '6時間以下' },
+          { value: 'medium', label: '6-7時間' },
+          { value: 'normal', label: '7-8時間' },
+          { value: 'long', label: '8時間以上' }
+        ]
+      },
+      {
+        id: 'sleep_quality',
+        text: '寝ても疲れが取れない感覚はある?',
+        options: [
+          { value: 'yes', label: 'ある(どれだけ寝ても抜けない)' },
+          { value: 'sometimes', label: 'たまに' },
+          { value: 'no', label: '起きるとスッキリしてる' }
+        ]
+      },
+      {
+        id: 'season',
+        text: '季節差はある?',
+        options: [
+          { value: 'winter', label: '冬・梅雨時期が特にきつい' },
+          { value: 'all_year', label: '一年中変わらない' },
+          { value: 'spring', label: '春先 / 季節の変わり目がきつい' }
+        ]
+      },
+      {
+        id: 'exercise',
+        text: '運動習慣は?',
+        options: [
+          { value: 'none', label: 'ほぼなし' },
+          { value: 'light', label: '週1-2回 軽く' },
+          { value: 'regular', label: '週3回以上' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.sleep_hours === 'short') return 'sleep_deficit';
+      if (a.sleep_quality === 'yes' && a.symptom === 'all') return 'adrenal_fatigue';
+      if (a.season === 'winter') return 'vitamin_d';
+      return 'mitochondria';
+    },
+    types: {
+      sleep_deficit: {
+        name: '単純睡眠不足型',
+        summary: '6時間以下の睡眠が常態化すると、どんなサプリも焼け石に水。まず睡眠時間を確保する方が先。',
+        targetMetric: {
+          label: '総睡眠時間',
+          direction: 'up',
+          description: '7時間以上の睡眠が確保できない限り、サプリの効果は限定的。「就寝時刻の前倒し」が本丸。'
+        },
+        activeIngredients: [
+          { name: 'グリシン', mechanism: '入眠を早め、限られた時間で深睡眠を稼ぐ。' },
+          { name: 'マグネシウム', mechanism: '神経安定で短時間睡眠でも質を上げる。' },
+          { name: 'L-テアニン(カフェイン代替)', mechanism: '日中のカフェイン依存を減らして睡眠を守る。' }
+        ],
+        supplements: [
+          { name: 'グリシン', dosage: '3g / 就寝30分前', reason: '入眠の早期化 + 深睡眠比率の向上。短時間睡眠の効率を上げる。', kw: 'glycine powder' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '神経安定で睡眠の質を底上げ。', kw: 'magnesium glycinate' },
+          { name: 'L-テアニン', dosage: '200mg / 集中時', reason: '日中のカフェイン代替。睡眠改善との好循環を作る。', kw: 'l-theanine 200mg' }
+        ],
+        lifestyle: [
+          'まず就寝時刻を30分前倒し(睡眠時間を増やすのが最優先)',
+          '昼休みの10-20分の仮眠(20分超えると逆効果)',
+          '休日に「寝溜め」より「平日の前倒し」を優先',
+          'サプリは「補助」と捉え、睡眠時間確保を最重要視する'
+        ]
+      },
+      adrenal_fatigue: {
+        name: '副腎疲労型',
+        summary: '慢性的なストレスでコルチゾール分泌リズムが乱れているパターン。朝に最も低く、夜高くなる「逆リズム」になっていることも。',
+        targetMetric: {
+          label: 'コルチゾール覚醒反応(CAR)',
+          direction: 'stabilize',
+          description: '正常では起床後30-45分でコルチゾールがピーク。副腎疲労ではこの反応が鈍化します。リズムの正常化が目標。'
+        },
+        activeIngredients: [
+          { name: 'アシュワガンダ', mechanism: 'コルチゾールリズムの正常化。複数RCTで実証。' },
+          { name: 'ロディオラ', mechanism: 'アダプトゲン。疲労感の改善RCTあり。' },
+          { name: 'ビタミンC + B群', mechanism: '副腎が大量消費する栄養素を補給。' }
+        ],
+        supplements: [
+          { name: 'アシュワガンダ', dosage: '300-600mg / 朝・就寝前', reason: 'コルチゾール正常化の第一選択。', kw: 'ashwagandha' },
+          { name: 'ロディオラ', dosage: '200-400mg / 朝', reason: 'アダプトゲンの併用で相乗効果。', kw: 'rhodiola rosea' },
+          { name: 'ビタミンB-Complex', dosage: 'B-50 / 朝', reason: '副腎機能の栄養基盤。', kw: 'b complex 50' }
+        ],
+        lifestyle: [
+          '就寝・起床時刻を固定(平日休日±30分以内)',
+          '朝起きて10分以内に日光を浴びる(コルチゾールリズムリセット)',
+          '高強度運動を避け、ヨガ・散歩等の低強度に切替',
+          '回復には3-6ヶ月かかる前提で長期戦に切り替える'
+        ]
+      },
+      vitamin_d: {
+        name: 'ビタミンD不足型',
+        summary: '冬季の疲労感はビタミンD不足が原因のことが多い。日本人の半数以上が血中VD不足域と報告。',
+        targetMetric: {
+          label: '血中ビタミンD(25(OH)D)',
+          direction: 'up',
+          description: '理想は30-50ng/mL。日本人平均は約20ng/mLで「不足」域。VDは免疫・骨・気分・エネルギー代謝すべてに関わる。'
+        },
+        activeIngredients: [
+          { name: 'ビタミンD3', mechanism: '直接補充。VD2より吸収率が高い。' },
+          { name: 'ビタミンK2', mechanism: 'VDと併用でカルシウム代謝を最適化。' },
+          { name: 'マグネシウム', mechanism: 'VDの活性化に必要。不足するとVDが効きにくい。' }
+        ],
+        supplements: [
+          { name: 'ビタミンD3', dosage: '2000-4000IU / 1日', reason: '冬季は4000IU、夏季は2000IU目安。理想は血液検査で調整。', kw: 'vitamin d3 2000' },
+          { name: 'ビタミンK2(MK-7)', dosage: '100-200μg / 1日', reason: 'VD3と必ずセット。カルシウムを骨に向ける。', kw: 'vitamin k2 mk7' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: 'VDの活性化に必要。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '冬でも晴れた日は10-15分の日光浴(腕・顔)',
+          '青魚(サバ・サーモン・イワシ)を週2-3回',
+          '健診のオプションで「血中VD測定」を追加(3000-5000円)',
+          '改善には3ヶ月以上かかる(脂溶性ビタミンの蓄積に時間)'
+        ]
+      },
+      mitochondria: {
+        name: 'ミトコンドリア機能低下型',
+        summary: '細胞のエネルギー工場であるミトコンドリアの働きが低下しているパターン。慢性疲労の根本要因として近年注目。',
+        targetMetric: {
+          label: 'ミトコンドリアのATP産生能',
+          direction: 'up',
+          description: 'ATPは細胞のエネルギー通貨。産生量が落ちると全身倦怠感として現れる。加齢・運動不足・栄養不足で低下。'
+        },
+        activeIngredients: [
+          { name: 'CoQ10(ユビキノール)', mechanism: 'ミトコンドリア電子伝達系の補酵素。ATP産生に直接関与。' },
+          { name: 'NMN または NR', mechanism: 'NAD+前駆体。ミトコンドリア機能とエネルギー代謝の鍵。' },
+          { name: 'マグネシウム', mechanism: 'ATP合成酵素の必須補因子。' }
+        ],
+        supplements: [
+          { name: 'CoQ10(ユビキノール型)', dosage: '100-200mg / 朝食後', reason: '40代以降は体内産生が減るため補充推奨。脂溶性なので食後。', kw: 'ubiquinol 100mg' },
+          { name: 'NMN', dosage: '250-500mg / 朝', reason: 'NAD+補充。慢性疲労感への効果が議論されている注目成分。', kw: 'nmn 500mg' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: 'ATP産生に必須。日本人の大多数が不足。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '週3回×20-30分の有酸素運動(ミトコンドリアの新生を促す)',
+          '時々の断食(16時間プチ断食など)もミトコンドリア生合成を促進',
+          '糖質過剰を避ける(ミトコンドリアの効率を下げる)',
+          '十分なタンパク質(体重1kgあたり1.2-1.6g)'
+        ]
+      }
+    }
+  },
+
+  stress: {
+    id: 'stress',
+    category: 'stability',
+    title: 'ふと、投げ出したくなる',
+    subtitle: 'やる気が続かない / イライラ / 不安・焦燥',
+    icon: '💭',
+    questions: [
+      {
+        id: 'symptom',
+        text: 'メンタルの主な症状は?',
+        options: [
+          { value: 'irritable', label: 'イライラ・怒りっぽくなる' },
+          { value: 'anxious', label: '不安・焦燥感' },
+          { value: 'depressed', label: '気分の落ち込み・憂うつ' },
+          { value: 'motivation', label: 'やる気・興味の低下' }
+        ]
+      },
+      {
+        id: 'duration',
+        text: '症状が続いている期間は?',
+        options: [
+          { value: 'days', label: '数日(一時的)' },
+          { value: 'weeks', label: '数週間' },
+          { value: 'months', label: '数ヶ月以上' }
+        ]
+      },
+      {
+        id: 'sleep_impact',
+        text: '睡眠への影響は?',
+        options: [
+          { value: 'falling_asleep', label: '寝つきが悪い' },
+          { value: 'mid_wake', label: '中途覚醒する' },
+          { value: 'none', label: '影響なし' }
+        ]
+      },
+      {
+        id: 'exercise',
+        text: '運動習慣は?',
+        options: [
+          { value: 'none', label: 'ほぼなし' },
+          { value: 'sometimes', label: '週1-2回' },
+          { value: 'regular', label: '週3回以上' }
+        ]
+      },
+      {
+        id: 'diet',
+        text: '食事は?',
+        options: [
+          { value: 'irregular', label: '不規則・抜くことが多い' },
+          { value: 'simple', label: '規則的だが偏りあり' },
+          { value: 'balanced', label: 'バランス良好' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.symptom === 'depressed' || a.symptom === 'motivation') return 'neurotransmitter';
+      if (a.diet === 'irregular' && a.symptom === 'anxious') return 'nutrition';
+      if (a.duration === 'months') return 'chronic_stress';
+      return 'acute_stress';
+    },
+    types: {
+      acute_stress: {
+        name: '急性ストレス型(イライラ)',
+        summary: '短期間のストレスで交感神経が優位になり、コルチゾールが一時的に高値になっているパターン。',
+        targetMetric: {
+          label: '日中のコルチゾール / 交感神経活動',
+          direction: 'down',
+          description: '一時的な高ストレス状態。アダプトゲンとリラックス系の併用で過剰な交感神経活動を鎮める。'
+        },
+        activeIngredients: [
+          { name: 'アシュワガンダ', mechanism: 'コルチゾール低下の即時性あり(数週間で効果)。' },
+          { name: 'L-テアニン', mechanism: 'α波増加、即効性のリラックス効果。' },
+          { name: 'マグネシウム', mechanism: '神経興奮の鎮静。' }
+        ],
+        supplements: [
+          { name: 'アシュワガンダ', dosage: '300-600mg / 朝・就寝前', reason: 'ストレス低減の第一選択。エビデンス豊富。', kw: 'ashwagandha' },
+          { name: 'L-テアニン', dosage: '200mg / 必要時', reason: '即効性のリラックス。仕事中のメンタル安定にも。', kw: 'l-theanine 200mg' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '神経安定 + 睡眠の質向上。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '深呼吸(4-7-8呼吸法)を1日3回',
+          '20分以上の散歩(コルチゾール低下のエビデンス)',
+          'カフェインを減らす(コルチゾールを上げる)',
+          '「終わる時刻」を決めて区切る(オーバーワーク防止)'
+        ]
+      },
+      chronic_stress: {
+        name: '慢性ストレス型',
+        summary: '数ヶ月以上ストレス状態が続き、副腎疲労傾向が出ているパターン。コルチゾールが昼夜逆転していることも。',
+        targetMetric: {
+          label: 'コルチゾールリズムの正常化',
+          direction: 'stabilize',
+          description: '朝高く・夜低い正常リズムからの乖離が問題。アダプトゲンでリズムを戻す + 副腎栄養素を補う。'
+        },
+        activeIngredients: [
+          { name: 'アシュワガンダ', mechanism: 'コルチゾールリズム正常化。' },
+          { name: 'ロディオラ', mechanism: '副腎機能サポート、疲労感改善。' },
+          { name: 'ビタミンB-Complex', mechanism: '副腎が大量消費するB群を補給。' }
+        ],
+        supplements: [
+          { name: 'アシュワガンダ', dosage: '300-600mg / 朝・就寝前', reason: '長期ストレスの第一選択。3ヶ月で効果実感。', kw: 'ashwagandha' },
+          { name: 'ロディオラ', dosage: '200-400mg / 朝', reason: 'アダプトゲンの併用で相乗効果。', kw: 'rhodiola rosea' },
+          { name: 'ビタミンB-Complex', dosage: 'B-50 / 朝', reason: '副腎機能の栄養基盤。', kw: 'b complex 50' }
+        ],
+        lifestyle: [
+          '高強度運動を避け、ヨガ・散歩・水泳など低強度に切替',
+          '就寝・起床時刻を固定(±30分以内)',
+          '回復には3-6ヶ月かかる前提で長期戦に切り替える',
+          '可能なら一時的に環境(仕事量・人間関係)を調整'
+        ]
+      },
+      neurotransmitter: {
+        name: '神経伝達物質低下型(落ち込み・やる気低下)',
+        summary: 'セロトニン・ドーパミンといった神経伝達物質の低下が背景にあるパターン。気分・意欲・興味の低下が主症状。',
+        targetMetric: {
+          label: 'セロトニン / ドーパミン産生量',
+          direction: 'up',
+          description: '神経伝達物質の前駆体(アミノ酸 + ビタミン)を補給し、産生をサポート。重度の場合は医師相談が前提。'
+        },
+        activeIngredients: [
+          { name: 'L-トリプトファン または 5-HTP', mechanism: 'セロトニンの前駆体。気分・睡眠に作用。' },
+          { name: 'L-チロシン', mechanism: 'ドーパミン・ノルアドレナリンの前駆体。意欲・集中。' },
+          { name: 'オメガ3(EPA)', mechanism: 'うつ症状改善のエビデンスあり(EPA成分が鍵)。' }
+        ],
+        supplements: [
+          { name: '5-HTP', dosage: '50-100mg / 就寝前', reason: 'セロトニン補充。SSRI服用中は併用不可。', kw: '5-htp 100mg' },
+          { name: 'L-チロシン', dosage: '500-1500mg / 朝', reason: 'やる気・集中をサポート。空腹時に。', kw: 'l-tyrosine' },
+          { name: 'オメガ3(高EPA)', dosage: 'EPA 1000mg / 1日', reason: 'うつ症状改善のメタ解析あり。EPA優位の製品を選ぶ。', kw: 'omega 3 high EPA' }
+        ],
+        lifestyle: [
+          '朝の日光浴(セロトニン産生を強烈に促す)',
+          '週3回以上の運動(抗うつ薬と同等の効果のエビデンス)',
+          '症状が2週間以上続く場合は心療内科 / 精神科で相談',
+          'サプリは「補助」の位置付け、医療判断を超えない'
+        ]
+      },
+      nutrition: {
+        name: '栄養不足由来型',
+        summary: '不規則な食事で神経系の働きに必要な栄養素が慢性的に不足しているパターン。不安・イライラの背景に栄養不足が隠れていることが多い。',
+        targetMetric: {
+          label: 'マグネシウム / B群 / 鉄 / VD の血中濃度',
+          direction: 'up',
+          description: 'これらの栄養素は神経系・ホルモン系の働きに必須。不足するとメンタル症状が出やすい。'
+        },
+        activeIngredients: [
+          { name: 'マグネシウム', mechanism: '神経安定、不安低減。日本人の8割が不足。' },
+          { name: 'ビタミンB-Complex', mechanism: 'セロトニン・GABA合成に必要。' },
+          { name: '鉄(女性)', mechanism: '神経伝達物質合成に必須。女性の不足率が高い。' }
+        ],
+        supplements: [
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '不安低減のRCTあり。神経安定の基盤。', kw: 'magnesium glycinate' },
+          { name: 'ビタミンB-Complex', dosage: 'B-50 / 朝', reason: '神経伝達物質合成の必須栄養素群。', kw: 'b complex 50' },
+          { name: 'マルチビタミン・ミネラル', dosage: '1日量', reason: '不足栄養素全般の底上げ。', kw: 'multivitamin' }
+        ],
+        lifestyle: [
+          '朝食を欠かさない(タンパク質20g以上)',
+          '魚・大豆・卵・葉物野菜を意識',
+          '加工食品・砂糖を減らす(栄養価が低くメンタルを乱す)',
+          '食事改善が本筋、サプリは「移行期の補助」'
+        ]
+      }
+    }
+  },
+
+  bloodwork: {
+    id: 'bloodwork',
+    category: 'bloodwork',
+    title: '健診の数字を動かしたい',
+    subtitle: 'LDL / 中性脂肪 / 肝機能 / 血糖 / 尿酸',
+    icon: '📊',
+    questions: [
+      {
+        id: 'target',
+        text: '気になる数値は?',
+        options: [
+          { value: 'ldl', label: 'LDLコレステロール(悪玉)' },
+          { value: 'tg', label: '中性脂肪(TG)' },
+          { value: 'liver', label: '肝機能(γ-GTP / ALT)' },
+          { value: 'glucose', label: '血糖 / HbA1c' },
+          { value: 'uric', label: '尿酸' }
+        ]
+      },
+      {
+        id: 'bmi',
+        text: 'BMI(体重÷身長²)は?',
+        options: [
+          { value: 'normal', label: '標準(18.5-25)' },
+          { value: 'over', label: '軽肥満(25-30)' },
+          { value: 'obese', label: '肥満(30以上)' }
+        ]
+      },
+      {
+        id: 'alcohol',
+        text: '飲酒頻度は?',
+        options: [
+          { value: 'daily', label: 'ほぼ毎日' },
+          { value: 'weekly', label: '週2-3回' },
+          { value: 'rare', label: '月数回以下 / 飲まない' }
+        ]
+      },
+      {
+        id: 'exercise',
+        text: '運動習慣は?',
+        options: [
+          { value: 'none', label: '週0-1回' },
+          { value: 'sometimes', label: '週2-3回' },
+          { value: 'regular', label: '週4回以上' }
+        ]
+      },
+      {
+        id: 'diet',
+        text: '食事の傾向は?',
+        options: [
+          { value: 'fat', label: '揚げ物・脂質が多い' },
+          { value: 'carb', label: '糖質・甘いものが多い' },
+          { value: 'balanced', label: 'バランス良好' }
+        ]
+      }
+    ],
+    classify(a) {
+      return a.target;
+    },
+    types: {
+      ldl: {
+        name: 'LDLコレステロール改善型',
+        summary: 'LDLは「動脈硬化の主要リスク因子」。スタチンほどの効果はないが、特定成分 + 食事改善で意味のある変化が期待できる。',
+        targetMetric: {
+          label: 'LDLコレステロール',
+          direction: 'down',
+          description: '基準値は120mg/dL未満。120-140はボーダー、140以上は要対策。家族歴がある場合はさらに厳しく管理。'
+        },
+        activeIngredients: [
+          { name: '水溶性食物繊維(サイリウム / βグルカン)', mechanism: '腸でコレステロールに結合し、排泄を促進。' },
+          { name: 'プラントステロール', mechanism: 'コレステロール吸収を競合阻害。' },
+          { name: 'ベルガモット', mechanism: 'LDL低下のRCTあり。スタチン代替候補。' }
+        ],
+        supplements: [
+          { name: 'サイリウム(オオバコ)', dosage: '5-10g / 食前', reason: 'LDL低下効果のメタ解析エビデンスあり。便通も改善。', kw: 'psyllium husk' },
+          { name: 'プラントステロール', dosage: '2g / 1日', reason: '食事性コレステロールの吸収阻害。', kw: 'plant sterols' },
+          { name: 'ベルガモット', dosage: '500-1000mg / 1日', reason: 'LDL 20%程度低下のRCTあり。注目素材。', kw: 'bergamot extract' }
+        ],
+        lifestyle: [
+          '飽和脂肪酸(バター / 揚げ物 / 加工肉)を減らす',
+          '青魚(サバ・サーモン・イワシ)を週2-3回',
+          'オートミール / もち麦をご飯に混ぜる(βグルカン補給)',
+          '週3回以上の有酸素運動(HDL上昇 + LDL低下)'
+        ]
+      },
+      tg: {
+        name: '中性脂肪改善型',
+        summary: '中性脂肪(TG)は食事と直結。短期間で動かせる数値。糖質過剰・アルコールが主犯のことが多い。',
+        targetMetric: {
+          label: '中性脂肪(TG)',
+          direction: 'down',
+          description: '基準値は150mg/dL未満。300以上は急性膵炎リスクも。食事・運動への反応が速く、3ヶ月で大きく動く。'
+        },
+        activeIngredients: [
+          { name: 'オメガ3(高EPA)', mechanism: 'EPA高用量でTG 20-30%低下のエビデンス。' },
+          { name: 'ナイアシン(B3)', mechanism: 'TG低下作用あり(高用量で顔のほてりに注意)。' },
+          { name: 'ベルベリン', mechanism: '脂質代謝の改善。TG・LDL両方に効く。' }
+        ],
+        supplements: [
+          { name: 'オメガ3(高EPA)', dosage: 'EPA 1500-2000mg / 1日', reason: 'TG低下のエビデンス最強。EPA優位の製品を選ぶ。', kw: 'omega 3 high EPA' },
+          { name: 'ベルベリン', dosage: '500mg × 2-3回 / 食前', reason: 'TG・LDL・血糖を同時に改善する万能株。', kw: 'berberine' },
+          { name: 'ナイアシン(B3)', dosage: '500-1000mg / 1日(漸増)', reason: '高用量でTG低下。顔のほてり(フラッシュ)に注意。', kw: 'niacin no flush' }
+        ],
+        lifestyle: [
+          '糖質(特に砂糖 / 果糖 / 精製炭水化物)を減らす — TGに直結',
+          'アルコール(特にビール / 日本酒)を減らす',
+          '週3回以上の有酸素運動',
+          '3ヶ月で再検査して変化を見る(短期で動く)'
+        ]
+      },
+      liver: {
+        name: '肝機能改善型(γ-GTP / ALT)',
+        summary: '飲酒や脂肪肝、薬剤性で肝臓に負担がかかっている状態。γ-GTPは特に飲酒の影響を反映。',
+        targetMetric: {
+          label: 'γ-GTP / ALT',
+          direction: 'down',
+          description: 'γ-GTPは飲酒で上昇、ALTは脂肪肝で上昇しやすい。両方上昇なら脂肪肝 + 飲酒の複合。'
+        },
+        activeIngredients: [
+          { name: 'シリマリン(マリアアザミ)', mechanism: '肝細胞保護・解毒酵素サポートのエビデンス豊富。' },
+          { name: 'NAC(N-アセチルシステイン)', mechanism: 'グルタチオン(抗酸化)の前駆体。肝臓の解毒能をサポート。' },
+          { name: 'クルクミン', mechanism: '肝機能改善のRCTあり。吸収しやすい製剤を選ぶ。' }
+        ],
+        supplements: [
+          { name: 'シリマリン', dosage: '200-400mg / 1日', reason: '肝機能サポートの定番。エビデンス強固。', kw: 'milk thistle silymarin' },
+          { name: 'NAC', dosage: '600-1200mg / 1日', reason: 'グルタチオン補充による肝臓サポート。', kw: 'nac n-acetyl cysteine' },
+          { name: 'クルクミン(高吸収型)', dosage: '500-1000mg / 1日', reason: '吸収率の高いミセル化・ピペリン併用製品を選ぶ。', kw: 'curcumin high absorption' }
+        ],
+        lifestyle: [
+          '飲酒を減らす(週2日以上の休肝日)',
+          '体重を5%減らす(脂肪肝改善のエビデンス)',
+          '果糖(果汁ジュース・果物の摂りすぎ)を控える',
+          '3ヶ月後の再検査で確認'
+        ]
+      },
+      glucose: {
+        name: '血糖・HbA1c改善型',
+        summary: 'HbA1cは過去1-2ヶ月の平均血糖を反映。6.0以上は要対策、6.5以上は糖尿病域。「食後眠気」とほぼ同じアプローチ。',
+        targetMetric: {
+          label: 'HbA1c / 食後血糖値',
+          direction: 'down',
+          description: '理想は5.6以下、5.7-6.0は予備軍、6.5以上は糖尿病。食事・運動の改善 + 特定成分で意味のある変化が出る。'
+        },
+        activeIngredients: [
+          { name: 'ベルベリン', mechanism: 'メトホルミン類似の血糖降下。最も効果が大きい自然素材。' },
+          { name: 'クロム', mechanism: 'インスリン感受性改善。' },
+          { name: '水溶性食物繊維', mechanism: '食後血糖の上昇を緩和。' }
+        ],
+        supplements: [
+          { name: 'ベルベリン', dosage: '500mg × 2-3回 / 食前', reason: '血糖降下作用の最有力候補。HbA1c低下のメタ解析あり。', kw: 'berberine' },
+          { name: 'クロム', dosage: '200-400μg / 食前', reason: 'インスリン感受性改善。ベルベリンと併用◎。', kw: 'chromium picolinate' },
+          { name: 'αリポ酸', dosage: '300-600mg / 朝食前', reason: 'インスリン感受性 + 抗酸化。', kw: 'alpha lipoic acid' }
+        ],
+        lifestyle: [
+          '食事順序を変える(野菜 → タンパク質 → 炭水化物)',
+          '精製糖質(白米 / 白パン / 甘いもの)を減らす',
+          '食後20-30分のウォーキングが血糖管理に強力',
+          '3ヶ月でHbA1cを再検査(動きが見える)'
+        ]
+      },
+      uric: {
+        name: '尿酸改善型',
+        summary: '尿酸が高いと痛風 + 腎機能・心血管リスクが上がる。食事と体重が主因子。',
+        targetMetric: {
+          label: '血中尿酸値',
+          direction: 'down',
+          description: '基準値は7.0mg/dL未満。痛風発作リスクは8.0以上で急増。プリン体・果糖・アルコールが主犯。'
+        },
+        activeIngredients: [
+          { name: 'アンセリン', mechanism: '尿酸産生抑制 + 排泄促進。鶏胸肉・マグロ由来。' },
+          { name: 'ビタミンC', mechanism: '尿酸排泄を促進。' },
+          { name: 'クエン酸', mechanism: '尿pHをアルカリ化し、尿酸の排泄を促進。' }
+        ],
+        supplements: [
+          { name: 'アンセリン', dosage: '50-100mg / 1日', reason: '尿酸低下のエビデンスあり。日本発の研究が多い素材。', kw: 'anserine' },
+          { name: 'ビタミンC', dosage: '500mg / 1日', reason: '尿酸低下作用のメタ解析あり。', kw: 'vitamin c' },
+          { name: 'クエン酸カリウム', dosage: '2-3g / 1日', reason: '尿のアルカリ化で尿酸排泄を促進。', kw: 'potassium citrate' }
+        ],
+        lifestyle: [
+          'ビール・日本酒を減らす(アルコールは尿酸を上げる)',
+          '果糖(清涼飲料 / 果汁100%ジュース)を控える',
+          '水を1日2L以上(尿量を増やして尿酸排泄)',
+          '体重を5%減らす(尿酸も連動して下がる)'
+        ]
+      }
+    }
+  }
+};
+
+// ------------------------------------------------------------
+// 状態管理 + レンダリング
+// ------------------------------------------------------------
+let state = {
+  screen: 'home',
+  problemId: null,
+  questionIndex: 0,
+  answers: {}
+};
+
+function setState(updates) {
+  state = Object.assign({}, state, updates);
+  render();
+  window.scrollTo({ top: 0, behavior: 'instant' });
+}
+
+function renderHome() {
+  const groups = CATEGORIES.map(cat => {
+    const probs = Object.values(PROBLEMS).filter(p => p.category === cat.id);
+    if (probs.length === 0) return '';
+    const cards = probs.map(p => `
+      <button class="problem-card" onclick="startProblem('${p.id}')">
+        <div class="problem-icon">${p.icon}</div>
+        <div class="problem-text">
+          <div class="problem-title">${p.title}</div>
+          <div class="problem-sub">${p.subtitle}</div>
+        </div>
+        <div class="problem-arrow">→</div>
+      </button>
+    `).join('');
+    return `
+      <div class="category-section">
+        <div class="category-header">
+          <span class="category-code">${cat.code}</span>
+          <span class="category-name">${cat.name}</span>
+          <span class="category-desc">— ${cat.description}</span>
+        </div>
+        <div class="problem-list">${cards}</div>
+      </div>
+    `;
+  }).join('');
+  return `
+    <div class="brand">
+      <div class="brand-logo">Sup<span class="dot">.</span></div>
+      <div class="brand-tagline">知的生産者の身体メンテ</div>
+    </div>
+
+    <div class="hero">
+      <div class="hero-eyebrow">7つの悩み / 28型診断 / エビデンスベース</div>
+      <h1 class="hero-title">あなたの「悩み」を、<br>「動かすべき数値」に翻訳する。</h1>
+      <p class="hero-sub">5分の問診から、型 → 動かす数値 → 効く成分 → 含むサプリ製品 まで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
+      <a href="#diagnose" class="hero-cta">いま気になる悩みから診断 →</a>
+    </div>
+
+    <div class="lp-section">
+      <div class="section-label">WHY SUP.</div>
+      <h2 class="lp-title">"なんとなく"のサプリ選びを、やめる。</h2>
+      <div class="lp-text">
+        <p>ChatGPT に「疲労に効くサプリは?」と聞けば、それっぽい答えは返ってくる。でも、<strong>あなたの状況に紐づいた、根拠ある一手</strong>はそこにはない。</p>
+        <p>Sup. は論点ツリーで「あなたがどの型に当てはまるか」を分岐診断し、その型に対して<strong>動かすべき具体的な数値</strong>(食後血糖 / フェリチン / コルチゾール覚醒反応 / LDL etc.)と、<strong>その数値に効く成分</strong>、さらに<strong>その成分を含むサプリ製品</strong>までを一気通貫で提示します。</p>
+      </div>
+      <div class="feature-grid">
+        <div class="feature-card">
+          <div class="feature-num">01</div>
+          <div class="feature-name">悩みを「型」に診断</div>
+          <div class="feature-desc">あいまいな症状を論点ツリーで分岐。あなたが何タイプかを明確化する。</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">02</div>
+          <div class="feature-name">数値 → 成分にマッピング</div>
+          <div class="feature-desc">「動かすべき具体的な数値」と「それに効く成分」を、メカニズム付きで提示。</div>
+        </div>
+        <div class="feature-card">
+          <div class="feature-num">03</div>
+          <div class="feature-name">サプリ製品まで一気通貫</div>
+          <div class="feature-desc">Amazon / iHerb から実際の製品候補を提示。すぐ買える形まで案内。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <div class="section-label">HOW IT WORKS</div>
+      <h2 class="lp-title">5分で完結する、3ステップ。</h2>
+      <div class="steps-grid">
+        <div class="step-card">
+          <div class="step-num">STEP 01</div>
+          <div class="step-name">悩みを選ぶ</div>
+          <div class="step-desc">7つの悩み × 4つの強化軸から、いま気になるものを1つ選ぶ。</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">STEP 02</div>
+          <div class="step-name">5問の問診</div>
+          <div class="step-desc">あなたの状態を細かく分岐。論点ツリーがあなたの型を診断する。</div>
+        </div>
+        <div class="step-card">
+          <div class="step-num">STEP 03</div>
+          <div class="step-name">提案を受け取る</div>
+          <div class="step-desc">型 + 動かす数値 + 効く成分 + サプリ製品 + 生活習慣 を一画面で。</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="diagnose" class="lp-section">
+      <div class="section-label">DIAGNOSE</div>
+      <h2 class="lp-title">いま気になる悩みから診断。</h2>
+      ${groups}
+    </div>
+
+    <div class="lp-section">
+      <div class="section-label">FAQ</div>
+      <h2 class="lp-title">よくある質問</h2>
+      <div class="faq-list">
+        <details class="faq-item">
+          <summary>ChatGPT に聞くのと何が違うの?</summary>
+          <p>ChatGPT は一般論を返します。Sup. は「論点ツリーで分岐 → 型診断 → 動かす数値 → 効く成分 → 含むサプリ製品」までを一気通貫で提示します。"あなたに必要な根拠ある一手"まで踏み込むのが違いです。</p>
+        </details>
+        <details class="faq-item">
+          <summary>サプリって、本当に効くの?</summary>
+          <p>「魔法の薬」ではありません。ただ、特定の悩みに対して「メカニズム上の根拠 + 臨床研究のエビデンス」がある成分は存在します。Sup. はそうした成分のみを提案対象にしています。効くまでに3週間〜3ヶ月かかるケースが大半です。</p>
+        </details>
+        <details class="faq-item">
+          <summary>医師の代わりになる?</summary>
+          <p>なりません。本サービスは栄養学・サプリメント研究に基づくセルフケアのガイドです。診断・治療は医療機関の役割で、Sup. は「選択肢を整理する」位置付け。既往歴・服薬中の方は必ず医師・薬剤師にご相談ください。</p>
+        </details>
+        <details class="faq-item">
+          <summary>アフィリエイトの仕組みは?</summary>
+          <p>結果ページから Amazon / iHerb の商品ページに飛ぶと、紹介手数料が Sup. に入ります。ユーザーの支払額は変わりません。透明性のため明示しています。</p>
+        </details>
+        <details class="faq-item">
+          <summary>無料で使える?</summary>
+          <p>はい、現在は完全無料です。将来、より高度な個別化機能(継続的なフォローアップ / 数値モニタリング / 専門家相談 等)を有料で提供する可能性があります。</p>
+        </details>
+      </div>
+    </div>
+
+    <div class="lp-footer">
+      <div class="lp-footer-section">
+        <div class="lp-footer-title">Sup. について</div>
+        <p>「知的生産で食べている人」のための、自己メンテツール。コンサル / IT / クリエイティブ系の30-40代を中心に、エビデンスに基づいたセルフケアの選択肢を提供することを目指しています。</p>
+      </div>
+      <div class="lp-footer-section">
+        <div class="lp-footer-title">透明性について</div>
+        <p>本サービスは Amazon アソシエイト / iHerb Rewards Program の紹介リンクを通じて運営されています。ユーザーの支払額が増えることはありません。</p>
+      </div>
+      <div class="disclaimer-lp">本サービスは一般的な栄養学・サプリメント研究に基づくガイドであり、医療行為や診断ではありません。既往歴・服薬中・妊娠中の方は必ず医師・薬剤師にご相談ください。特に健診数値の改善は医師の指導下で取り組むことが前提です。</div>
+    </div>
+  `;
+}
+
+function renderIntake() {
+  const problem = PROBLEMS[state.problemId];
+  const q = problem.questions[state.questionIndex];
+  const total = problem.questions.length;
+  const progressItems = problem.questions.map((_, i) => {
+    if (i < state.questionIndex) return '<div class="q-progress-item done"></div>';
+    if (i === state.questionIndex) return '<div class="q-progress-item current"></div>';
+    return '<div class="q-progress-item"></div>';
+  }).join('');
+  const options = q.options.map(opt => `
+    <button class="q-option" onclick="answerQuestion('${q.id}', '${opt.value}')">${opt.label}</button>
+  `).join('');
+  return `
+    <div class="brand">
+      <div class="brand-logo">Sup<span class="dot">.</span></div>
+      <div class="brand-tagline">${problem.title}</div>
+    </div>
+    <div class="q-progress">${progressItems}</div>
+    <div class="q-step-label">QUESTION ${state.questionIndex + 1} / ${total}</div>
+    <h2 class="q-text">${q.text}</h2>
+    <div class="q-options">${options}</div>
+    <button class="q-back" onclick="goBack()">← 戻る</button>
+  `;
+}
+
+function renderResult() {
+  const problem = PROBLEMS[state.problemId];
+  const typeKey = problem.classify(state.answers);
+  const type = problem.types[typeKey];
+  const m = type.targetMetric;
+  const dirIcon = m.direction === 'up' ? '↑' : m.direction === 'down' ? '↓' : '⇕';
+  const dirText = m.direction === 'up' ? 'UP / 上げる' : m.direction === 'down' ? 'DOWN / 下げる' : 'STABILIZE / 安定化';
+  const ingredients = type.activeIngredients.map(ing => `
+    <div class="ingredient-item">
+      <div class="ingredient-name">${ing.name}</div>
+      <div class="ingredient-mechanism">${ing.mechanism}</div>
+    </div>
+  `).join('');
+  const supps = type.supplements.map(s => `
+    <div class="supp-card">
+      <div class="supp-name">${s.name}</div>
+      <div class="supp-dosage">推奨用量: ${s.dosage}</div>
+      <div class="supp-reason">${s.reason}</div>
+      <div class="supp-links">
+        <a class="supp-link" href="${amazonLink(s.kw)}" target="_blank" rel="noopener">Amazonで探す →</a>
+        <a class="supp-link secondary" href="${iherbLink(s.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
+      </div>
+    </div>
+  `).join('');
+  const lifestyle = type.lifestyle.map(l => `<li>${l}</li>`).join('');
+  return `
+    <div class="brand">
+      <div class="brand-logo">Sup<span class="dot">.</span></div>
+      <div class="brand-tagline">${problem.title} / 診断結果</div>
+    </div>
+    <div class="result-tag">YOUR TYPE</div>
+    <h1 class="result-title">${type.name}</h1>
+    <div class="result-summary">${type.summary}</div>
+
+    <div class="section-label">TARGET METRIC — コントロールすべき指標</div>
+    <div class="metric-card">
+      <div class="metric-header">
+        <div class="metric-direction">${dirIcon}</div>
+        <div>
+          <div class="metric-action">${dirText}</div>
+          <div class="metric-label">${m.label}</div>
+        </div>
+      </div>
+      <div class="metric-description">${m.description}</div>
+    </div>
+
+    <div class="section-label">ACTIVE INGREDIENTS — その数値に効く成分</div>
+    <div class="ingredient-list">${ingredients}</div>
+
+    <div class="section-label">RECOMMENDED SUPPLEMENTS — これらの成分を含むサプリ</div>
+    ${supps}
+
+    <div class="section-label">LIFESTYLE INTERVENTION — 生活習慣の介入</div>
+    <ul class="lifestyle-list">${lifestyle}</ul>
+
+    <div class="disclaimer">本提案は一般的な栄養学・サプリメント研究に基づくガイドであり、医療行為や診断ではありません。特に健診数値の改善は医師の指導下で取り組むことが前提です。既往歴・服薬中・妊娠中の方は必ず医師・薬剤師にご相談ください。</div>
+
+    <div class="action-row">
+      <button class="action-btn" onclick="restart()">この悩みをもう一度やり直す</button>
+      <button class="action-btn primary" onclick="goHome()">他の悩みも診る</button>
+    </div>
+  `;
+}
+
+function render() {
+  const app = document.getElementById('app');
+  if (state.screen === 'home') app.innerHTML = renderHome();
+  else if (state.screen === 'intake') app.innerHTML = renderIntake();
+  else if (state.screen === 'result') app.innerHTML = renderResult();
+}
+
+window.startProblem = (id) => setState({ screen: 'intake', problemId: id, questionIndex: 0, answers: {} });
+
+window.answerQuestion = (qid, value) => {
+  const newAnswers = Object.assign({}, state.answers, { [qid]: value });
+  const problem = PROBLEMS[state.problemId];
+  const nextIndex = state.questionIndex + 1;
+  if (nextIndex >= problem.questions.length) {
+    setState({ screen: 'result', answers: newAnswers });
+  } else {
+    setState({ questionIndex: nextIndex, answers: newAnswers });
+  }
+};
+
+window.goBack = () => {
+  if (state.questionIndex > 0) {
+    setState({ questionIndex: state.questionIndex - 1 });
+  } else {
+    setState({ screen: 'home', problemId: null, questionIndex: 0, answers: {} });
+  }
+};
+
+window.goHome = () => setState({ screen: 'home', problemId: null, questionIndex: 0, answers: {} });
+window.restart = () => setState({ screen: 'intake', questionIndex: 0, answers: {} });
+
+render();
+</script>
+</body>
+</html>
