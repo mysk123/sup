@@ -263,7 +263,38 @@ body {
   border-radius: 12px;
   padding: 20px 22px;
   margin-bottom: 10px;
+  position: relative;
 }
+.supp-card.primary {
+  border-color: var(--accent);
+  border-width: 2px;
+  padding: 22px 22px 20px;
+  background: linear-gradient(180deg, var(--accent-light) 0%, var(--card-bg) 60%);
+}
+.supp-badge {
+  display: inline-block;
+  background: var(--accent);
+  color: white;
+  font-size: 10px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.16em;
+  padding: 4px 11px;
+  border-radius: 6px;
+  margin-bottom: 12px;
+  font-weight: 700;
+}
+.combination-box {
+  background: #faf7f1;
+  border: 1px solid #e8e0cf;
+  border-radius: 12px;
+  padding: 20px 22px;
+}
+.combination-text {
+  font-size: 14px;
+  color: var(--text-main);
+  line-height: 1.85;
+}
+.combination-text strong { color: var(--accent-dark); font-weight: 600; }
 .supp-name { font-weight: 600; font-size: 16px; margin-bottom: 6px; line-height: 1.4; }
 .supp-dosage {
   font-size: 12px;
@@ -602,7 +633,7 @@ body {
   background: var(--card-bg);
   border: 1px solid var(--border);
   border-radius: 14px;
-  padding: 22px 14px;
+  padding: 28px 14px 22px;
   text-align: center;
   min-width: 0;
 }
@@ -611,7 +642,7 @@ body {
   align-items: center;
   justify-content: center;
   color: var(--text-soft);
-  font-size: 16px;
+  font-size: 18px;
   flex-shrink: 0;
   padding: 0 2px;
 }
@@ -621,13 +652,13 @@ body {
   color: var(--accent);
   letter-spacing: 0.15em;
   font-weight: 600;
-  margin-bottom: 12px;
+  margin-bottom: 14px;
 }
 .flow-icon {
-  width: 32px;
-  height: 32px;
+  width: 48px;
+  height: 48px;
   color: var(--accent);
-  margin: 0 auto 14px;
+  margin: 0 auto 16px;
   display: block;
 }
 .flow-title {
@@ -825,10 +856,57 @@ const ICONS = {
   branch: `<svg ${SVG_ATTR}><circle cx="24" cy="10" r="3"/><circle cx="12" cy="30" r="3"/><circle cx="24" cy="30" r="3"/><circle cx="36" cy="30" r="3"/><line x1="24" y1="13" x2="24" y2="27"/><line x1="24" y1="13" x2="13" y2="28"/><line x1="24" y1="13" x2="35" y2="28"/></svg>`,
   gauge: `<svg ${SVG_ATTR}><path d="M10 32a14 14 0 0 1 28 0"/><line x1="24" y1="32" x2="32" y2="18"/><circle cx="24" cy="32" r="2" fill="currentColor"/></svg>`,
   molecule: `<svg ${SVG_ATTR}><circle cx="14" cy="14" r="3"/><circle cx="34" cy="14" r="3"/><circle cx="24" cy="32" r="3"/><circle cx="14" cy="34" r="3"/><line x1="14" y1="17" x2="14" y2="31"/><line x1="17" y1="14" x2="31" y2="14"/><line x1="32" y1="17" x2="26" y2="29"/><line x1="16" y1="32" x2="22" y2="32"/></svg>`,
-  capsule: `<svg ${SVG_ATTR}><rect x="10" y="18" width="28" height="14" rx="7"/><line x1="24" y1="18" x2="24" y2="32"/></svg>`,
+  capsule: `<svg ${SVG_ATTR}><rect x="16" y="6" width="16" height="6" rx="1.5"/><path d="M13 14h22v26a4 4 0 0 1-4 4H17a4 4 0 0 1-4-4V14z"/><line x1="24" y1="22" x2="24" y2="34"/><line x1="18" y1="28" x2="30" y2="28"/></svg>`,
 
   // Hero decoration
   heroDeco: `<svg viewBox="0 0 280 280" fill="none"><defs><radialGradient id="hg" cx="50%" cy="50%"><stop offset="0%" stop-color="#0f5b3e" stop-opacity="0.22"/><stop offset="60%" stop-color="#0f5b3e" stop-opacity="0.05"/><stop offset="100%" stop-color="#0f5b3e" stop-opacity="0"/></radialGradient></defs><circle cx="140" cy="140" r="140" fill="url(#hg)"/><g stroke="#0f5b3e" stroke-width="0.6" opacity="0.25" fill="none"><circle cx="140" cy="140" r="70"/><circle cx="140" cy="140" r="95"/><circle cx="140" cy="140" r="120"/></g></svg>`
+};
+
+// ------------------------------------------------------------
+// 飲み合わせ・服用タイミング(型別)
+// ------------------------------------------------------------
+const COMBINATIONS = {
+  // 食後眠気
+  'sleepiness.bloodSugar': '<strong>クロム + αリポ酸</strong>は食前に同時摂取OK。<strong>ベルベリン</strong>は強力なので、最初は夕食前1回(500mg)から始めて慣らす。3つすべての併用は2-3週間後、体感を見ながら段階的に。',
+  'sleepiness.iron': '<strong>ヘム鉄 + ビタミンC</strong>は必ずセット(Cで吸収倍増)。<strong>B12 + 葉酸</strong>は朝食後に別タイミングで。コーヒー・緑茶は鉄サプリの前後30分は避ける。',
+  'sleepiness.adrenal': '<strong>マグネシウム</strong>は就寝前に固定。<strong>ロディオラ(朝)</strong> と <strong>アシュワガンダ(就寝前)</strong>は朝晩で分けて効果最大化。アシュワガンダは2-3ヶ月かけてゆっくり効くので継続前提で。',
+
+  // プロテイン便ゆるみ
+  'protein.lactose': '<strong>ラクターゼ酵素</strong>はプロテイン摂取の直前に。<strong>WPI</strong>に切り替えてしまえばラクターゼ酵素は不要に。<strong>プロバイオティクス</strong>は食事と別タイミングで朝 or 就寝前。',
+  'protein.overdose': '<strong>消化酵素</strong>はプロテイン摂取時に同時。<strong>グルタミン + プロバイオティクス</strong>は空腹時の朝が吸収◎。プロテイン量を分割できれば消化酵素も不要になる可能性。',
+  'protein.sweetener': 'まず<strong>製品切替(無添加)</strong>が最優先 — それで治ればグルタミン/プロバイオティクスも不要。腸が荒れている初期は<strong>グルタミン</strong>朝晩で粘膜修復をサポート。',
+  'protein.gut': '<strong>プロバイオティクス + イヌリン</strong>はセットで相乗効果(食後に同時摂取)。<strong>グルタミン</strong>は空腹時の朝。長期戦(3ヶ月以上)で菌叢が変わる。',
+
+  // 集中力
+  'focus.sleep': '<strong>マグネシウム + グリシン</strong>は就寝前に同時OK。<strong>アシュワガンダ</strong>も同タイミングで併用可能。睡眠が整えば日中サプリは不要になる人も多い。',
+  'focus.nutrition': '<strong>マルチビタミン + B-Complex</strong>は朝食後に同時。<strong>ビタミンD3</strong>は脂溶性なので必ず食事と共に。B群は重複してもOK(尿で排出されるため過剰心配なし)。',
+  'focus.inflammation': '<strong>オメガ3</strong>は食事と共に(脂質と一緒で吸収UP)。<strong>クレアチン</strong>は朝 or 運動後に5g固定。<strong>ライオンズメイン</strong>は朝食後。3つ全部同時に飲んでも干渉なし。',
+  'focus.neurotransmitter': '<strong>L-テアニン</strong>は必要な時(集中したい1時間前)に頓服。<strong>L-チロシン + アルファGPC</strong>は朝の空腹時(食事の影響を受けるため)。テアニン以外は朝に集中で。',
+
+  // 睡眠の質
+  'sleep.sleep_onset': '<strong>メラトニン + グリシン + マグネシウム</strong>は全て就寝30分前に同時OK。メラトニンは少量(0.5mg)から始める — 効きすぎる場合があるため。',
+  'sleep.stress_insomnia': '<strong>アシュワガンダ + L-テアニン + マグネシウム</strong>は就寝前に同時OK。テアニンは即効、アシュワガンダは2-3週間で実感。短期と長期の両輪。',
+  'sleep.mid_wake': '<strong>アシュワガンダ + マグネシウム</strong>は就寝前。<strong>5-HTP</strong>も就寝前同時OK。ただし<strong>SSRI服用中は5-HTPは併用禁忌</strong>(セロトニン症候群リスク)。',
+  'sleep.shallow_sleep': '<strong>グリシン + マグネシウム + 亜鉛</strong>は全て就寝前に同時OK。亜鉛は空腹時のほうが吸収◎なので、夕食から2-3時間空けて。',
+
+  // 朝のだるさ
+  'fatigue.sleep_deficit': '<strong>グリシン + マグネシウム</strong>は就寝前に同時。<strong>L-テアニン</strong>は日中の集中時(コーヒー代替)。順番として「睡眠時間確保」が最優先、サプリは補助。',
+  'fatigue.adrenal_fatigue': '<strong>アシュワガンダ</strong>は朝晩2回、<strong>ロディオラ</strong>は朝1回、<strong>B-Complex</strong>も朝1回。朝の3つは朝食後に同時OK。継続3-6ヶ月でリズムが整う。',
+  'fatigue.vitamin_d': '<strong>ビタミンD3 + K2</strong>は必ずセット(K2がカルシウムを骨に向ける)。<strong>マグネシウム</strong>はVD活性化に必要なので就寝前に。D3 + K2 は朝食(脂質あり)と一緒。',
+  'fatigue.mitochondria': '<strong>CoQ10</strong>は朝食後(脂溶性)。<strong>NMN</strong>は朝食前の空腹時。<strong>マグネシウム</strong>は就寝前。3つ別タイミングで干渉なし。',
+
+  // ストレス・メンタル
+  'stress.acute_stress': '<strong>アシュワガンダ</strong>朝晩2回 + <strong>マグネシウム</strong>就寝前。<strong>L-テアニン</strong>は「必要な時」(会議前など)に200mg頓服。日常2つ + 頓服1つの構成。',
+  'stress.chronic_stress': '<strong>アシュワガンダ</strong>朝晩、<strong>ロディオラ</strong>朝、<strong>B-Complex</strong>朝。朝の3つは朝食後に同時OK。長期戦(3-6ヶ月)で副腎リズムが整う。',
+  'stress.neurotransmitter': '<strong>5-HTP</strong>は就寝前(セロトニン→メラトニン)。<strong>L-チロシン</strong>は朝の空腹時。<strong>オメガ3</strong>は朝食と一緒。<strong>SSRI服用中の方は5-HTPは併用禁忌</strong>。',
+  'stress.nutrition': '<strong>マグネシウム</strong>は就寝前。<strong>B-Complex + マルチビタミン</strong>は朝食後に同時OK。B群はマルチに含まれることが多いが重複しても問題なし。',
+
+  // 健診の数値改善
+  'bloodwork.ldl': '<strong>サイリウム</strong>は食前(10-15分前)に水で。<strong>プラントステロール</strong>は食事と同時(脂質吸収を競合阻害)。<strong>ベルガモット</strong>は朝食後。3つ同日OK。',
+  'bloodwork.tg': '<strong>オメガ3</strong>は食事と共に。<strong>ベルベリン</strong>は食前30分。<strong>ナイアシン</strong>は段階的に増量(最初500mg → 慣れたら1000mg)。顔のほてり(フラッシュ)に注意。',
+  'bloodwork.liver': '<strong>シリマリン + NAC + クルクミン</strong>は3つとも食事と共にOK(脂溶性)。朝食後に同時摂取で吸収◎。NACは強力なので長期使用は3ヶ月ごとに1-2週間休む。',
+  'bloodwork.glucose': '<strong>ベルベリン + クロム + αリポ酸</strong>は全て食前(30分前)に同時OK。これは「食後眠気の血糖値スパイク型」と同じアプローチ。',
+  'bloodwork.uric': '<strong>アンセリン + ビタミンC</strong>は朝食後に同時。<strong>クエン酸カリウム</strong>は別タイミング(食事の間)で水量多めに。腎機能低下の方は医師相談前提。'
 };
 
 // ------------------------------------------------------------
@@ -2267,8 +2345,9 @@ function renderResult() {
       <div class="ingredient-mechanism">${ing.mechanism}</div>
     </div>
   `).join('');
-  const supps = type.supplements.map(s => `
-    <div class="supp-card">
+  const supps = type.supplements.map((s, i) => `
+    <div class="supp-card${i === 0 ? ' primary' : ''}">
+      ${i === 0 ? '<div class="supp-badge">FIRST PICK / 最初の一本</div>' : ''}
       <div class="supp-name">${s.name}</div>
       <div class="supp-dosage">推奨用量: ${s.dosage}</div>
       <div class="supp-reason">${s.reason}</div>
@@ -2278,6 +2357,8 @@ function renderResult() {
       </div>
     </div>
   `).join('');
+  const comboKey = `${state.problemId}.${typeKey}`;
+  const combination = COMBINATIONS[comboKey] || '';
   const lifestyle = type.lifestyle.map(l => `<li>${l}</li>`).join('');
   return `
     <div class="brand">
@@ -2305,6 +2386,13 @@ function renderResult() {
 
     <div class="section-label">RECOMMENDED SUPPLEMENTS — これらの成分を含むサプリ</div>
     ${supps}
+
+    ${combination ? `
+    <div class="section-label">COMBINATION — 飲み合わせ・タイミング</div>
+    <div class="combination-box">
+      <div class="combination-text">${combination}</div>
+    </div>
+    ` : ''}
 
     <div class="section-label">LIFESTYLE INTERVENTION — 生活習慣の介入</div>
     <ul class="lifestyle-list">${lifestyle}</ul>
