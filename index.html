@@ -812,6 +812,196 @@ body {
   transform: translateY(0);
 }
 
+/* === Save button on supp-card === */
+.save-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: transparent;
+  color: var(--text-sub);
+  padding: 8px 14px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  border: 1px solid var(--border);
+  cursor: pointer;
+  font-family: inherit;
+  transition: all 0.15s;
+  line-height: 1;
+}
+.save-btn:hover { border-color: var(--accent); color: var(--accent); }
+.save-btn.saved {
+  background: var(--accent-light);
+  color: var(--accent-dark);
+  border-color: var(--accent);
+}
+
+/* === Floating saved FAB === */
+.saved-fab {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: var(--text-main);
+  color: var(--bg);
+  padding: 14px 22px;
+  border-radius: 100px;
+  border: none;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: 0 6px 24px rgba(0,0,0,0.18);
+  z-index: 100;
+  transition: all 0.15s;
+}
+.saved-fab:hover { transform: translateY(-2px); box-shadow: 0 10px 32px rgba(0,0,0,0.24); }
+.saved-fab .fab-count {
+  background: var(--accent);
+  color: white;
+  padding: 2px 9px;
+  border-radius: 100px;
+  font-size: 12px;
+  font-weight: 700;
+  min-width: 22px;
+  text-align: center;
+}
+
+/* === Modal === */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 200;
+  padding: 24px;
+  animation: fadeIn 0.18s ease;
+}
+@keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+.modal-content {
+  background: var(--card-bg);
+  border-radius: 18px;
+  padding: 32px 28px 24px;
+  max-width: 540px;
+  width: 100%;
+  max-height: 88vh;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 24px 64px rgba(0,0,0,0.22);
+}
+.modal-close {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--border);
+  border: none;
+  cursor: pointer;
+  font-size: 18px;
+  font-family: inherit;
+  color: var(--text-main);
+  line-height: 1;
+}
+.modal-close:hover { background: var(--text-sub); color: white; }
+.modal-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 6px;
+  letter-spacing: -0.02em;
+}
+.modal-sub {
+  font-size: 13px;
+  color: var(--text-sub);
+  margin-bottom: 20px;
+  line-height: 1.7;
+}
+.modal-empty {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.8;
+  text-align: center;
+  padding: 36px 0;
+}
+.saved-list { display: flex; flex-direction: column; margin-bottom: 22px; }
+.saved-item {
+  display: flex;
+  gap: 14px;
+  padding: 14px 0;
+  border-bottom: 1px solid var(--border);
+}
+.saved-item:last-child { border-bottom: none; padding-bottom: 0; }
+.saved-item-info { flex: 1; min-width: 0; }
+.saved-item-name { font-size: 14px; font-weight: 600; margin-bottom: 4px; line-height: 1.4; }
+.saved-item-dosage {
+  font-size: 11px;
+  color: var(--accent);
+  font-family: ui-monospace, "SF Mono", monospace;
+  margin-bottom: 4px;
+}
+.saved-item-context { font-size: 11px; color: var(--text-soft); line-height: 1.4; }
+.saved-item-actions {
+  display: flex;
+  gap: 6px;
+  flex-shrink: 0;
+  align-items: center;
+}
+.saved-item-link {
+  background: var(--accent);
+  color: white;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+}
+.saved-item-link.secondary {
+  background: transparent;
+  color: var(--accent);
+  border: 1px solid var(--accent);
+}
+.saved-item-remove {
+  background: transparent;
+  border: 1px solid var(--border);
+  color: var(--text-sub);
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-family: inherit;
+  font-size: 14px;
+  line-height: 1;
+}
+.saved-item-remove:hover { background: #fbeaea; border-color: #f0c8c8; color: #c33; }
+.modal-actions { display: flex; flex-direction: column; gap: 8px; }
+.modal-action {
+  padding: 12px 18px;
+  border-radius: 10px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  border: 1px solid var(--border);
+  background: var(--card-bg);
+  color: var(--text-main);
+  transition: all 0.15s;
+}
+.modal-action.primary { background: var(--accent); color: white; border-color: var(--accent); }
+.modal-action.primary:hover { background: var(--accent-dark); }
+.modal-action:hover { border-color: var(--accent); color: var(--accent); }
+.modal-action.danger {
+  color: var(--text-sub);
+  font-size: 12px;
+  font-weight: 500;
+  margin-top: 6px;
+}
+.modal-action.danger:hover { color: #c33; border-color: #f0c8c8; }
+
 @media (max-width: 600px) {
   .container { padding: 18px 18px 60px; }
   .hero { margin: 8px 0 36px; padding: 4px 0 12px; }
@@ -842,6 +1032,11 @@ body {
   .feature-name, .step-name { font-size: 14px; }
   .feature-desc, .step-desc { font-size: 12px; }
   .faq-item { padding: 16px 18px; }
+  .saved-fab { bottom: 14px; right: 14px; padding: 12px 18px; font-size: 13px; gap: 8px; }
+  .modal-overlay { padding: 16px; }
+  .modal-content { padding: 28px 22px 22px; }
+  .saved-item { flex-direction: column; gap: 10px; padding: 14px 0; }
+  .saved-item-actions { align-self: stretch; justify-content: flex-start; }
 }
 </style>
 </head>
@@ -2145,6 +2340,115 @@ const PROBLEMS = {
 };
 
 // ------------------------------------------------------------
+// 保存リスト(localStorage)
+// ------------------------------------------------------------
+const SAVED_KEY = 'sup_saved_v1';
+let savedState = {
+  items: (() => { try { return JSON.parse(localStorage.getItem(SAVED_KEY) || '[]'); } catch { return []; } })(),
+  modalOpen: false
+};
+function persistSaved() {
+  try { localStorage.setItem(SAVED_KEY, JSON.stringify(savedState.items)); } catch {}
+}
+window.toggleSave = (kw) => {
+  const idx = savedState.items.findIndex(it => it.kw === kw);
+  if (idx >= 0) {
+    savedState.items.splice(idx, 1);
+  } else {
+    const problem = PROBLEMS[state.problemId];
+    if (!problem) return;
+    const typeKey = problem.classify(state.answers);
+    const type = problem.types[typeKey];
+    const supp = type.supplements.find(s => s.kw === kw);
+    if (!supp) return;
+    savedState.items.push({
+      kw: supp.kw,
+      name: supp.name,
+      dosage: supp.dosage,
+      context: `${problem.title} / ${type.name}`,
+      savedAt: Date.now()
+    });
+  }
+  persistSaved();
+  render();
+};
+window.removeSaved = (kw) => {
+  savedState.items = savedState.items.filter(it => it.kw !== kw);
+  persistSaved();
+  render();
+};
+window.clearSaved = () => {
+  if (confirm('保存リストを全部クリアしますか?')) {
+    savedState.items = [];
+    persistSaved();
+    render();
+  }
+};
+window.openAllAmazon = () => {
+  savedState.items.forEach(it => window.open(amazonLink(it.kw), '_blank'));
+};
+window.openAllIherb = () => {
+  savedState.items.forEach(it => window.open(iherbLink(it.kw), '_blank'));
+};
+window.openSavedModal = () => { savedState.modalOpen = true; render(); };
+window.closeSavedModal = () => { savedState.modalOpen = false; render(); };
+
+function renderSavedFab() {
+  if (savedState.items.length === 0 || savedState.modalOpen) return '';
+  return `
+    <button class="saved-fab" onclick="openSavedModal()" type="button">
+      <span>📋 保存リスト</span>
+      <span class="fab-count">${savedState.items.length}</span>
+    </button>
+  `;
+}
+
+function renderSavedModal() {
+  if (!savedState.modalOpen) return '';
+  const items = savedState.items;
+  if (items.length === 0) {
+    return `
+      <div class="modal-overlay" onclick="closeSavedModal()">
+        <div class="modal-content" onclick="event.stopPropagation()">
+          <button class="modal-close" onclick="closeSavedModal()" type="button">×</button>
+          <h2 class="modal-title">保存リスト</h2>
+          <div class="modal-empty">まだ保存したサプリはありません。<br>診断結果ページから「+ 保存」してください。</div>
+        </div>
+      </div>
+    `;
+  }
+  const list = items.map(it => `
+    <div class="saved-item">
+      <div class="saved-item-info">
+        <div class="saved-item-name">${it.name}</div>
+        <div class="saved-item-dosage">${it.dosage}</div>
+        <div class="saved-item-context">${it.context}</div>
+      </div>
+      <div class="saved-item-actions">
+        <a class="saved-item-link" href="${amazonLink(it.kw)}" target="_blank" rel="noopener">Amazon</a>
+        <a class="saved-item-link secondary" href="${iherbLink(it.kw)}" target="_blank" rel="noopener">iHerb</a>
+        <button class="saved-item-remove" onclick="removeSaved('${it.kw}')" type="button" title="削除">×</button>
+      </div>
+    </div>
+  `).join('');
+  return `
+    <div class="modal-overlay" onclick="closeSavedModal()">
+      <div class="modal-content" onclick="event.stopPropagation()">
+        <button class="modal-close" onclick="closeSavedModal()" type="button">×</button>
+        <h2 class="modal-title">保存リスト (${items.length})</h2>
+        <p class="modal-sub">気になるサプリを集めて、後でまとめて開けます。アフィリリンクは維持されたまま。</p>
+        <div class="saved-list">${list}</div>
+        <div class="modal-actions">
+          <button class="modal-action primary" onclick="openAllAmazon()" type="button">Amazonで全部開く(${items.length}タブ) →</button>
+          <button class="modal-action" onclick="openAllIherb()" type="button">iHerbで全部開く(${items.length}タブ) →</button>
+          <button class="modal-action danger" onclick="clearSaved()" type="button">保存リストを全部クリア</button>
+        </div>
+      </div>
+    </div>
+  `;
+}
+
+// ------------------------------------------------------------
 // 状態管理 + レンダリング
 // ------------------------------------------------------------
 let state = {
@@ -2420,7 +2724,9 @@ function renderResult() {
       <div class="ingredient-mechanism">${ing.mechanism}</div>
     </div>
   `).join('');
-  const supps = type.supplements.map((s, i) => `
+  const supps = type.supplements.map((s, i) => {
+    const isSaved = savedState.items.some(it => it.kw === s.kw);
+    return `
     <div class="supp-card${i === 0 ? ' primary' : ''}">
       ${i === 0 ? '<div class="supp-badge">FIRST PICK / 最初の一本</div>' : ''}
       <div class="supp-name">${s.name}</div>
@@ -2429,9 +2735,11 @@ function renderResult() {
       <div class="supp-links">
         <a class="supp-link" href="${amazonLink(s.kw)}" target="_blank" rel="noopener">Amazonで探す →</a>
         <a class="supp-link secondary" href="${iherbLink(s.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
+        <button class="save-btn${isSaved ? ' saved' : ''}" onclick="toggleSave('${s.kw}')" type="button">${isSaved ? '✓ 保存済み' : '+ 保存'}</button>
       </div>
     </div>
-  `).join('');
+    `;
+  }).join('');
   const comboKey = `${state.problemId}.${typeKey}`;
   const combination = COMBINATIONS[comboKey] || '';
   const lifestyle = type.lifestyle.map(l => `<li>${l}</li>`).join('');
@@ -2483,9 +2791,11 @@ function renderResult() {
 
 function render() {
   const app = document.getElementById('app');
-  if (state.screen === 'home') app.innerHTML = renderHome();
-  else if (state.screen === 'intake') app.innerHTML = renderIntake();
-  else if (state.screen === 'result') app.innerHTML = renderResult();
+  let content = '';
+  if (state.screen === 'home') content = renderHome();
+  else if (state.screen === 'intake') content = renderIntake();
+  else if (state.screen === 'result') content = renderResult();
+  app.innerHTML = content + renderSavedFab() + renderSavedModal();
 }
 
 window.startProblem = (id) => setState({ screen: 'intake', problemId: id, questionIndex: 0, answers: {} });
