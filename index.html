@@ -1091,7 +1091,8 @@ const KW_JA = {
   'nac n-acetyl cysteine': 'NAC アセチルシステイン',
   'curcumin high absorption': 'クルクミン 高吸収',
   'anserine': 'アンセリン',
-  'potassium citrate': 'クエン酸カリウム'
+  'potassium citrate': 'クエン酸カリウム',
+  'bacopa monnieri': 'バコパモニエラ'
 };
 function amazonLink(kw) {
   const q = KW_JA[kw] || kw;
@@ -1167,7 +1168,22 @@ const COMBINATIONS = {
   'bloodwork.tg': '<strong>オメガ3</strong>は食事と共に。<strong>ベルベリン</strong>は食前30分。<strong>ナイアシン</strong>は段階的に増量(最初500mg → 慣れたら1000mg)。顔のほてり(フラッシュ)に注意。',
   'bloodwork.liver': '<strong>シリマリン + NAC + クルクミン</strong>は3つとも食事と共にOK(脂溶性)。朝食後に同時摂取で吸収◎。NACは強力なので長期使用は3ヶ月ごとに1-2週間休む。',
   'bloodwork.glucose': '<strong>ベルベリン + クロム + αリポ酸</strong>は全て食前(30分前)に同時OK。これは「食後眠気の血糖値スパイク型」と同じアプローチ。',
-  'bloodwork.uric': '<strong>アンセリン + ビタミンC</strong>は朝食後に同時。<strong>クエン酸カリウム</strong>は別タイミング(食事の間)で水量多めに。腎機能低下の方は医師相談前提。'
+  'bloodwork.uric': '<strong>アンセリン + ビタミンC</strong>は朝食後に同時。<strong>クエン酸カリウム</strong>は別タイミング(食事の間)で水量多めに。腎機能低下の方は医師相談前提。',
+
+  // 集中力(深い集中に入れない)
+  'focus_immediate.dopamine_burnout': '<strong>L-チロシン</strong>は朝の空腹時、<strong>アシュワガンダ</strong>は朝晩2回、<strong>オメガ3</strong>は食事と共に。3つ別タイミングで干渉なし。報酬系の回復は3-6週間スパンで。',
+  'focus_immediate.attention': '<strong>アルファGPC + バコパモニエラ</strong>は朝食後に同時OK。<strong>L-テアニン</strong>は集中時の頓服(200mg)。バコパは効果実感に8週間以上の継続必要。',
+  'focus_immediate.stress_overload': '<strong>L-テアニン</strong>は集中時の頓服(200mg、即効性)、<strong>アシュワガンダ</strong>朝晩2回、<strong>マグネシウム</strong>は就寝前。日常+頓服の組み合わせ。',
+
+  // 回復(身体が重い)
+  'recovery_chronic.chronic_nutrition': '<strong>ヘム鉄 + VC</strong>は食後に同時(コーヒー・緑茶の前後30分は避ける)。<strong>B-Complex</strong>は朝食後。<strong>プロテイン</strong>は食事の補助として。',
+  'recovery_chronic.mitochondrial_drain': '<strong>CoQ10</strong>は朝食後(脂溶性)、<strong>NMN</strong>は朝の空腹時、<strong>マグネシウム</strong>は就寝前。3つ別タイミングで干渉なし。3ヶ月継続で実感。',
+  'recovery_chronic.inactivity_cycle': '<strong>クレアチン</strong>は5g/1日固定(タイミング自由)、<strong>オメガ3</strong>は食事と共に、<strong>VD3</strong>は朝食後。サプリより運動が本筋、これらは補助。',
+
+  // 安定性(食事のリズム)
+  'stability_irregular.circadian_disruption': '<strong>マグネシウム + メラトニン</strong>は就寝30分前に同時。<strong>B-Complex</strong>は朝食後。時間固定がメインで、サプリは助走サポート。',
+  'stability_irregular.blood_sugar_management': '<strong>ベルベリン + クロム + サイリウム</strong>は全て食前(15-30分前)に同時OK。「食後眠気の血糖値スパイク型」と同じアプローチ。',
+  'stability_irregular.nutritional_completeness': '<strong>マルチビタミン + オメガ3</strong>は朝食後に同時OK。<strong>プロバイオティクス</strong>は別タイミング(空腹時の朝 or 就寝前)で吸収◎。'
 };
 
 // ------------------------------------------------------------
@@ -1328,8 +1344,8 @@ const PROBLEMS = {
   protein: {
     id: 'protein',
     category: 'stability',
-    title: 'プロテインで便がゆるい',
-    subtitle: 'タンパク質を増やすと、お腹が崩れる',
+    title: 'すぐにお腹の調子が悪くなる',
+    subtitle: 'プロテイン・乳糖・甘味料・腸内環境のチェック',
     icon: '💪',
     questions: [
       {
@@ -2336,6 +2352,419 @@ const PROBLEMS = {
         ]
       }
     }
+  },
+
+  focus_immediate: {
+    id: 'focus_immediate',
+    category: 'performance',
+    title: '即時に深い集中状態に入れない',
+    subtitle: '机に向かっても、なかなかゾーンに入れない',
+    icon: '🎯',
+    questions: [
+      {
+        id: 'main_block',
+        text: '集中したいのに、一番起きやすいのは?',
+        options: [
+          { value: 'no_motivation', label: 'やる気が湧かない' },
+          { value: 'distraction', label: '注意が頻繁に飛ぶ' },
+          { value: 'mind_blank', label: '頭が真っ白になる' },
+          { value: 'fatigued', label: 'そもそも疲れていて入れない' }
+        ]
+      },
+      {
+        id: 'sns_usage',
+        text: 'SNS / 動画コンテンツの消費量は?',
+        options: [
+          { value: 'high', label: '1日3時間以上' },
+          { value: 'medium', label: '1-3時間' },
+          { value: 'low', label: '1時間以下' }
+        ]
+      },
+      {
+        id: 'stress_level',
+        text: '日中のストレスレベルは?',
+        options: [
+          { value: 'high', label: '高い(緊張・焦り)' },
+          { value: 'medium', label: '普通' },
+          { value: 'low', label: '低い' }
+        ]
+      },
+      {
+        id: 'morning_state',
+        text: '朝の頭の状態は?',
+        options: [
+          { value: 'foggy', label: 'モヤモヤ・スッキリしない' },
+          { value: 'normal', label: '普通' },
+          { value: 'clear', label: 'クリア' }
+        ]
+      },
+      {
+        id: 'environment',
+        text: '集中するための環境対策は?',
+        options: [
+          { value: 'none', label: '特に何もしてない' },
+          { value: 'some', label: '通知オフ程度' },
+          { value: 'full', label: '徹底している(時間ブロック等)' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.main_block === 'no_motivation' || a.sns_usage === 'high') return 'dopamine_burnout';
+      if (a.main_block === 'mind_blank' && a.stress_level === 'high') return 'stress_overload';
+      return 'attention';
+    },
+    types: {
+      dopamine_burnout: {
+        name: 'ドーパミン報酬系疲弊型',
+        summary: 'SNS・動画のような「高刺激・即時報酬」が日常的にあると、ドーパミン報酬系が鈍化して、地味な仕事の報酬感が薄くなります。やる気が湧かない理由は、しばしばここに。',
+        targetMetric: {
+          label: 'ドーパミン報酬感度 / ベースライン覚醒度',
+          direction: 'up',
+          description: 'ドーパミンの絶対量を増やすより、感度を取り戻すアプローチ。前駆体補給 + 高刺激の制限がセット。'
+        },
+        activeIngredients: [
+          { name: 'L-チロシン', mechanism: 'ドーパミン・ノルアドレナリンの前駆体。意欲・集中の出力を補給。' },
+          { name: 'アシュワガンダ', mechanism: '報酬系のストレス耐性を高め、長期でドーパミン応答性をサポート。' },
+          { name: 'オメガ3(EPA/DHA)', mechanism: '脳細胞膜の流動性 → 神経伝達物質の受容性をサポート。' }
+        ],
+        supplements: [
+          { name: 'L-チロシン', dosage: '500-1500mg / 朝の空腹時', reason: 'ドーパミン前駆体。仕事前の補給に。食事の影響を受けるので空腹時。', kw: 'l-tyrosine' },
+          { name: 'アシュワガンダ', dosage: '300-600mg / 朝晩', reason: 'ストレス耐性と神経の柔軟性を長期で底上げ。3週間〜効果実感。', kw: 'ashwagandha' },
+          { name: 'オメガ3(EPA/DHA)', dosage: '1000-2000mg / 食事と', reason: '脳細胞膜の柔軟性。受容体感度のサポート。', kw: 'omega 3 EPA DHA' }
+        ],
+        lifestyle: [
+          '朝起きて1-2時間は SNS・ニュースを見ない(報酬系のチューニング)',
+          '週1日「ドーパミン断食」 — 意図的に高刺激を避ける',
+          '退屈に耐える練習 — 15分の単純作業を意図的に',
+          '達成感のある小さなタスクを積む(成功体験の蓄積)'
+        ]
+      },
+      attention: {
+        name: '注意散漫型(ワーキングメモリ低下)',
+        summary: '注意が頻繁に飛ぶタイプ。マルチタスク癖や環境刺激(通知・音)が背景にあり、ワーキングメモリのリソースが慢性的に枯渇しています。',
+        targetMetric: {
+          label: 'ワーキングメモリ容量 / 注意持続時間',
+          direction: 'up',
+          description: '注意を持続させる脳の基礎力を底上げ。アセチルコリン系成分が中心。'
+        },
+        activeIngredients: [
+          { name: 'アルファGPC', mechanism: 'アセチルコリン前駆体。記憶と注意の中核。' },
+          { name: 'バコパモニエラ', mechanism: 'ワーキングメモリ・注意持続のRCTあり。長期使用で効果増。' },
+          { name: 'L-テアニン', mechanism: 'α波増加でリラックスしながらの集中状態に。' }
+        ],
+        supplements: [
+          { name: 'アルファGPC', dosage: '300-600mg / 朝', reason: 'アセチルコリン補充。記憶・注意の前駆体。', kw: 'alpha gpc' },
+          { name: 'バコパモニエラ', dosage: '300mg / 食後', reason: '注意・記憶のエビデンス。効果実感には8週間以上の継続必要。', kw: 'bacopa monnieri' },
+          { name: 'L-テアニン', dosage: '200mg / 集中時', reason: '即効性のリラックス集中。マルチタスク癖の緩和にも。', kw: 'l-theanine 200mg' }
+        ],
+        lifestyle: [
+          'スマホ通知を全部オフ + 集中時はスマホを別室に',
+          'ポモドーロ法(25分集中 + 5分休憩)を導入',
+          '1タスクに集中(マルチタスクを意識的にやめる)',
+          '環境(机周りの整理 / 音楽 or 無音)を整える'
+        ]
+      },
+      stress_overload: {
+        name: 'ストレス過多型(緊張で動けない)',
+        summary: '集中したいのに頭が真っ白になる、緊張で動けないタイプ。交感神経が優位すぎて、かえって脳のリソースが固まる状態。',
+        targetMetric: {
+          label: '交感神経活動 / コルチゾール水準',
+          direction: 'down',
+          description: '過剰な緊張状態を緩めて、集中できる「適度な覚醒」に戻す。リラックス系成分が中心。'
+        },
+        activeIngredients: [
+          { name: 'L-テアニン', mechanism: 'α波増加、即効性のリラックス × 集中。' },
+          { name: 'アシュワガンダ', mechanism: 'コルチゾール低下、慢性的な緊張状態を解く。' },
+          { name: 'マグネシウム', mechanism: '神経興奮の鎮静、緊張による消耗をリセット。' }
+        ],
+        supplements: [
+          { name: 'L-テアニン', dosage: '200mg / 集中時', reason: '即効性のリラックス。仕事前 / 会議前の緊張緩和に。', kw: 'l-theanine 200mg' },
+          { name: 'アシュワガンダ', dosage: '300-600mg / 朝晩', reason: 'コルチゾール低下による慢性緊張の解消。', kw: 'ashwagandha' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '神経安定 + 睡眠の質向上で日中の余裕に。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '集中の前に4-7-8呼吸法(緊張を解く)',
+          '完璧主義を緩める(80%でOKの意識)',
+          '高強度運動より散歩(過剰なコルチゾールを上げない)',
+          '集中時間を区切る(オーバーワーク防止)'
+        ]
+      }
+    }
+  },
+
+  recovery_chronic: {
+    id: 'recovery_chronic',
+    category: 'recovery',
+    title: '常に身体が重くて疲れやすい',
+    subtitle: '特に病気じゃないのに、活力がない感覚',
+    icon: '🪨',
+    questions: [
+      {
+        id: 'symptom',
+        text: '主な症状は?',
+        options: [
+          { value: 'heavy', label: '体が常に重い・だるい' },
+          { value: 'tires_easily', label: 'すぐ疲れる・続かない' },
+          { value: 'low_energy', label: 'エネルギーが切れるのが早い' },
+          { value: 'all', label: '全部当てはまる' }
+        ]
+      },
+      {
+        id: 'diet_balance',
+        text: '食事の傾向は?',
+        options: [
+          { value: 'low_protein', label: 'タンパク質が少なめ' },
+          { value: 'low_iron', label: '魚・レバー・葉物野菜は少ない' },
+          { value: 'balanced', label: 'バランス良好' }
+        ]
+      },
+      {
+        id: 'exercise',
+        text: '運動習慣は?',
+        options: [
+          { value: 'none', label: 'ほぼなし' },
+          { value: 'light', label: '週1-2回 軽く' },
+          { value: 'regular', label: '週3回以上' }
+        ]
+      },
+      {
+        id: 'iron_supplements',
+        text: '鉄/ビタミン系のサプリは既に飲んでる?',
+        options: [
+          { value: 'yes', label: 'はい' },
+          { value: 'no', label: 'いいえ' }
+        ]
+      },
+      {
+        id: 'sleep_recovery',
+        text: '寝ても疲れが取れない感覚は?',
+        options: [
+          { value: 'yes', label: 'ある(寝ても重さが残る)' },
+          { value: 'sometimes', label: 'たまに' },
+          { value: 'no', label: '起きるとスッキリ' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.iron_supplements === 'no' && (a.diet_balance === 'low_iron' || a.diet_balance === 'low_protein')) return 'chronic_nutrition';
+      if (a.sleep_recovery === 'yes') return 'mitochondrial_drain';
+      return 'inactivity_cycle';
+    },
+    types: {
+      chronic_nutrition: {
+        name: '慢性栄養不足型',
+        summary: '食事から摂る基礎栄養素(タンパク質・鉄・B群)が長期的に不足しているパターン。慢性的な「重い感じ」の最も多い原因です。',
+        targetMetric: {
+          label: '血中フェリチン / タンパク質摂取量 / B群充足度',
+          direction: 'up',
+          description: '土台となる栄養素を底上げ。改善は3-6ヶ月かかるが、土台が整うと「重さ」が消える。'
+        },
+        activeIngredients: [
+          { name: 'ヘム鉄 + ビタミンC', mechanism: '隠れ貧血の補正、エネルギー代謝の基礎。' },
+          { name: 'ビタミンB-Complex', mechanism: 'エネルギー代謝の鍵、慢性疲労に直結。' },
+          { name: 'WPI / ソイプロテイン', mechanism: '合成の材料、基礎代謝を支える。' }
+        ],
+        supplements: [
+          { name: 'ヘム鉄', dosage: '10-20mg / 食後', reason: '吸収率が高く胃腸負担も少ない。VC併用で吸収倍増。', kw: 'heme iron' },
+          { name: 'ビタミンB-Complex', dosage: 'B-50 / 朝食後', reason: 'エネルギー代謝全般のサポート。', kw: 'b complex 50' },
+          { name: 'WPI(ホエイプロテイン)', dosage: '20-30g / 1日', reason: '基礎タンパク質の補完。WPIは乳糖なしで腸に優しい。', kw: 'whey protein isolate unflavored' }
+        ],
+        lifestyle: [
+          'まずフェリチン値を測る(健診のオプションで追加可能)',
+          '毎食タンパク質20g以上を意識(目玉焼き2個 + 鶏胸肉等)',
+          '加工食品 / 砂糖を減らす(栄養価が低い)',
+          '改善は3-6ヶ月かかる前提でゆっくり立て直す'
+        ]
+      },
+      mitochondrial_drain: {
+        name: 'ミトコンドリア消耗型',
+        summary: '細胞のエネルギー工場ミトコンドリアの働きが慢性的に低下しているパターン。加齢、運動不足、栄養不足、慢性ストレスで起きます。',
+        targetMetric: {
+          label: 'ミトコンドリア機能(ATP産生能)',
+          direction: 'up',
+          description: 'CoQ10とNAD+前駆体で直接サポート。改善には3ヶ月以上の継続が必要。'
+        },
+        activeIngredients: [
+          { name: 'CoQ10(ユビキノール)', mechanism: 'ミトコンドリア電子伝達系の補酵素。ATP産生に直結。' },
+          { name: 'NMN', mechanism: 'NAD+前駆体。ミトコンドリア機能と代謝の鍵。' },
+          { name: 'マグネシウム', mechanism: 'ATP合成酵素の必須補因子。' }
+        ],
+        supplements: [
+          { name: 'CoQ10(ユビキノール型)', dosage: '100-200mg / 朝食後', reason: '脂溶性なので食事と。40代以降は体内産生が減るため補充推奨。', kw: 'ubiquinol 100mg' },
+          { name: 'NMN', dosage: '250-500mg / 朝の空腹時', reason: 'NAD+補充。慢性疲労感への効果が議論されている注目成分。', kw: 'nmn 500mg' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: 'ATP合成の必須補因子。日本人の大多数が不足。', kw: 'magnesium glycinate' }
+        ],
+        lifestyle: [
+          '週3回20-30分の有酸素運動(ミトコンドリア新生を促す)',
+          '間欠的断食(16時間プチ断食)もミトコンドリア生合成を促進',
+          '寒冷曝露(冷水シャワー)も新生を促す',
+          '抗酸化食品(ベリー類、緑茶、ダークチョコ)を意識'
+        ]
+      },
+      inactivity_cycle: {
+        name: '運動不足由来の悪循環型',
+        summary: '運動不足が長期化し、基礎体力(VO2max)が低下している状態。動かない → 重い → さらに動かない、の悪循環に入っています。',
+        targetMetric: {
+          label: 'VO2max(最大酸素摂取量) / 心肺機能',
+          direction: 'up',
+          description: '基礎体力を取り戻すと「重さ」が抜ける。サプリより運動が本筋、サプリは補助。'
+        },
+        activeIngredients: [
+          { name: 'クレアチン', mechanism: 'ATP急性供給能を増やす。運動効率向上 + 脳機能サポート。' },
+          { name: 'オメガ3(EPA/DHA)', mechanism: '心血管機能サポート、運動回復促進、抗炎症。' },
+          { name: 'ビタミンD3', mechanism: '筋機能・気分・エネルギー全般のサポート。' }
+        ],
+        supplements: [
+          { name: 'クレアチン(モノハイドレート)', dosage: '5g / 1日', reason: '持続的なエネルギー供給。脳・筋肉両方に効く。', kw: 'creatine monohydrate' },
+          { name: 'オメガ3(EPA/DHA)', dosage: '1000-2000mg / 食事と', reason: '心血管 + 抗炎症。運動回復をサポート。', kw: 'omega 3 EPA DHA' },
+          { name: 'ビタミンD3', dosage: '2000-4000IU / 1日', reason: '筋機能・気分・エネルギー。日本人の半数が不足。', kw: 'vitamin d3 2000' }
+        ],
+        lifestyle: [
+          '「やりたくない」を超える最初の5分 を毎日習慣化(散歩でもOK)',
+          '階段を使う、一駅歩く等のマイクロ運動',
+          '週1回でも有酸素運動(20分以上)',
+          '動かない → 重い → 動かない のスパイラルを断つ意識'
+        ]
+      }
+    }
+  },
+
+  stability_irregular: {
+    id: 'stability_irregular',
+    category: 'stability',
+    title: '食事のリズムが整わない',
+    subtitle: '時間も量もばらばらで、体調が安定しない',
+    icon: '🍽',
+    questions: [
+      {
+        id: 'main_irregularity',
+        text: '一番ばらつくのは?',
+        options: [
+          { value: 'timing', label: '食事の時間' },
+          { value: 'quantity', label: '食事の量' },
+          { value: 'content', label: '食事の内容' },
+          { value: 'all', label: '全部' }
+        ]
+      },
+      {
+        id: 'breakfast',
+        text: '朝食を抜くことは?',
+        options: [
+          { value: 'often', label: 'よくある(週3回以上)' },
+          { value: 'sometimes', label: 'たまに' },
+          { value: 'rare', label: 'ほぼない' }
+        ]
+      },
+      {
+        id: 'lunch_type',
+        text: '仕事中の食事は?',
+        options: [
+          { value: 'snacking', label: 'スナックでつまむ' },
+          { value: 'convenience', label: 'コンビニ / 外食 中心' },
+          { value: 'cooked', label: '自炊 / お弁当 中心' }
+        ]
+      },
+      {
+        id: 'planning',
+        text: '食事への意識は?',
+        options: [
+          { value: 'no_time', label: 'そもそも時間がない' },
+          { value: 'no_planning', label: '計画してない' },
+          { value: 'planning_fails', label: '計画はするけど続かない' }
+        ]
+      },
+      {
+        id: 'symptom',
+        text: '一番感じる不調は?',
+        options: [
+          { value: 'fatigue', label: '疲れ・だるさ' },
+          { value: 'blood_sugar', label: '食後眠気 / 血糖変動' },
+          { value: 'gut', label: '腸の不調' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.main_irregularity === 'timing' || a.breakfast === 'often') return 'circadian_disruption';
+      if (a.symptom === 'blood_sugar' || a.main_irregularity === 'quantity') return 'blood_sugar_management';
+      return 'nutritional_completeness';
+    },
+    types: {
+      circadian_disruption: {
+        name: '体内時計型(食事時間のばらつき)',
+        summary: '食事時間がばらばらで体内時計が乱れているパターン。食事は体内時計を整える最強の手段なので、ここを直すと連鎖的に体調が良くなります。',
+        targetMetric: {
+          label: '食事時間の規則性 / 体内時計の同期',
+          direction: 'stabilize',
+          description: '時間栄養学的に、食事時間を固定するだけで体調は大きく変わる。サプリは「時間固定の助走」の補助。'
+        },
+        activeIngredients: [
+          { name: 'マグネシウム', mechanism: '体内時計の安定化、自律神経サポート。' },
+          { name: 'ビタミンB-Complex', mechanism: '不規則食事で枯渇しやすいB群の底上げ。' },
+          { name: 'メラトニン', mechanism: '体内時計のリセット補助(夜)。' }
+        ],
+        supplements: [
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: 'リズム整理 + 神経安定。', kw: 'magnesium glycinate' },
+          { name: 'ビタミンB-Complex', dosage: 'B-50 / 朝食後', reason: '不規則食生活の補完。', kw: 'b complex 50' },
+          { name: 'メラトニン', dosage: '0.5-1mg / 就寝30分前', reason: '体内時計の同期化補助。少量で十分。', kw: 'melatonin 0.5mg' }
+        ],
+        lifestyle: [
+          '食事時間を固定する(±30分以内に)が最優先',
+          '朝食を必ず取る(体内時計のリセット)',
+          '夕食は就寝3時間前まで',
+          '週末も平日と同じリズムを保つ'
+        ]
+      },
+      blood_sugar_management: {
+        name: '血糖管理型(食事量のばらつき)',
+        summary: '食事量がばらつくと血糖値の振れ幅が大きくなり、エネルギー切れと過食を繰り返すパターン。「食後眠気の血糖値スパイク型」と同じ根っこの問題。',
+        targetMetric: {
+          label: '食後血糖値の安定性 / インスリン感受性',
+          direction: 'stabilize',
+          description: '血糖値の振れ幅を抑えると、エネルギーが安定する。空腹・過食のサイクルから抜け出せる。'
+        },
+        activeIngredients: [
+          { name: 'ベルベリン', mechanism: '血糖降下、インスリン感受性改善。' },
+          { name: 'クロム', mechanism: 'インスリン感受性のサポート。' },
+          { name: '水溶性食物繊維(サイリウム)', mechanism: '糖の吸収緩和、満腹感持続。' }
+        ],
+        supplements: [
+          { name: 'ベルベリン', dosage: '500mg / 食前', reason: 'メトホルミン類似の血糖降下作用。最有力候補。', kw: 'berberine' },
+          { name: 'クロム', dosage: '200-400μg / 食前', reason: 'インスリン感受性を高め、食後血糖を平準化。', kw: 'chromium picolinate' },
+          { name: 'サイリウム(オオバコ)', dosage: '5-10g / 食前', reason: '糖の吸収緩和 + 満腹感持続。LDLにも効く。', kw: 'psyllium husk' }
+        ],
+        lifestyle: [
+          '食事順序: 野菜 → タンパク質 → 炭水化物',
+          '各食事のタンパク質20g以上(満腹感持続)',
+          '間食は「ナッツ + プロテイン」など血糖安定型に',
+          '食事量を「腹八分」に意識的に'
+        ]
+      },
+      nutritional_completeness: {
+        name: '栄養充足型(食事内容のばらつき)',
+        summary: '食事内容が偏って、基礎栄養素の充足度が日によって大きく変わるパターン。完璧な食生活が難しい時、サプリで底上げするのは合理的。',
+        targetMetric: {
+          label: 'マルチビタミン・ミネラル充足度 / 食物繊維摂取量',
+          direction: 'up',
+          description: '食事の質を底上げできない期間は、サプリで穴を埋めるのが現実的。サプリは「保険」。'
+        },
+        activeIngredients: [
+          { name: 'マルチビタミン・ミネラル', mechanism: '不足栄養素全般の底上げ。' },
+          { name: 'オメガ3(EPA/DHA)', mechanism: '不足しがちな良質脂質の補完。' },
+          { name: 'プロバイオティクス', mechanism: '食事内容に左右されがちな腸内環境のサポート。' }
+        ],
+        supplements: [
+          { name: 'マルチビタミン・ミネラル', dosage: '1日量 / 朝食後', reason: '栄養充足の保険。最初の一本として無難。', kw: 'multivitamin' },
+          { name: 'オメガ3(EPA/DHA)', dosage: '1000-2000mg / 食事と', reason: '良質脂質の補完。日常的に不足しがち。', kw: 'omega 3 EPA DHA' },
+          { name: 'プロバイオティクス', dosage: '100億cfu以上 / 1日', reason: '腸内環境のベース。食事内容に左右されにくい安定化。', kw: 'probiotic 100 billion' }
+        ],
+        lifestyle: [
+          '1日の食事を写真で記録(意識化)',
+          '「炭水化物 + タンパク質 + 野菜」を毎食意識',
+          '朝食を「タンパク質中心」にする(目玉焼き + ヨーグルト等)',
+          '週1日でも自炊 / 計画的な食事を試す'
+        ]
+      }
+    }
   }
 };
 
@@ -2635,7 +3064,7 @@ function renderHome() {
       <div class="dark-content">
         <div class="dark-eyebrow">PHILOSOPHY</div>
         <h2 class="dark-statement">サプリを通じて、<br><em>自分をマネジメント</em>する。</h2>
-        <p class="dark-text">「飲めば良くなる」ではなく、「動かしたい数値があり、それに効く成分を選ぶ」。<br>Sup. はその思考の補助線でありたい。あなたの身体は、設計できる。</p>
+        <p class="dark-text">「飲めば良くなる」ではなく、動かす数値に効く成分を。<br>Sup. はその思考の補助線。あなたの身体は、設計できる。</p>
       </div>
     </div>
 
