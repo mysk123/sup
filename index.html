@@ -53,10 +53,64 @@ body {
 }
 .container { max-width: 720px; margin: 0 auto; padding: 32px 24px 80px; }
 
-.brand { display: flex; align-items: baseline; gap: 12px; margin-bottom: 48px; }
+.brand {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  margin-bottom: 48px;
+  cursor: pointer;
+  user-select: none;
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: inherit;
+  color: inherit;
+  text-align: left;
+  transition: opacity 0.15s;
+}
+.brand:hover { opacity: 0.7; }
 .brand-logo { font-weight: 700; font-size: 22px; letter-spacing: -0.02em; }
 .brand-logo .dot { color: var(--accent); }
 .brand-tagline { font-size: 12px; color: var(--text-sub); letter-spacing: 0.02em; }
+
+/* === Mobile anchor nav === */
+.lp-nav {
+  display: none;
+  gap: 6px;
+  overflow-x: auto;
+  padding: 12px 24px;
+  margin: -8px -24px 16px;
+  position: sticky;
+  top: 0;
+  background: var(--bg);
+  z-index: 50;
+  scrollbar-width: none;
+  border-bottom: 1px solid var(--border);
+}
+.lp-nav::-webkit-scrollbar { display: none; }
+.lp-nav a {
+  flex-shrink: 0;
+  padding: 7px 13px;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 100px;
+  text-decoration: none;
+  color: var(--text-sub);
+  font-size: 11px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.08em;
+  white-space: nowrap;
+  font-weight: 600;
+  transition: all 0.15s;
+}
+.lp-nav a:active, .lp-nav a:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  background: var(--accent-light);
+}
+@media (max-width: 600px) {
+  .lp-nav { display: flex; }
+}
 
 .hero {
   position: relative;
@@ -759,23 +813,35 @@ body {
 }
 
 @media (max-width: 600px) {
-  .container { padding: 24px 18px 60px; }
-  .hero { margin: 12px 0 56px; padding: 12px 0 24px; }
-  .hero-title { font-size: 28px; line-height: 1.3; }
-  .hero-sub { font-size: 14px; }
-  .hero-deco { width: 200px; height: 200px; right: -60px; top: -30px; }
+  .container { padding: 18px 18px 60px; }
+  .hero { margin: 8px 0 36px; padding: 4px 0 12px; }
+  .hero-title { font-size: 26px; line-height: 1.3; margin-bottom: 14px; }
+  .hero-sub { font-size: 13px; line-height: 1.75; }
+  .hero-cta-row { margin-top: 18px; }
+  .hero-deco { width: 180px; height: 180px; right: -60px; top: -20px; opacity: 0.35; }
   .q-text { font-size: 19px; }
   .result-title { font-size: 23px; }
-  .brand { margin-bottom: 24px; }
-  .feature-grid, .steps-grid { grid-template-columns: 1fr; }
-  .vision-grid { grid-template-columns: 1fr; }
-  .flow-row { flex-direction: column; }
+  .brand { margin-bottom: 16px; }
+  .feature-grid, .steps-grid { grid-template-columns: 1fr; gap: 10px; }
+  .vision-grid { grid-template-columns: 1fr; gap: 10px; }
+  .vision-card { padding: 22px 22px; }
+  .vision-icon { width: 40px; height: 40px; margin-bottom: 16px; }
+  .vision-title { font-size: 19px; }
+  .flow-row { flex-direction: column; gap: 6px; margin-top: 20px; }
   .flow-arrow { transform: rotate(90deg); padding: 2px 0; }
-  .lp-section { margin: 56px 0; }
-  .lp-section-dark { margin: 64px -18px; padding: 64px 18px; }
-  .dark-statement { font-size: 24px; }
-  .lp-title { font-size: 21px; }
-  .lp-title-v2 { font-size: 24px; }
+  .flow-step { padding: 18px 14px 16px; }
+  .flow-icon { width: 40px; height: 40px; margin-bottom: 12px; }
+  .lp-section { margin: 40px 0; }
+  .lp-section-dark { margin: 48px -18px; padding: 56px 22px; }
+  .dark-statement { font-size: 22px; }
+  .dark-text { font-size: 13px; }
+  .lp-title { font-size: 19px; }
+  .lp-title-v2 { font-size: 22px; }
+  .vision-intro { font-size: 14px; margin-bottom: 22px; }
+  .feature-card, .step-card { padding: 18px 18px; }
+  .feature-name, .step-name { font-size: 14px; }
+  .feature-desc, .step-desc { font-size: 12px; }
+  .faq-item { padding: 16px 18px; }
 }
 </style>
 </head>
@@ -2120,10 +2186,19 @@ function renderHome() {
     `;
   }).join('');
   return `
-    <div class="brand">
-      <div class="brand-logo">Sup<span class="dot">.</span></div>
-      <div class="brand-tagline">知的生産者の身体メンテ</div>
-    </div>
+    <button class="brand" onclick="goHome()" type="button">
+      <span class="brand-logo">Sup<span class="dot">.</span></span>
+      <span class="brand-tagline">知的生産者の身体メンテ</span>
+    </button>
+
+    <nav class="lp-nav">
+      <a href="#vision">VISION</a>
+      <a href="#logic">LOGIC</a>
+      <a href="#why">WHY</a>
+      <a href="#how">HOW</a>
+      <a href="#diagnose">DIAGNOSE</a>
+      <a href="#faq">FAQ</a>
+    </nav>
 
     <div class="hero">
       <div class="hero-deco">${ICONS.heroDeco}</div>
@@ -2136,7 +2211,7 @@ function renderHome() {
       </div>
     </div>
 
-    <div class="lp-section">
+    <div class="lp-section" id="vision">
       <div class="section-label">VISION</div>
       <h2 class="lp-title-v2">Sup. が向き合う、3つの軸。</h2>
       <p class="vision-intro">「悩みを消す」から、「もっと良くなる」へ。集中して働き、深く眠り、ぶれずに続く。サプリは、その状態を作る道具です。</p>
@@ -2162,7 +2237,7 @@ function renderHome() {
       </div>
     </div>
 
-    <div class="lp-section">
+    <div class="lp-section" id="logic">
       <div class="section-label">LOGIC</div>
       <h2 class="lp-title-v2">悩みを、製品に翻訳する流れ。</h2>
       <p class="vision-intro">あなたの悩みを論点ツリーで型に分け、その型に対応する数値 → 成分 → サプリ製品へ翻訳します。</p>
@@ -2230,7 +2305,7 @@ function renderHome() {
       </div>
     </div>
 
-    <div class="lp-section">
+    <div class="lp-section" id="how">
       <div class="section-label">HOW IT WORKS</div>
       <h2 class="lp-title-v2">5分で完結する、3ステップ。</h2>
       <div class="steps-grid">
@@ -2255,7 +2330,7 @@ function renderHome() {
     <div class="lp-section-dark">
       <div class="dark-content">
         <div class="dark-eyebrow">PHILOSOPHY</div>
-        <h2 class="dark-statement">サプリは、目的を達成する<br>ための、<em>道具</em>です。</h2>
+        <h2 class="dark-statement">サプリを通じて、<br><em>自分をマネジメント</em>する。</h2>
         <p class="dark-text">「飲めば良くなる」ではなく、「動かしたい数値があり、それに効く成分を選ぶ」。<br>Sup. はその思考の補助線でありたい。あなたの身体は、設計できる。</p>
       </div>
     </div>
@@ -2266,7 +2341,7 @@ function renderHome() {
       ${groups}
     </div>
 
-    <div class="lp-section">
+    <div class="lp-section" id="faq">
       <div class="section-label">FAQ</div>
       <h2 class="lp-title-v2">よくある質問</h2>
       <div class="faq-list">
@@ -2320,10 +2395,10 @@ function renderIntake() {
     <button class="q-option" onclick="answerQuestion('${q.id}', '${opt.value}')">${opt.label}</button>
   `).join('');
   return `
-    <div class="brand">
-      <div class="brand-logo">Sup<span class="dot">.</span></div>
-      <div class="brand-tagline">${problem.title}</div>
-    </div>
+    <button class="brand" onclick="goHome()" type="button">
+      <span class="brand-logo">Sup<span class="dot">.</span></span>
+      <span class="brand-tagline">${problem.title}</span>
+    </button>
     <div class="q-progress">${progressItems}</div>
     <div class="q-step-label">QUESTION ${state.questionIndex + 1} / ${total}</div>
     <h2 class="q-text">${q.text}</h2>
@@ -2361,10 +2436,10 @@ function renderResult() {
   const combination = COMBINATIONS[comboKey] || '';
   const lifestyle = type.lifestyle.map(l => `<li>${l}</li>`).join('');
   return `
-    <div class="brand">
-      <div class="brand-logo">Sup<span class="dot">.</span></div>
-      <div class="brand-tagline">${problem.title} / 診断結果</div>
-    </div>
+    <button class="brand" onclick="goHome()" type="button">
+      <span class="brand-logo">Sup<span class="dot">.</span></span>
+      <span class="brand-tagline">${problem.title} / 診断結果</span>
+    </button>
     <div class="result-tag">YOUR TYPE</div>
     <h1 class="result-title">${type.name}</h1>
     <div class="result-summary">${type.summary}</div>
