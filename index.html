@@ -31,8 +31,15 @@ html { scroll-behavior: smooth; }
   --accent: #0f5b3e;
   --accent-light: #e8f0eb;
   --accent-dark: #0a4530;
+  --accent-deep: #06352a;
+  --warm-accent: #c8835f;
+  --dark-bg: #0a1612;
+  --dark-text: #f0f5f1;
+  --dark-text-sub: #8aa399;
+  --dark-accent: #4ca47e;
   --border: #ebe8e2;
   --shadow: 0 1px 3px rgba(0,0,0,0.04), 0 4px 16px rgba(0,0,0,0.03);
+  --shadow-lg: 0 4px 24px rgba(0,0,0,0.06), 0 12px 48px rgba(0,0,0,0.04);
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: var(--bg); }
@@ -51,9 +58,63 @@ body {
 .brand-logo .dot { color: var(--accent); }
 .brand-tagline { font-size: 12px; color: var(--text-sub); letter-spacing: 0.02em; }
 
-.hero { margin-bottom: 36px; }
-.hero-title { font-size: 30px; font-weight: 700; line-height: 1.45; margin-bottom: 14px; letter-spacing: -0.02em; }
-.hero-sub { color: var(--text-sub); font-size: 15px; line-height: 1.7; }
+.hero {
+  position: relative;
+  margin: 24px 0 88px;
+  padding: 24px 0 32px;
+}
+.hero-title {
+  font-size: 44px;
+  font-weight: 700;
+  line-height: 1.25;
+  margin-bottom: 20px;
+  letter-spacing: -0.028em;
+}
+.hero-title .accent {
+  color: var(--accent);
+  position: relative;
+  white-space: nowrap;
+}
+.hero-sub {
+  color: var(--text-sub);
+  font-size: 16px;
+  line-height: 1.85;
+  max-width: 540px;
+}
+.hero-cta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 28px;
+}
+.cta-secondary {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  background: transparent;
+  color: var(--text-main);
+  text-decoration: none;
+  padding: 14px 22px;
+  border-radius: 12px;
+  font-size: 15px;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  transition: all 0.15s;
+}
+.cta-secondary:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+}
+.hero-deco {
+  position: absolute;
+  top: -20px;
+  right: -40px;
+  width: 280px;
+  height: 280px;
+  opacity: 0.5;
+  pointer-events: none;
+  z-index: -1;
+}
 
 .category-section { margin-bottom: 32px; }
 .category-header {
@@ -463,15 +524,226 @@ body {
   margin-top: 28px;
 }
 
+/* === VISION section === */
+.vision-intro {
+  font-size: 17px;
+  color: var(--text-main);
+  line-height: 1.85;
+  margin-bottom: 32px;
+  max-width: 600px;
+}
+.vision-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+.vision-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 18px;
+  padding: 30px 26px;
+  transition: all 0.2s ease;
+  position: relative;
+  overflow: hidden;
+}
+.vision-card::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3px;
+  background: var(--accent);
+  opacity: 0;
+  transition: opacity 0.2s;
+}
+.vision-card:hover {
+  border-color: var(--accent);
+  transform: translateY(-3px);
+  box-shadow: var(--shadow-lg);
+}
+.vision-card:hover::before { opacity: 1; }
+.vision-icon {
+  width: 52px;
+  height: 52px;
+  color: var(--accent);
+  margin-bottom: 22px;
+}
+.vision-label {
+  font-size: 10px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.2em;
+  color: var(--accent);
+  margin-bottom: 8px;
+  font-weight: 600;
+}
+.vision-title {
+  font-size: 22px;
+  font-weight: 700;
+  margin-bottom: 10px;
+  letter-spacing: -0.01em;
+}
+.vision-desc {
+  font-size: 14px;
+  color: var(--text-sub);
+  line-height: 1.75;
+}
+
+/* === LOGIC FLOW === */
+.flow-row {
+  display: flex;
+  align-items: stretch;
+  gap: 6px;
+  margin-top: 32px;
+}
+.flow-step {
+  flex: 1;
+  background: var(--card-bg);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  padding: 22px 14px;
+  text-align: center;
+  min-width: 0;
+}
+.flow-arrow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-soft);
+  font-size: 16px;
+  flex-shrink: 0;
+  padding: 0 2px;
+}
+.flow-num {
+  font-size: 10px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  color: var(--accent);
+  letter-spacing: 0.15em;
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.flow-icon {
+  width: 32px;
+  height: 32px;
+  color: var(--accent);
+  margin: 0 auto 14px;
+  display: block;
+}
+.flow-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 4px;
+  letter-spacing: -0.01em;
+}
+.flow-desc {
+  font-size: 11px;
+  color: var(--text-sub);
+  line-height: 1.55;
+}
+
+/* === DARK PHILOSOPHY section === */
+.lp-section-dark {
+  background: var(--dark-bg);
+  color: var(--dark-text);
+  margin: 88px -24px;
+  padding: 88px 24px;
+  position: relative;
+  overflow: hidden;
+}
+.lp-section-dark::before {
+  content: "";
+  position: absolute;
+  top: -120px;
+  right: -120px;
+  width: 360px;
+  height: 360px;
+  background: radial-gradient(circle, rgba(76,164,126,0.18) 0%, transparent 70%);
+  pointer-events: none;
+}
+.dark-content {
+  max-width: 640px;
+  margin: 0 auto;
+  text-align: center;
+  position: relative;
+}
+.dark-eyebrow {
+  font-size: 11px;
+  font-family: ui-monospace, "SF Mono", "JetBrains Mono", monospace;
+  letter-spacing: 0.22em;
+  color: var(--dark-accent);
+  margin-bottom: 28px;
+  font-weight: 600;
+}
+.dark-statement {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.45;
+  letter-spacing: -0.025em;
+  margin-bottom: 28px;
+}
+.dark-statement em {
+  font-style: normal;
+  color: var(--dark-accent);
+  position: relative;
+  display: inline-block;
+  padding: 0 4px;
+}
+.dark-statement em::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 4px;
+  width: 100%;
+  height: 8px;
+  background: rgba(76,164,126,0.2);
+  z-index: -1;
+}
+.dark-text {
+  font-size: 15px;
+  line-height: 1.95;
+  color: var(--dark-text-sub);
+  max-width: 540px;
+  margin: 0 auto;
+}
+
+/* === Section title v2 === */
+.lp-title-v2 {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 10px 0 18px;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+}
+
+/* === Scroll animation === */
+.fade-in {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+.fade-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 @media (max-width: 600px) {
   .container { padding: 24px 18px 60px; }
-  .hero-title { font-size: 24px; }
+  .hero { margin: 12px 0 56px; padding: 12px 0 24px; }
+  .hero-title { font-size: 28px; line-height: 1.3; }
+  .hero-sub { font-size: 14px; }
+  .hero-deco { width: 200px; height: 200px; right: -60px; top: -30px; }
   .q-text { font-size: 19px; }
   .result-title { font-size: 23px; }
-  .brand { margin-bottom: 36px; }
+  .brand { margin-bottom: 24px; }
   .feature-grid, .steps-grid { grid-template-columns: 1fr; }
+  .vision-grid { grid-template-columns: 1fr; }
+  .flow-row { flex-direction: column; }
+  .flow-arrow { transform: rotate(90deg); padding: 2px 0; }
   .lp-section { margin: 56px 0; }
+  .lp-section-dark { margin: 64px -18px; padding: 64px 18px; }
+  .dark-statement { font-size: 24px; }
   .lp-title { font-size: 21px; }
+  .lp-title-v2 { font-size: 24px; }
 }
 </style>
 </head>
@@ -535,6 +807,28 @@ function amazonLink(kw) {
 function iherbLink(kw) {
   return `https://www.iherb.com/search?kw=${encodeURIComponent(kw)}&rcode=${IHERB_RCODE}`;
 }
+
+// ------------------------------------------------------------
+// SVG アイコンライブラリ
+// ------------------------------------------------------------
+const SVG_ATTR = 'viewBox="0 0 48 48" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"';
+
+const ICONS = {
+  // VISION section (大サイズ)
+  focus: `<svg ${SVG_ATTR}><path d="M16 16c0-3 3-6 6-6 2 0 3 1 4 2 1-1 2-2 4-2 3 0 6 3 6 6 0 1 0 2-1 3 2 1 3 3 3 5s-1 4-3 5c1 1 1 3-1 4 0 3-3 5-6 5h-12c-3 0-6-2-6-5-2-1-2-3-1-4-2-1-3-3-3-5s1-4 3-5c-1-1-1-2-1-3z"/><path d="M24 12v22"/></svg>`,
+  recovery: `<svg ${SVG_ATTR}><path d="M36 24a14 14 0 1 1-12-14 11 11 0 0 0 12 14z"/><circle cx="14" cy="14" r="1" fill="currentColor"/><circle cx="40" cy="12" r="0.7" fill="currentColor"/><circle cx="38" cy="36" r="0.5" fill="currentColor"/></svg>`,
+  stability: `<svg ${SVG_ATTR}><line x1="24" y1="8" x2="24" y2="42"/><line x1="14" y1="42" x2="34" y2="42"/><line x1="11" y1="16" x2="37" y2="16"/><path d="M11 16L5 30c0 3 3 5 6 5s6-2 6-5L11 16z"/><path d="M37 16L31 30c0 3 3 5 6 5s6-2 6-5L37 16z"/></svg>`,
+
+  // FLOW section (小サイズ)
+  worry: `<svg ${SVG_ATTR}><circle cx="22" cy="22" r="10"/><line x1="29" y1="29" x2="38" y2="38"/></svg>`,
+  branch: `<svg ${SVG_ATTR}><circle cx="24" cy="10" r="3"/><circle cx="12" cy="30" r="3"/><circle cx="24" cy="30" r="3"/><circle cx="36" cy="30" r="3"/><line x1="24" y1="13" x2="24" y2="27"/><line x1="24" y1="13" x2="13" y2="28"/><line x1="24" y1="13" x2="35" y2="28"/></svg>`,
+  gauge: `<svg ${SVG_ATTR}><path d="M10 32a14 14 0 0 1 28 0"/><line x1="24" y1="32" x2="32" y2="18"/><circle cx="24" cy="32" r="2" fill="currentColor"/></svg>`,
+  molecule: `<svg ${SVG_ATTR}><circle cx="14" cy="14" r="3"/><circle cx="34" cy="14" r="3"/><circle cx="24" cy="32" r="3"/><circle cx="14" cy="34" r="3"/><line x1="14" y1="17" x2="14" y2="31"/><line x1="17" y1="14" x2="31" y2="14"/><line x1="32" y1="17" x2="26" y2="29"/><line x1="16" y1="32" x2="22" y2="32"/></svg>`,
+  capsule: `<svg ${SVG_ATTR}><rect x="10" y="18" width="28" height="14" rx="7"/><line x1="24" y1="18" x2="24" y2="32"/></svg>`,
+
+  // Hero decoration
+  heroDeco: `<svg viewBox="0 0 280 280" fill="none"><defs><radialGradient id="hg" cx="50%" cy="50%"><stop offset="0%" stop-color="#0f5b3e" stop-opacity="0.22"/><stop offset="60%" stop-color="#0f5b3e" stop-opacity="0.05"/><stop offset="100%" stop-color="#0f5b3e" stop-opacity="0"/></radialGradient></defs><circle cx="140" cy="140" r="140" fill="url(#hg)"/><g stroke="#0f5b3e" stroke-width="0.6" opacity="0.25" fill="none"><circle cx="140" cy="140" r="70"/><circle cx="140" cy="140" r="95"/><circle cx="140" cy="140" r="120"/></g></svg>`
+};
 
 // ------------------------------------------------------------
 // カテゴリ: 4つの強化軸
@@ -1753,15 +2047,87 @@ function renderHome() {
     </div>
 
     <div class="hero">
+      <div class="hero-deco">${ICONS.heroDeco}</div>
       <div class="hero-eyebrow">7つの悩み / 28型診断 / エビデンスベース</div>
-      <h1 class="hero-title">あなたの「悩み」を、<br>「動かすべき数値」に翻訳する。</h1>
-      <p class="hero-sub">5分の問診から、型 → 動かす数値 → 効く成分 → 含むサプリ製品 まで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
-      <a href="#diagnose" class="hero-cta">いま気になる悩みから診断 →</a>
+      <h1 class="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。<br>成分から、明日のパフォーマンスへ。</h1>
+      <p class="hero-sub">5分の問診で、型 → 動かす数値 → 効く成分 → 含むサプリまで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
+      <div class="hero-cta-row">
+        <a href="#diagnose" class="hero-cta">いま気になる悩みから診断 →</a>
+        <a href="#why" class="cta-secondary">Sup. のロジックを見る</a>
+      </div>
     </div>
 
     <div class="lp-section">
+      <div class="section-label">VISION</div>
+      <h2 class="lp-title-v2">Sup. が向き合う、3つの軸。</h2>
+      <p class="vision-intro">「悩みを消す」から、「もっと良くなる」へ。集中して働き、深く眠り、ぶれずに続く。サプリは、その状態を作る道具です。</p>
+      <div class="vision-grid">
+        <div class="vision-card">
+          <div class="vision-icon">${ICONS.focus}</div>
+          <div class="vision-label">FOCUS</div>
+          <div class="vision-title">集中力</div>
+          <div class="vision-desc">カフェインに頼らない、持続する思考のクリアさ。脳と神経の最適化。</div>
+        </div>
+        <div class="vision-card">
+          <div class="vision-icon">${ICONS.recovery}</div>
+          <div class="vision-label">RECOVERY</div>
+          <div class="vision-title">回復力</div>
+          <div class="vision-desc">深い眠り、軽い目覚め、抜ける疲労。次の日の自分への投資。</div>
+        </div>
+        <div class="vision-card">
+          <div class="vision-icon">${ICONS.stability}</div>
+          <div class="vision-label">STABILITY</div>
+          <div class="vision-title">安定性</div>
+          <div class="vision-desc">ぶれない心、整った腸、長く続けられる状態。土台を作るベース。</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="lp-section">
+      <div class="section-label">LOGIC</div>
+      <h2 class="lp-title-v2">悩みを、製品に翻訳する流れ。</h2>
+      <p class="vision-intro">あなたの悩みを論点ツリーで型に分け、その型に対応する数値 → 成分 → サプリ製品へ翻訳します。</p>
+      <div class="flow-row">
+        <div class="flow-step">
+          <div class="flow-num">01</div>
+          <div class="flow-icon">${ICONS.worry}</div>
+          <div class="flow-title">悩み</div>
+          <div class="flow-desc">7つから選ぶ</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">02</div>
+          <div class="flow-icon">${ICONS.branch}</div>
+          <div class="flow-title">型診断</div>
+          <div class="flow-desc">論点ツリーで分岐</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">03</div>
+          <div class="flow-icon">${ICONS.gauge}</div>
+          <div class="flow-title">動かす数値</div>
+          <div class="flow-desc">具体指標を提示</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">04</div>
+          <div class="flow-icon">${ICONS.molecule}</div>
+          <div class="flow-title">成分</div>
+          <div class="flow-desc">メカニズム提示</div>
+        </div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-step">
+          <div class="flow-num">05</div>
+          <div class="flow-icon">${ICONS.capsule}</div>
+          <div class="flow-title">サプリ</div>
+          <div class="flow-desc">製品を案内</div>
+        </div>
+      </div>
+    </div>
+
+    <div id="why" class="lp-section">
       <div class="section-label">WHY SUP.</div>
-      <h2 class="lp-title">"なんとなく"のサプリ選びを、やめる。</h2>
+      <h2 class="lp-title-v2">"なんとなく"のサプリ選びを、やめる。</h2>
       <div class="lp-text">
         <p>ChatGPT に「疲労に効くサプリは?」と聞けば、それっぽい答えは返ってくる。でも、<strong>あなたの状況に紐づいた、根拠ある一手</strong>はそこにはない。</p>
         <p>Sup. は論点ツリーで「あなたがどの型に当てはまるか」を分岐診断し、その型に対して<strong>動かすべき具体的な数値</strong>(食後血糖 / フェリチン / コルチゾール覚醒反応 / LDL etc.)と、<strong>その数値に効く成分</strong>、さらに<strong>その成分を含むサプリ製品</strong>までを一気通貫で提示します。</p>
@@ -1787,7 +2153,7 @@ function renderHome() {
 
     <div class="lp-section">
       <div class="section-label">HOW IT WORKS</div>
-      <h2 class="lp-title">5分で完結する、3ステップ。</h2>
+      <h2 class="lp-title-v2">5分で完結する、3ステップ。</h2>
       <div class="steps-grid">
         <div class="step-card">
           <div class="step-num">STEP 01</div>
@@ -1807,15 +2173,23 @@ function renderHome() {
       </div>
     </div>
 
+    <div class="lp-section-dark">
+      <div class="dark-content">
+        <div class="dark-eyebrow">PHILOSOPHY</div>
+        <h2 class="dark-statement">サプリは、目的を達成する<br>ための、<em>道具</em>です。</h2>
+        <p class="dark-text">「飲めば良くなる」ではなく、「動かしたい数値があり、それに効く成分を選ぶ」。<br>Sup. はその思考の補助線でありたい。あなたの身体は、設計できる。</p>
+      </div>
+    </div>
+
     <div id="diagnose" class="lp-section">
       <div class="section-label">DIAGNOSE</div>
-      <h2 class="lp-title">いま気になる悩みから診断。</h2>
+      <h2 class="lp-title-v2">いま気になる悩みから、診断。</h2>
       ${groups}
     </div>
 
     <div class="lp-section">
       <div class="section-label">FAQ</div>
-      <h2 class="lp-title">よくある質問</h2>
+      <h2 class="lp-title-v2">よくある質問</h2>
       <div class="faq-list">
         <details class="faq-item">
           <summary>ChatGPT に聞くのと何が違うの?</summary>
