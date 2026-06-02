@@ -47,6 +47,7 @@ html { scroll-behavior: smooth; }
 }
 * { box-sizing: border-box; margin: 0; padding: 0; }
 html, body { background: var(--bg); }
+body { overflow-x: hidden; }
 body {
   font-family: "Inter", "Noto Sans JP", -apple-system, BlinkMacSystemFont, "Hiragino Kaku Gothic ProN", "Hiragino Sans", "Yu Gothic UI", "Segoe UI", sans-serif;
   color: var(--text-main);
@@ -634,7 +635,7 @@ body {
 }
 .vision-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-template-columns: repeat(2, 1fr);
   gap: 14px;
 }
 .vision-card {
@@ -1081,6 +1082,7 @@ body {
   .feature-desc, .step-desc { font-size: 12px; }
   .faq-item { padding: 16px 18px; }
   .saved-fab { bottom: 90px; right: 14px; padding: 12px 18px; font-size: 13px; gap: 8px; }
+  .lp-nav { margin: -8px -18px 16px; padding: 12px 18px; }
   .modal-overlay { padding: 16px; }
   .modal-content { padding: 28px 22px 22px; }
   .saved-item { flex-direction: column; gap: 10px; padding: 14px 0; }
@@ -3484,8 +3486,8 @@ function renderHome() {
 
     <div class="lp-section" id="vision">
       <div class="section-label">VISION</div>
-      <h2 class="lp-title-v2">Sup. が向き合う、3つの軸。</h2>
-      <p class="vision-intro">「悩みを消す」から、「もっと良くなる」へ。集中して働き、深く眠り、ぶれずに続く。サプリは、その状態を作る道具です。</p>
+      <h2 class="lp-title-v2">Sup. が向き合う、4つの軸。</h2>
+      <p class="vision-intro">「悩みを消す」から、「もっと良くなる」へ。集中・回復・安定・印象を、内側から整えていく。サプリは、その状態を作る道具です。</p>
       <div class="vision-grid">
         <div class="vision-card">
           <div class="vision-icon">${ICONS.focus}</div>
@@ -3504,6 +3506,12 @@ function renderHome() {
           <div class="vision-label">STABILITY</div>
           <div class="vision-title">安定性</div>
           <div class="vision-desc">ぶれない心、整った腸、長く続けられる状態。土台を作るベース。</div>
+        </div>
+        <div class="vision-card">
+          <div class="vision-icon">${ICONS.impression}</div>
+          <div class="vision-label">IMPRESSION</div>
+          <div class="vision-title">印象</div>
+          <div class="vision-desc">整った肌、艶のある髪、引き締まったシルエット。語る前から伝わる、自分のコンディション。</div>
         </div>
       </div>
     </div>
