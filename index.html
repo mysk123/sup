@@ -1134,7 +1134,20 @@ const KW_JA = {
   'curcumin high absorption': 'クルクミン 高吸収',
   'anserine': 'アンセリン',
   'potassium citrate': 'クエン酸カリウム',
-  'bacopa monnieri': 'バコパモニエラ'
+  'bacopa monnieri': 'バコパモニエラ',
+  'astaxanthin': 'アスタキサンチン',
+  'collagen peptide': 'コラーゲンペプチド',
+  'hyaluronic acid': 'ヒアルロン酸',
+  'vitamin e': 'ビタミンE',
+  'niacinamide': 'ナイアシンアミド',
+  'vitamin b6': 'ビタミンB6',
+  'biotin': 'ビオチン',
+  'saw palmetto': 'ノコギリヤシ',
+  'resistant dextrin': '難消化性デキストリン',
+  'chitosan': 'キトサン',
+  'phaseolamin white kidney bean': '白インゲン豆エキス',
+  'egcg green tea extract': '緑茶カテキン EGCG',
+  'hmb': 'HMB ヒドロキシメチル酪酸'
 };
 function amazonLink(kw) {
   const q = KW_JA[kw] || kw;
@@ -1225,7 +1238,23 @@ const COMBINATIONS = {
   // 安定性(食事のリズム)
   'stability_irregular.circadian_disruption': '<strong>マグネシウム + メラトニン</strong>は就寝30分前に同時。<strong>B-Complex</strong>は朝食後。時間固定がメインで、サプリは助走サポート。',
   'stability_irregular.blood_sugar_management': '<strong>ベルベリン + クロム + サイリウム</strong>は全て食前(15-30分前)に同時OK。「食後眠気の血糖値スパイク型」と同じアプローチ。',
-  'stability_irregular.nutritional_completeness': '<strong>マルチビタミン + オメガ3</strong>は朝食後に同時OK。<strong>プロバイオティクス</strong>は別タイミング(空腹時の朝 or 就寝前)で吸収◎。'
+  'stability_irregular.nutritional_completeness': '<strong>マルチビタミン + オメガ3</strong>は朝食後に同時OK。<strong>プロバイオティクス</strong>は別タイミング(空腹時の朝 or 就寝前)で吸収◎。',
+
+  // 印象強化(肌)
+  'skin.inflammation_skin': '<strong>亜鉛</strong>は朝の空腹時、<strong>オメガ3</strong>は食事と共に、<strong>プロバイオティクス</strong>は別タイミング(朝 or 就寝前)。亜鉛は単独吸収◎。3-4週間で実感。',
+  'skin.glycation': '<strong>アスタキサンチン + αリポ酸</strong>は食事と共に同時OK(脂溶性 + 脂質代謝)。<strong>ビタミンC</strong>は朝晩2回で空腹時◎。糖質制限と並行で効果最大。',
+  'skin.dryness': '<strong>コラーゲンペプチド + VC</strong>は朝食後に同時(VCがコラーゲン合成に必須)。<strong>ヒアルロン酸</strong>は空腹時。<strong>VE</strong>は食事と共に。3ヶ月継続で実感。',
+  'skin.sebum': '<strong>亜鉛 + B6</strong>は朝の空腹時に同時。<strong>ナイアシンアミド</strong>は朝食後。亜鉛は皮脂調整の最有力、まずこれから始めるのが定石。',
+
+  // 印象強化(髪)
+  'hair.nutrition_hair': '<strong>ヘム鉄 + VC</strong>は食後に同時(コーヒー・緑茶の前後30分は避ける)。<strong>亜鉛</strong>は空腹時の朝、<strong>ビオチン</strong>は食事と共に。改善は3-6ヶ月(毛周期が長いため)。',
+  'hair.dht_overdrive': '<strong>ノコギリヤシ + 亜鉛</strong>は朝の空腹時に同時。<strong>ビオチン</strong>は食事と共に。本格対応は皮膚科/AGAクリニック(フィナステリド処方)、サプリは予防または補助。',
+  'hair.stress_shedding': '<strong>アシュワガンダ</strong>朝晩 + <strong>マグネシウム</strong>就寝前で、ストレス反応とコルチゾールを鎮める。<strong>ビオチン</strong>は食事と共に。回復は2-6ヶ月で自然に。',
+
+  // 印象強化(体型)
+  'body.fat_absorption': '<strong>難消化性デキストリン + キトサン + 白インゲン豆</strong>は全て食前(10-15分前)に水で。即効性あり、食後の血糖と脂質の吸収を緩和。',
+  'body.visceral_fat': '<strong>緑茶カテキン</strong>は食後、<strong>αリポ酸</strong>は朝食前、<strong>ベルベリン</strong>は食前30分。3つ別タイミングで干渉なし。内臓脂肪は3ヶ月で動く。',
+  'body.muscle_decline': '<strong>プロテイン</strong>は運動後 or 朝食代わりに20-30g。<strong>HMB + クレアチン</strong>は1日固定タイミング(朝 or 運動前)。筋トレと組み合わせて効果最大。'
 };
 
 // ------------------------------------------------------------
@@ -1235,6 +1264,7 @@ const CATEGORIES = [
   { id: 'performance', name: '集中力強化', code: 'PERFORMANCE', description: 'パフォーマンスを上げる' },
   { id: 'recovery',    name: '回復力強化', code: 'RECOVERY',    description: '疲れと睡眠を立て直す' },
   { id: 'stability',   name: '安定性強化', code: 'STABILITY',   description: '心と腸のぶれを減らす' },
+  { id: 'impression',  name: '印象強化',   code: 'IMPRESSION',  description: '整えられた身体は、語る前から伝わる' },
   { id: 'bloodwork',   name: '数値改善',   code: 'BLOODWORK',   description: '健診の数字を動かす' }
 ];
 
@@ -2804,6 +2834,449 @@ const PROBLEMS = {
           '「炭水化物 + タンパク質 + 野菜」を毎食意識',
           '朝食を「タンパク質中心」にする(目玉焼き + ヨーグルト等)',
           '週1日でも自炊 / 計画的な食事を試す'
+        ]
+      }
+    }
+  },
+
+  skin: {
+    id: 'skin',
+    category: 'impression',
+    title: '鏡を見ると、肌が気になる',
+    subtitle: '吹き出物 / くすみ / 脂浮き / 乾燥',
+    icon: '✨',
+    questions: [
+      {
+        id: 'main_concern',
+        text: '一番気になる肌の状態は?',
+        options: [
+          { value: 'breakout', label: '吹き出物・赤み・炎症' },
+          { value: 'dullness', label: 'くすみ・黄ばみ・透明感の低下' },
+          { value: 'dryness', label: '乾燥・つっぱり・かさつき' },
+          { value: 'oily', label: '脂浮き・テカリ・毛穴' }
+        ]
+      },
+      {
+        id: 'diet_sugar',
+        text: '甘いもの・精製炭水化物の摂取は?',
+        options: [
+          { value: 'high', label: '多い(毎日 / 1日複数回)' },
+          { value: 'medium', label: '普通(週数回)' },
+          { value: 'low', label: '少ない(週1回以下)' }
+        ]
+      },
+      {
+        id: 'screen_time',
+        text: '画面時間(PC/スマホ)は?',
+        options: [
+          { value: 'very_high', label: '10時間以上' },
+          { value: 'high', label: '6-10時間' },
+          { value: 'normal', label: '6時間未満' }
+        ]
+      },
+      {
+        id: 'stress_level',
+        text: 'ストレスレベルは?',
+        options: [
+          { value: 'high', label: '高い' },
+          { value: 'medium', label: '普通' },
+          { value: 'low', label: '低い' }
+        ]
+      },
+      {
+        id: 'gender',
+        text: '性別(処方の参考)',
+        options: [
+          { value: 'male', label: '男性' },
+          { value: 'female', label: '女性' },
+          { value: 'na', label: '答えたくない' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.main_concern === 'breakout') return 'inflammation_skin';
+      if (a.main_concern === 'dullness' || a.diet_sugar === 'high') return 'glycation';
+      if (a.main_concern === 'dryness') return 'dryness';
+      return 'sebum';
+    },
+    types: {
+      inflammation_skin: {
+        name: '炎症性タイプ(吹き出物・赤み)',
+        summary: '免疫の過剰反応や腸内環境の乱れで皮膚に炎症が起きやすいパターン。吹き出物・赤みが慢性化している時は、腸-皮膚軸からのアプローチが効きます。',
+        targetMetric: {
+          label: '皮膚炎症マーカー / 腸内環境バランス',
+          direction: 'down',
+          description: '炎症を抑え、皮膚を整える。腸内環境の改善も並行で効果◎。'
+        },
+        activeIngredients: [
+          { name: '亜鉛', mechanism: '炎症抑制 + 皮脂分泌の調整 + 創傷治癒のサポート。' },
+          { name: 'オメガ3(EPA)', mechanism: '抗炎症作用で皮膚の炎症レベルを下げる。' },
+          { name: 'プロバイオティクス', mechanism: '腸内環境を整え、腸-皮膚軸からの炎症抑制。' }
+        ],
+        supplements: [
+          { name: '亜鉛(ピコリン酸亜鉛)', dosage: '15-30mg / 朝の空腹時', reason: '皮脂・炎症の調整に最有力。', kw: 'zinc picolinate' },
+          { name: 'オメガ3(高EPA)', dosage: 'EPA 1000-2000mg / 食事と', reason: '皮膚炎症のメタ解析エビデンスあり。', kw: 'omega 3 high EPA' },
+          { name: 'プロバイオティクス', dosage: '100億cfu以上 / 1日', reason: '腸-皮膚軸の改善。', kw: 'probiotic 100 billion' }
+        ],
+        lifestyle: [
+          '砂糖・精製炭水化物を減らす(炎症を煽る)',
+          '乳製品を1ヶ月控えて変化を見る(肌の人の20-30%が反応)',
+          '1日2L以上の水',
+          '枕カバー・タオルを週2回交換'
+        ]
+      },
+      glycation: {
+        name: '糖化型(くすみ・黄ばみ)',
+        summary: '糖質過剰摂取でAGE(糖化最終産物)が皮膚に蓄積し、コラーゲンが硬化・黄ばんで「くすみ」として見えるパターン。エイジングの主因です。',
+        targetMetric: {
+          label: 'AGE(糖化最終産物) / コラーゲン弾力性',
+          direction: 'down',
+          description: 'AGE生成を抑制し、既存のAGEの分解を促す。糖質管理と並行で最大効果。'
+        },
+        activeIngredients: [
+          { name: 'アスタキサンチン', mechanism: '強力な抗酸化作用 + 糖化抑制効果。' },
+          { name: 'ビタミンC', mechanism: 'コラーゲン産生に必須 + 抗糖化作用。' },
+          { name: 'αリポ酸', mechanism: 'AGE生成抑制、インスリン感受性改善で根本対応。' }
+        ],
+        supplements: [
+          { name: 'アスタキサンチン', dosage: '4-12mg / 食後', reason: '糖化と酸化の両方に強い。脂溶性なので食事と。', kw: 'astaxanthin' },
+          { name: 'ビタミンC', dosage: '500-1000mg / 朝晩2回', reason: 'コラーゲン産生 + 抗糖化。', kw: 'vitamin c' },
+          { name: 'αリポ酸', dosage: '300-600mg / 朝食前', reason: 'インスリン感受性改善で糖化の根本対応。', kw: 'alpha lipoic acid' }
+        ],
+        lifestyle: [
+          '砂糖・精製炭水化物を強く制限(GI値の低い食材へ)',
+          '食事順序: 野菜 → タンパク質 → 炭水化物',
+          '揚げ物・高温調理を減らす(AGE摂取そのものを減らす)',
+          '紫外線対策(UVもAGE生成を促進)'
+        ]
+      },
+      dryness: {
+        name: '乾燥型(TEWL高)',
+        summary: 'TEWL(経皮水分蒸散量)が高く、肌の水分保持機能が弱っているパターン。コラーゲン・セラミドの基礎力を上げる必要があります。',
+        targetMetric: {
+          label: 'TEWL(経皮水分蒸散量) / 角層保水力',
+          direction: 'down',
+          description: '肌の水分保持機能を上げて、外への水分蒸発を防ぐ。長期的な基礎力強化。'
+        },
+        activeIngredients: [
+          { name: 'コラーゲンペプチド', mechanism: '低分子化コラーゲン。皮膚の水分保持と弾力に寄与のRCTあり。' },
+          { name: 'ヒアルロン酸', mechanism: '保水機能の補完。経口摂取のエビデンスあり。' },
+          { name: 'ビタミンE', mechanism: '皮膚の脂質バリア機能をサポート。' }
+        ],
+        supplements: [
+          { name: 'コラーゲンペプチド', dosage: '5-10g / 朝食後', reason: '皮膚の水分保持・弾力のRCTあり。3ヶ月継続で効果実感。', kw: 'collagen peptide' },
+          { name: 'ヒアルロン酸', dosage: '120-240mg / 空腹時', reason: '保水機能のサポート。', kw: 'hyaluronic acid' },
+          { name: 'ビタミンE', dosage: '400IU / 食事と', reason: '脂質バリア機能のサポート。', kw: 'vitamin e' }
+        ],
+        lifestyle: [
+          '1日2L以上の水',
+          'お湯シャワー時間を短く(過度の熱が水分を奪う)',
+          '室内湿度50-60%維持',
+          '青魚・アボカドの食事頻度を上げる(良質脂質)'
+        ]
+      },
+      sebum: {
+        name: '皮脂過剰型(脂浮き・毛穴)',
+        summary: '皮脂分泌が活発で、Tゾーンを中心に脂浮き・毛穴が気になるパターン。亜鉛とビタミンB群で皮脂分泌を調整します。',
+        targetMetric: {
+          label: '皮脂分泌量 / 角化のコンディション',
+          direction: 'stabilize',
+          description: '皮脂を「ゼロ」ではなく「適量」にコントロール。ホルモンバランスの調整がカギ。'
+        },
+        activeIngredients: [
+          { name: '亜鉛', mechanism: '皮脂分泌の調整 + 5αリダクターゼ阻害。' },
+          { name: 'ナイアシンアミド(B3)', mechanism: '皮脂分泌の調整、毛穴の見た目改善のエビデンス。' },
+          { name: 'ビタミンB6', mechanism: 'ホルモンバランス、皮脂代謝のサポート。' }
+        ],
+        supplements: [
+          { name: '亜鉛(ピコリン酸亜鉛)', dosage: '15-30mg / 朝の空腹時', reason: '皮脂調整の最有力。まずこれから。', kw: 'zinc picolinate' },
+          { name: 'ナイアシンアミド(B3)', dosage: '500mg / 朝食後', reason: '毛穴・皮脂・色むらに経口でも効果のエビデンス。', kw: 'niacinamide' },
+          { name: 'ビタミンB6', dosage: '50-100mg / 朝の空腹時', reason: 'ホルモンバランスのサポート。', kw: 'vitamin b6' }
+        ],
+        lifestyle: [
+          '糖質・乳製品を減らす(皮脂分泌を増やす可能性)',
+          '洗顔は1日2回まで(過剰洗顔は反動で皮脂↑)',
+          'スクリーン時間を減らす(皮脂腺刺激)',
+          '枕カバーを週2回交換'
+        ]
+      }
+    }
+  },
+
+  hair: {
+    id: 'hair',
+    category: 'impression',
+    title: '髪のボリュームが減ってきた',
+    subtitle: '抜け毛 / ハリ低下 / 頭皮の状態',
+    icon: '💇',
+    questions: [
+      {
+        id: 'main_concern',
+        text: '一番気になる髪・頭皮の症状は?',
+        options: [
+          { value: 'thinning', label: '全体的に細くなった / ボリューム低下' },
+          { value: 'shedding', label: '抜け毛が増えた' },
+          { value: 'receding', label: '生え際・つむじが薄くなってきた(男性型)' },
+          { value: 'scalp_issue', label: '頭皮のかゆみ・脂浮き・フケ' }
+        ]
+      },
+      {
+        id: 'gender',
+        text: '性別',
+        options: [
+          { value: 'male', label: '男性' },
+          { value: 'female', label: '女性' },
+          { value: 'na', label: '答えたくない' }
+        ]
+      },
+      {
+        id: 'family_history',
+        text: '家族の薄毛歴は?',
+        options: [
+          { value: 'yes', label: 'ある(親・祖父母など)' },
+          { value: 'no', label: 'ない' },
+          { value: 'unknown', label: 'わからない' }
+        ]
+      },
+      {
+        id: 'recent_trigger',
+        text: '最近、強いストレス・大きな変化はあった?',
+        options: [
+          { value: 'yes', label: 'あった(仕事・人間関係・出来事)' },
+          { value: 'no', label: '特にない' }
+        ]
+      },
+      {
+        id: 'diet_state',
+        text: '食事のタンパク質量は?',
+        options: [
+          { value: 'low', label: '少なめ(肉魚卵が少ない)' },
+          { value: 'normal', label: '普通' },
+          { value: 'high', label: '意識して多めに摂る' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.main_concern === 'receding' && a.gender === 'male') return 'dht_overdrive';
+      if (a.recent_trigger === 'yes') return 'stress_shedding';
+      return 'nutrition_hair';
+    },
+    types: {
+      nutrition_hair: {
+        name: '栄養由来型(鉄・亜鉛・ビオチン不足)',
+        summary: '髪の材料であるケラチン産生に必要な栄養素が慢性的に不足しているパターン。男女問わず最も多い原因です。',
+        targetMetric: {
+          label: 'ケラチン産生能 / 鉄・亜鉛・ビオチン充足度',
+          direction: 'up',
+          description: '髪の材料を確保。改善は3-6ヶ月かかる(毛周期が長いため)。'
+        },
+        activeIngredients: [
+          { name: 'ヘム鉄 + VC', mechanism: '隠れ貧血の補正、毛根への酸素供給。' },
+          { name: '亜鉛', mechanism: 'ケラチン合成の必須補因子。' },
+          { name: 'ビオチン(B7)', mechanism: '髪・爪の構造維持に必須。' }
+        ],
+        supplements: [
+          { name: 'ヘム鉄', dosage: '10-20mg / 食後', reason: '隠れ貧血の補正、女性は特に効果実感しやすい。', kw: 'heme iron' },
+          { name: '亜鉛(ピコリン酸亜鉛)', dosage: '15-30mg / 朝の空腹時', reason: 'ケラチン合成の補因子。', kw: 'zinc picolinate' },
+          { name: 'ビオチン', dosage: '5000μg / 1日', reason: '髪・爪のコンディション改善のエビデンス。', kw: 'biotin' }
+        ],
+        lifestyle: [
+          '毎食タンパク質20g以上(髪はタンパク質)',
+          'フェリチン値を健診で測定(隠れ貧血の確認)',
+          '過度なダイエットを避ける',
+          '改善は3-6ヶ月かかる前提でゆっくり'
+        ]
+      },
+      dht_overdrive: {
+        name: 'DHT過剰型(男性型脱毛)',
+        summary: 'テストステロンが酵素5αリダクターゼでDHTに変換され、毛根を萎縮させるパターン。家族歴がある男性に多い。本格対応は皮膚科/AGAクリニックでの処方薬、サプリは予防または補助。',
+        targetMetric: {
+          label: 'DHT(ジヒドロテストステロン)変換 / 毛根の活性',
+          direction: 'down',
+          description: '5αリダクターゼを穏やかに阻害してDHT産生を抑える。本格対応は医師処方が必要、サプリは補助。'
+        },
+        activeIngredients: [
+          { name: 'ノコギリヤシ', mechanism: '5αリダクターゼ阻害(穏やか)、DHT産生抑制。' },
+          { name: '亜鉛', mechanism: '5αリダクターゼ活性の調整、テストステロン代謝サポート。' },
+          { name: 'ビオチン', mechanism: '髪の構造維持。' }
+        ],
+        supplements: [
+          { name: 'ノコギリヤシ', dosage: '320mg / 1日', reason: '5αリダクターゼ阻害のエビデンス。AGA予防の定番。', kw: 'saw palmetto' },
+          { name: '亜鉛(ピコリン酸亜鉛)', dosage: '15-30mg / 朝の空腹時', reason: '5αリダクターゼ調整 + ケラチン合成。', kw: 'zinc picolinate' },
+          { name: 'ビオチン', dosage: '5000μg / 1日', reason: '髪のベース材料。', kw: 'biotin' }
+        ],
+        lifestyle: [
+          '本格対応は皮膚科 / AGAクリニックの相談を推奨(フィナステリド等)',
+          'サプリは「補助」+「早めの介入」が効く',
+          '高脂質食を減らす(DHT産生に影響)',
+          '頭皮マッサージで血流促進'
+        ]
+      },
+      stress_shedding: {
+        name: 'ストレス由来型(休止期脱毛)',
+        summary: '強いストレス・大きな変化の2-3ヶ月後に抜け毛が増えるパターン(「休止期脱毛」)。多くの場合、原因が落ち着けば自然回復しますが、サプリで回復を後押しできます。',
+        targetMetric: {
+          label: 'コルチゾール水準 / 毛周期の正常化',
+          direction: 'stabilize',
+          description: 'ストレス反応を鎮め、毛周期を正常に戻す。基本的に時間が解決するが、サプリで回復を加速。'
+        },
+        activeIngredients: [
+          { name: 'アシュワガンダ', mechanism: 'コルチゾール低下、ストレス反応の鎮静。' },
+          { name: 'マグネシウム', mechanism: '神経系の安定、毛周期の正常化サポート。' },
+          { name: 'ビオチン', mechanism: '髪の構造維持・回復のサポート。' }
+        ],
+        supplements: [
+          { name: 'アシュワガンダ', dosage: '300-600mg / 朝晩', reason: 'コルチゾール低下、ストレス由来の脱毛緩和。', kw: 'ashwagandha' },
+          { name: 'マグネシウム(グリシネート)', dosage: '300-400mg / 就寝前', reason: '神経安定 + 睡眠改善で回復促進。', kw: 'magnesium glycinate' },
+          { name: 'ビオチン', dosage: '5000μg / 1日', reason: '髪の構造維持・回復サポート。', kw: 'biotin' }
+        ],
+        lifestyle: [
+          'ストレス源の見直し(可能なら環境調整)',
+          '睡眠時間を7時間以上確保',
+          '軽い運動(コルチゾール低下効果)',
+          '通常2-6ヶ月で回復(継続観察)'
+        ]
+      }
+    }
+  },
+
+  body: {
+    id: 'body',
+    category: 'impression',
+    title: '同じ食事で太りやすくなった',
+    subtitle: '代謝低下 / 脂肪吸収 / 内臓脂肪',
+    icon: '🏃',
+    questions: [
+      {
+        id: 'change_area',
+        text: '太り方の特徴は?',
+        options: [
+          { value: 'belly', label: 'お腹周りだけ太くなった(内臓脂肪)' },
+          { value: 'overall', label: '全体的に脂肪がついた' },
+          { value: 'after_meal', label: '食事の量を増やしてないのに増えた' },
+          { value: 'muscle_loss', label: '筋肉が落ちて代謝が下がった感覚' }
+        ]
+      },
+      {
+        id: 'age',
+        text: '年代は?',
+        options: [
+          { value: '20s', label: '20代' },
+          { value: '30s', label: '30代' },
+          { value: '40s', label: '40代' },
+          { value: '50s_up', label: '50代以上' }
+        ]
+      },
+      {
+        id: 'exercise',
+        text: '運動習慣は?',
+        options: [
+          { value: 'none', label: 'ほぼなし' },
+          { value: 'light', label: '週1-2回 軽く' },
+          { value: 'regular', label: '週3回以上(筋トレ含む)' }
+        ]
+      },
+      {
+        id: 'diet_type',
+        text: '食事の傾向は?',
+        options: [
+          { value: 'fat_heavy', label: '揚げ物・脂質が多い' },
+          { value: 'carb_heavy', label: '糖質・甘いものが多い' },
+          { value: 'protein_low', label: 'タンパク質が少ない' },
+          { value: 'balanced', label: 'バランス良好' }
+        ]
+      },
+      {
+        id: 'belly_size',
+        text: 'お腹周り(ウエスト)の変化は?',
+        options: [
+          { value: 'increased', label: '明らかに増えた' },
+          { value: 'slight', label: '少し増えた' },
+          { value: 'stable', label: 'あまり変わらない' }
+        ]
+      }
+    ],
+    classify(a) {
+      if (a.change_area === 'belly') return 'visceral_fat';
+      if (a.change_area === 'muscle_loss') return 'muscle_decline';
+      if (a.belly_size === 'increased' && a.age !== '20s') return 'visceral_fat';
+      if ((a.age === '40s' || a.age === '50s_up') && a.exercise === 'none') return 'muscle_decline';
+      return 'fat_absorption';
+    },
+    types: {
+      fat_absorption: {
+        name: '脂質吸収過剰型',
+        summary: '食事性の脂質・糖質をそのまま吸収してしまうパターン。吸収のところで「邪魔をする成分」を入れる戦略です。即効性あり。',
+        targetMetric: {
+          label: '食事性脂質の吸収率 / 食後血糖値',
+          direction: 'down',
+          description: '食前に食物繊維や吸収抑制成分を入れ、吸収率を下げる。即効性あり。'
+        },
+        activeIngredients: [
+          { name: '難消化性デキストリン', mechanism: '糖と脂質の吸収を緩やかにする食物繊維。' },
+          { name: 'キトサン', mechanism: '腸内で脂質を吸着して排出。' },
+          { name: '白インゲン豆抽出物(ファセオラミン)', mechanism: 'α-アミラーゼ阻害で炭水化物の分解抑制。' }
+        ],
+        supplements: [
+          { name: '難消化性デキストリン', dosage: '5-10g / 食前', reason: '食後の血糖と脂質の吸収緩和。即効性あり。', kw: 'resistant dextrin' },
+          { name: 'キトサン', dosage: '500-1000mg / 食前', reason: '脂質吸着で排出促進。', kw: 'chitosan' },
+          { name: '白インゲン豆抽出物', dosage: '500-1000mg / 食前', reason: '炭水化物分解の抑制。', kw: 'phaseolamin white kidney bean' }
+        ],
+        lifestyle: [
+          '食事順序: 野菜 → タンパク質 → 炭水化物',
+          '食前に食物繊維(野菜・サイリウム)を入れる',
+          '揚げ物・高脂質食を週1-2回までに',
+          '早食いをやめる(満腹中枢が働く時間を作る)'
+        ]
+      },
+      visceral_fat: {
+        name: '内臓脂肪蓄積型(お腹周り)',
+        summary: 'お腹周りに脂肪が集中するパターン。内臓脂肪は慢性炎症を起こし、代謝悪化のスパイラルを作ります。30代以降に増えやすい典型像。',
+        targetMetric: {
+          label: '内臓脂肪量 / 慢性炎症マーカー',
+          direction: 'down',
+          description: '内臓脂肪は皮下脂肪より代謝されやすい。食事改善 + 運動 + 特定成分で減らせる。'
+        },
+        activeIngredients: [
+          { name: '緑茶カテキン(EGCG)', mechanism: '内臓脂肪減少、脂質代謝改善のエビデンス。' },
+          { name: 'αリポ酸', mechanism: 'インスリン感受性改善、糖代謝の改善で脂肪蓄積を抑える。' },
+          { name: 'ベルベリン', mechanism: '血糖・脂質代謝の改善、内臓脂肪減少のエビデンス。' }
+        ],
+        supplements: [
+          { name: '緑茶カテキン(高EGCG)', dosage: '300-500mg / 食後', reason: '内臓脂肪減少のメタ解析あり。', kw: 'egcg green tea extract' },
+          { name: 'αリポ酸', dosage: '300-600mg / 朝食前', reason: 'インスリン感受性改善で根本対応。', kw: 'alpha lipoic acid' },
+          { name: 'ベルベリン', dosage: '500mg × 2-3回 / 食前', reason: '脂質・血糖・体重の改善のメタ解析あり。', kw: 'berberine' }
+        ],
+        lifestyle: [
+          '砂糖・果糖を強く制限(内臓脂肪に直結)',
+          '週3回30分の有酸素運動(内臓脂肪の代謝促進)',
+          '16時間プチ断食を試す(内臓脂肪の燃焼)',
+          'アルコール(特にビール・日本酒)を減らす'
+        ]
+      },
+      muscle_decline: {
+        name: '筋肉量低下型(基礎代謝の落ち込み)',
+        summary: '30代以降は何もしなければ筋肉量が年1%ずつ低下し、基礎代謝も下がる。「同じ食事で太る」の最多の真因です。筋肉を維持・増やすアプローチが本筋。',
+        targetMetric: {
+          label: '筋肉量 / 基礎代謝',
+          direction: 'up',
+          description: '筋肉を維持・増やして基礎代謝を底上げ。サプリよりも筋トレが本筋、サプリは合成サポート。'
+        },
+        activeIngredients: [
+          { name: 'プロテイン(WPI)', mechanism: '筋合成の材料。1日体重1kgあたり1.6gが推奨。' },
+          { name: 'HMB', mechanism: '筋分解抑制、特に運動初心者・シニアでの効果。' },
+          { name: 'クレアチン', mechanism: 'ATPの供給能向上、筋出力と筋肥大のサポート。' }
+        ],
+        supplements: [
+          { name: 'プロテイン(WPI)', dosage: '20-30g × 2-3回 / 1日', reason: '筋合成の材料、最重要。WPIは乳糖なしで腸に優しい。', kw: 'whey protein isolate unflavored' },
+          { name: 'HMB', dosage: '3g / 1日', reason: '筋分解抑制、運動効果のサポート。', kw: 'hmb' },
+          { name: 'クレアチン(モノハイドレート)', dosage: '5g / 1日', reason: '筋肉量・筋出力の向上。脳機能にも効く。', kw: 'creatine monohydrate' }
+        ],
+        lifestyle: [
+          '週2-3回の筋トレ(自重でもOK / スクワット・腕立て・プランク)',
+          '毎食タンパク質20g以上',
+          '階段を使う / 歩く距離を増やす(NEAT増加)',
+          'サプリより筋トレが本筋、サプリは補助'
         ]
       }
     }
