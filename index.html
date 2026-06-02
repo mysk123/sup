@@ -646,6 +646,10 @@ body {
   transition: all 0.2s ease;
   position: relative;
   overflow: hidden;
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
 }
 .vision-card::before {
   content: "";
@@ -1089,7 +1093,7 @@ body {
   .saved-item-actions { align-self: stretch; justify-content: flex-start; }
   .mobile-cta-bar { display: block; }
   .container { padding-bottom: 100px; }
-  .lp-section { scroll-margin-top: 64px; }
+  .lp-section, .category-section { scroll-margin-top: 64px; }
 }
 </style>
 </head>
@@ -3447,7 +3451,7 @@ function renderHome() {
       </button>
     `).join('');
     return `
-      <div class="category-section">
+      <div class="category-section" id="cat-${cat.id}">
         <div class="category-header">
           <span class="category-icon">${CATEGORY_ICONS[cat.id] || ''}</span>
           <span class="category-code">${cat.code}</span>
@@ -3489,30 +3493,30 @@ function renderHome() {
       <h2 class="lp-title-v2">Sup. が向き合う、4つの軸。</h2>
       <p class="vision-intro">「悩みを消す」から、「もっと良くなる」へ。集中・回復・安定・印象を、内側から整えていく。サプリは、その状態を作る道具です。</p>
       <div class="vision-grid">
-        <div class="vision-card">
+        <a class="vision-card" href="#cat-performance">
           <div class="vision-icon">${ICONS.focus}</div>
           <div class="vision-label">FOCUS</div>
           <div class="vision-title">集中力</div>
           <div class="vision-desc">カフェインに頼らない、持続する思考のクリアさ。脳と神経の最適化。</div>
-        </div>
-        <div class="vision-card">
+        </a>
+        <a class="vision-card" href="#cat-recovery">
           <div class="vision-icon">${ICONS.recovery}</div>
           <div class="vision-label">RECOVERY</div>
           <div class="vision-title">回復力</div>
           <div class="vision-desc">深い眠り、軽い目覚め、抜ける疲労。次の日の自分への投資。</div>
-        </div>
-        <div class="vision-card">
+        </a>
+        <a class="vision-card" href="#cat-stability">
           <div class="vision-icon">${ICONS.stability}</div>
           <div class="vision-label">STABILITY</div>
           <div class="vision-title">安定性</div>
           <div class="vision-desc">ぶれない心、整った腸、長く続けられる状態。土台を作るベース。</div>
-        </div>
-        <div class="vision-card">
+        </a>
+        <a class="vision-card" href="#cat-impression">
           <div class="vision-icon">${ICONS.impression}</div>
           <div class="vision-label">IMPRESSION</div>
           <div class="vision-title">印象</div>
           <div class="vision-desc">整った肌、艶のある髪、引き締まったシルエット。語る前から伝わる、自分のコンディション。</div>
-        </div>
+        </a>
       </div>
     </div>
 
