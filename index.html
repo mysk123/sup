@@ -1227,8 +1227,8 @@ const KW_JA = {
   'egcg green tea extract': '緑茶カテキン EGCG',
   'hmb': 'HMB ヒドロキシメチル酪酸'
 };
-function amazonLink(kw) {
-  const q = KW_JA[kw] || kw;
+function amazonLink(kw, override) {
+  const q = override || KW_JA[kw] || kw;
   return `https://www.amazon.co.jp/s?k=${encodeURIComponent(q)}&tag=${AMAZON_TAG}`;
 }
 function iherbLink(kw) {
@@ -1353,77 +1353,77 @@ const COMBINATIONS = {
 // ------------------------------------------------------------
 const EFFICIENT_ROUTE = {
   // 食後眠気
-  'sleepiness.bloodSugar': { name: 'Berberine + Chromium Complex', brand: "Doctor's Best", claim: '血糖管理 + インスリン感受性のオールインワン', ingredients: ['ベルベリン', 'クロム', 'シナモン'], tradeoff: '個別精密より用量控えめだが、血糖系を包括的にカバー。', kw: 'doctors best berberine chromium' },
-  'sleepiness.iron': { name: 'Blood Builder', brand: 'MegaFood', claim: '隠れ貧血 + 造血の総合サポート', ingredients: ['ヘム鉄', 'ビタミンC', 'B12', '葉酸'], tradeoff: 'ホールフードベースで吸収◎、女性向けに最適化。', kw: 'megafood blood builder' },
-  'sleepiness.adrenal': { name: 'Adrenal Stress End', brand: 'NOW Foods', claim: '副腎・自律神経のオールインワン', ingredients: ['ロディオラ', 'アシュワガンダ', 'B5', 'C'], tradeoff: 'アダプトゲン + 副腎栄養素の複合、長期使用前提。', kw: 'now foods adrenal stress end' },
+  'sleepiness.bloodSugar': { name: 'Berberine + Chromium Complex', brand: "Doctor's Best", claim: '血糖管理 + インスリン感受性のオールインワン', ingredients: ['ベルベリン', 'クロム', 'シナモン'], tradeoff: '個別精密より用量控えめだが、血糖系を包括的にカバー。', kw: 'doctors best berberine chromium', kw_amazon: "Doctor's Best ベルベリン クロム" },
+  'sleepiness.iron': { name: 'Gentle Iron + Vitamin C', brand: 'Solgar', claim: '隠れ貧血 + 造血サポート(胃に優しい)', ingredients: ['ビスグリシン酸鉄', 'ビタミンC'], tradeoff: '胃腸負担少なめ、Amazon JPでも入手しやすい鉄サプリ。', kw: 'solgar gentle iron', kw_amazon: 'Solgar ジェントルアイアン' },
+  'sleepiness.adrenal': { name: 'Adrenal Stress End', brand: 'NOW Foods', claim: '副腎・自律神経のオールインワン', ingredients: ['ロディオラ', 'アシュワガンダ', 'B5', 'C'], tradeoff: 'アダプトゲン + 副腎栄養素の複合、長期使用前提。', kw: 'now foods adrenal stress end', kw_amazon: 'NOW Foods Adrenal Stress' },
 
   // プロテイン
-  'protein.lactose': { name: 'WPI 100% Whey Protein Isolate', brand: 'NOW Sports', claim: '乳糖カット + 高純度ホエイ', ingredients: ['WPI(分離ホエイ)'], tradeoff: '問題の根本(乳糖)を排除するシンプル解。', kw: 'now sports whey protein isolate' },
-  'protein.overdose': { name: 'Digestive Enzymes Complex', brand: 'NOW Foods', claim: 'タンパク消化の総合サポート', ingredients: ['プロテアーゼ', 'ペプシン', 'ブロメライン', 'パパイン'], tradeoff: '複数の消化酵素を一度に、重い食事の前後に。', kw: 'now foods digestive enzymes' },
-  'protein.sweetener': { name: 'Unflavored Whey Protein', brand: 'NOW Sports', claim: '甘味料ゼロ・無添加', ingredients: ['WPI または ピープロテイン のみ'], tradeoff: '味付けはカカオ・きなこ等で自前。', kw: 'now sports unflavored whey' },
-  'protein.gut': { name: 'Primal Defense Ultra', brand: 'Garden of Life', claim: 'プロバイオティクス + プレバイオティクス + 酵素', ingredients: ['複数株乳酸菌', 'ビフィズス菌', '土壌菌(SBO)', '消化酵素'], tradeoff: '腸内環境の総合改善、3ヶ月継続で実感。', kw: 'garden of life primal defense' },
+  'protein.lactose': { name: 'Whey Protein Isolate Unflavored', brand: 'NOW Sports', claim: '乳糖カット + 高純度ホエイ', ingredients: ['WPI(分離ホエイ)'], tradeoff: '問題の根本(乳糖)を排除するシンプル解。', kw: 'now sports whey protein isolate', kw_amazon: 'NOW Sports ホエイプロテイン アイソレート' },
+  'protein.overdose': { name: 'Digestive Enzymes Complex', brand: 'NOW Foods', claim: 'タンパク消化の総合サポート', ingredients: ['プロテアーゼ', 'ペプシン', 'ブロメライン', 'パパイン'], tradeoff: '複数の消化酵素を一度に、重い食事の前後に。', kw: 'now foods digestive enzymes', kw_amazon: 'NOW Foods 消化酵素' },
+  'protein.sweetener': { name: 'Unflavored Whey Protein', brand: 'NOW Sports', claim: '甘味料ゼロ・無添加', ingredients: ['WPI または ピープロテイン のみ'], tradeoff: '味付けはカカオ・きなこ等で自前。', kw: 'now sports unflavored whey', kw_amazon: 'NOW Sports 無添加 ホエイ' },
+  'protein.gut': { name: 'Primal Defense Ultra', brand: 'Garden of Life', claim: 'プロバイオティクス + プレバイオティクス + 酵素', ingredients: ['複数株乳酸菌', 'ビフィズス菌', '土壌菌(SBO)', '消化酵素'], tradeoff: '腸内環境の総合改善、3ヶ月継続で実感。', kw: 'garden of life primal defense', kw_amazon: 'Garden of Life プライマルディフェンス' },
 
   // 脱カフェ集中
-  'focus.sleep': { name: 'Sleep', brand: 'Performance Lab', claim: '入眠 + 深睡眠 + 夜のリカバリー', ingredients: ['タルトチェリー', 'マグネシウム', 'メラトニン微量'], tradeoff: 'ナチュラル系で翌朝の眠気残りなし。', kw: 'performance lab sleep' },
-  'focus.nutrition': { name: 'AG1 (Athletic Greens)', brand: 'Athletic Greens', claim: '1日1杯で75種の栄養素', ingredients: ['野菜エキス', 'プロバイオティクス', '酵素', 'ビタミン・ミネラル'], tradeoff: '価格高め(月¥10,000-)だが複数サプリを1杯に集約。', kw: 'athletic greens AG1' },
-  'focus.inflammation': { name: 'Omega-3 Triglyceride 高EPA', brand: 'Sports Research', claim: '抗炎症 + 脳機能 + 心血管', ingredients: ['EPA + DHA(高濃度)'], tradeoff: '抗炎症の万能薬、複数の悩みに同時に効く。', kw: 'sports research omega 3 triglyceride' },
-  'focus.neurotransmitter': { name: 'Alpha Brain', brand: 'Onnit', claim: '集中力 + 記憶 + 認知パフォーマンス', ingredients: ['アルファGPC', 'バコパ', 'L-テアニン', 'AC-11'], tradeoff: 'ヌートロピックの定番、即効 + 長期のバランス。', kw: 'alpha brain onnit' },
+  'focus.sleep': { name: 'Sleep', brand: 'NOW Foods', claim: '入眠 + 深睡眠 + 夜のリカバリー', ingredients: ['メラトニン', 'GABA', 'バレリアン', 'パッションフラワー'], tradeoff: 'NOW定番、Amazon JPでも安定流通。', kw: 'now foods sleep', kw_amazon: 'NOW Foods スリープ' },
+  'focus.nutrition': { name: 'Vitamin Code Men/Women', brand: 'Garden of Life', claim: 'ホールフード由来のマルチビタミン', ingredients: ['ホールフード由来ビタミン', 'ミネラル', 'プロバイオティクス', '酵素'], tradeoff: '吸収率◎、男女別最適化版あり。Amazonでも安定。', kw: 'garden of life vitamin code', kw_amazon: 'Garden of Life Vitamin Code' },
+  'focus.inflammation': { name: 'Omega-3 Triglyceride 高EPA', brand: 'Sports Research', claim: '抗炎症 + 脳機能 + 心血管', ingredients: ['EPA + DHA(高濃度)'], tradeoff: '抗炎症の万能薬、複数の悩みに同時に効く。', kw: 'sports research omega 3 triglyceride', kw_amazon: 'Sports Research オメガ3' },
+  'focus.neurotransmitter': { name: 'Alpha Brain', brand: 'Onnit', claim: '集中力 + 記憶 + 認知パフォーマンス', ingredients: ['アルファGPC', 'バコパ', 'L-テアニン', 'AC-11'], tradeoff: 'ヌートロピックの定番、Amazon JPでも入手可。', kw: 'onnit alpha brain', kw_amazon: 'Onnit アルファブレイン' },
 
   // 即時集中
-  'focus_immediate.dopamine_burnout': { name: 'Mind Lab Pro', brand: 'Opti-Nutra', claim: '集中 + 認知 + ストレス耐性 + ドーパミン回復', ingredients: ['シチコリン', 'バコパ', 'ロディオラ', 'ライオンズメイン', 'L-テアニン'], tradeoff: 'ナチュラルヌートロピックの最高峰、カフェイン無し。', kw: 'mind lab pro' },
-  'focus_immediate.attention': { name: 'Alpha Brain', brand: 'Onnit', claim: '注意持続 + ワーキングメモリ', ingredients: ['アルファGPC', 'バコパ', 'L-テアニン'], tradeoff: 'ジョー・ローガン愛用、即効 + 長期効果。', kw: 'alpha brain onnit' },
-  'focus_immediate.stress_overload': { name: 'Performance Lab Mind', brand: 'Performance Lab', claim: '緊張下でもクリアな集中', ingredients: ['シチコリン', 'L-チロシン', 'PS', 'タルトチェリー'], tradeoff: 'ストレス時の認知保護に特化。', kw: 'performance lab mind' },
+  'focus_immediate.dopamine_burnout': { name: 'Alpha Brain', brand: 'Onnit', claim: '集中 + 認知 + ドーパミン応答性', ingredients: ['アルファGPC', 'バコパ', 'L-テアニン', 'AC-11'], tradeoff: 'Mind Lab ProはAmazon JPで入手難のため Onnit に変更、近い成分構成。', kw: 'onnit alpha brain', kw_amazon: 'Onnit アルファブレイン' },
+  'focus_immediate.attention': { name: 'Alpha Brain', brand: 'Onnit', claim: '注意持続 + ワーキングメモリ', ingredients: ['アルファGPC', 'バコパ', 'L-テアニン'], tradeoff: 'ジョー・ローガン愛用、即効 + 長期効果。', kw: 'onnit alpha brain', kw_amazon: 'Onnit アルファブレイン' },
+  'focus_immediate.stress_overload': { name: 'True Focus', brand: 'NOW Foods', claim: '緊張下でもクリアな集中', ingredients: ['L-テアニン', 'L-チロシン', 'タウリン', 'B6', 'B12'], tradeoff: 'NOW定番、リラックス系の集中サポート。Amazon安定。', kw: 'now foods true focus', kw_amazon: 'NOW Foods True Focus' },
 
   // 睡眠
-  'sleep.sleep_onset': { name: 'Sleep', brand: 'NOW Foods', claim: '入眠 + リラックス', ingredients: ['メラトニン', 'GABA', 'バレリアン', 'パッションフラワー'], tradeoff: '即効性◎ / 朝の眠気残りに注意。', kw: 'now foods sleep' },
-  'sleep.stress_insomnia': { name: 'Stress + Cortisol Manager', brand: 'Garden of Life', claim: 'コルチゾール低下 + リラックス + 睡眠', ingredients: ['アシュワガンダ KSM-66', 'L-テアニン', 'マグネシウム'], tradeoff: 'ストレス起因の睡眠問題に最適。', kw: 'garden of life stress cortisol manager' },
-  'sleep.mid_wake': { name: 'ZMA', brand: 'Optimum Nutrition', claim: '中途覚醒抑制 + 深睡眠 + 回復', ingredients: ['亜鉛', 'マグネシウム', 'ビタミンB6'], tradeoff: 'アスリート定番、空腹時の就寝前に。', kw: 'optimum nutrition zma' },
-  'sleep.shallow_sleep': { name: 'Sleep', brand: 'Performance Lab', claim: '深睡眠比率UP + 翌朝のスッキリ', ingredients: ['タルトチェリー', 'マグネシウム', 'メラトニン微量'], tradeoff: 'ナチュラル系で翌朝の眠気残りなし。', kw: 'performance lab sleep' },
+  'sleep.sleep_onset': { name: 'Sleep', brand: 'NOW Foods', claim: '入眠 + リラックス', ingredients: ['メラトニン', 'GABA', 'バレリアン', 'パッションフラワー'], tradeoff: '即効性◎ / 朝の眠気残りに注意。', kw: 'now foods sleep', kw_amazon: 'NOW Foods スリープ' },
+  'sleep.stress_insomnia': { name: 'Stress + Cortisol Manager', brand: 'Garden of Life', claim: 'コルチゾール低下 + リラックス + 睡眠', ingredients: ['アシュワガンダ KSM-66', 'L-テアニン', 'マグネシウム'], tradeoff: 'ストレス起因の睡眠問題に最適。', kw: 'garden of life stress cortisol manager', kw_amazon: 'Garden of Life Cortisol Manager' },
+  'sleep.mid_wake': { name: 'ZMA', brand: 'Optimum Nutrition', claim: '中途覚醒抑制 + 深睡眠 + 回復', ingredients: ['亜鉛', 'マグネシウム', 'ビタミンB6'], tradeoff: 'アスリート定番、空腹時の就寝前に。', kw: 'optimum nutrition zma', kw_amazon: 'Optimum Nutrition ZMA' },
+  'sleep.shallow_sleep': { name: 'Sleep', brand: 'NOW Foods', claim: '深睡眠比率UP + 翌朝のスッキリ', ingredients: ['メラトニン', 'GABA', 'バレリアン'], tradeoff: 'Performance Lab同等の成分構成でAmazon安定。', kw: 'now foods sleep', kw_amazon: 'NOW Foods スリープ' },
 
   // 朝のだるさ
-  'fatigue.sleep_deficit': { name: 'ZMA', brand: 'Optimum Nutrition', claim: '短時間睡眠の質UP', ingredients: ['亜鉛', 'マグネシウム', 'B6'], tradeoff: '睡眠時間が短い時の質確保に。', kw: 'optimum nutrition zma' },
-  'fatigue.adrenal_fatigue': { name: 'Adrenal Stress End', brand: 'NOW Foods', claim: '副腎の総合サポート', ingredients: ['アシュワガンダ', 'ロディオラ', 'B5', 'C'], tradeoff: '副腎疲労の定番、3-6ヶ月で実感。', kw: 'now foods adrenal stress end' },
-  'fatigue.vitamin_d': { name: 'D3 + K2 1000IU/100mcg', brand: 'NOW Foods', claim: 'VD補充 + 骨カルシウム代謝', ingredients: ['ビタミンD3', 'ビタミンK2 MK-7'], tradeoff: 'VDとK2のゴールデンコンビ。', kw: 'now foods d3 k2' },
-  'fatigue.mitochondria': { name: 'CoQ10 + PQQ', brand: "Doctor's Best", claim: 'ミトコンドリアエネルギー総合', ingredients: ['CoQ10', 'PQQ', 'BioPerine'], tradeoff: 'PQQがミトコンドリア生合成も促進。', kw: 'doctors best coq10 pqq' },
+  'fatigue.sleep_deficit': { name: 'ZMA', brand: 'Optimum Nutrition', claim: '短時間睡眠の質UP', ingredients: ['亜鉛', 'マグネシウム', 'B6'], tradeoff: '睡眠時間が短い時の質確保に。', kw: 'optimum nutrition zma', kw_amazon: 'Optimum Nutrition ZMA' },
+  'fatigue.adrenal_fatigue': { name: 'Adrenal Stress End', brand: 'NOW Foods', claim: '副腎の総合サポート', ingredients: ['アシュワガンダ', 'ロディオラ', 'B5', 'C'], tradeoff: '副腎疲労の定番、3-6ヶ月で実感。', kw: 'now foods adrenal stress end', kw_amazon: 'NOW Foods Adrenal Stress' },
+  'fatigue.vitamin_d': { name: 'D3 + K2 1000IU/100mcg', brand: 'NOW Foods', claim: 'VD補充 + 骨カルシウム代謝', ingredients: ['ビタミンD3', 'ビタミンK2 MK-7'], tradeoff: 'VDとK2のゴールデンコンビ。', kw: 'now foods d3 k2', kw_amazon: 'NOW Foods D3 K2' },
+  'fatigue.mitochondria': { name: 'CoQ10 + PQQ', brand: "Doctor's Best", claim: 'ミトコンドリアエネルギー総合', ingredients: ['CoQ10', 'PQQ', 'BioPerine'], tradeoff: 'PQQがミトコンドリア生合成も促進。', kw: 'doctors best coq10 pqq', kw_amazon: "Doctor's Best CoQ10 PQQ" },
 
   // 慢性疲労
-  'recovery_chronic.chronic_nutrition': { name: 'Vitamin Code Men / Women', brand: 'Garden of Life', claim: 'ホールフードベースの総合マルチ', ingredients: ['ホールフードビタミン', 'ミネラル', 'プロバイオティクス', '酵素'], tradeoff: '吸収率◎、男女別最適化版あり。', kw: 'garden of life vitamin code' },
-  'recovery_chronic.mitochondrial_drain': { name: 'Mitochondrial Basics', brand: 'Life Extension', claim: 'ミトコンドリア機能の総合サポート', ingredients: ['CoQ10', 'PQQ', 'L-カルニチン', 'NAD+前駆体'], tradeoff: 'ミトコンドリア科学の最新成分を1本に。', kw: 'life extension mitochondrial basics' },
-  'recovery_chronic.inactivity_cycle': { name: 'Gold Standard Pre-Workout', brand: 'Optimum Nutrition', claim: '運動を始める力をサポート', ingredients: ['カフェイン微量', 'クレアチン', 'ベータアラニン', 'L-シトルリン'], tradeoff: 'カフェイン入りなので午前限定、運動習慣化の助走。', kw: 'optimum nutrition gold standard pre workout' },
+  'recovery_chronic.chronic_nutrition': { name: 'Vitamin Code Men / Women', brand: 'Garden of Life', claim: 'ホールフードベースの総合マルチ', ingredients: ['ホールフードビタミン', 'ミネラル', 'プロバイオティクス', '酵素'], tradeoff: '吸収率◎、男女別最適化版あり。', kw: 'garden of life vitamin code', kw_amazon: 'Garden of Life Vitamin Code' },
+  'recovery_chronic.mitochondrial_drain': { name: 'CoQ10 + PQQ', brand: "Doctor's Best", claim: 'ミトコンドリア機能の総合サポート', ingredients: ['CoQ10 100mg', 'PQQ 20mg', 'BioPerine'], tradeoff: 'Life Extension品が入手難のためDoctor\'s Bestに変更、同等成分。', kw: 'doctors best coq10 pqq', kw_amazon: "Doctor's Best CoQ10 PQQ" },
+  'recovery_chronic.inactivity_cycle': { name: 'Gold Standard Pre-Workout', brand: 'Optimum Nutrition', claim: '運動を始める力をサポート', ingredients: ['カフェイン微量', 'クレアチン', 'ベータアラニン', 'L-シトルリン'], tradeoff: 'カフェイン入りなので午前限定、運動習慣化の助走。', kw: 'optimum nutrition gold standard pre workout', kw_amazon: 'Optimum Nutrition プレワークアウト' },
 
   // ストレス
-  'stress.acute_stress': { name: 'KSM-66 Ashwagandha', brand: "Doctor's Best", claim: '急性ストレス + コルチゾール低下', ingredients: ['アシュワガンダ KSM-66', 'BioPerine'], tradeoff: '即効性◎、2-3週間で実感。', kw: 'doctors best ashwagandha ksm-66' },
-  'stress.chronic_stress': { name: 'Adrenal Stress End', brand: 'NOW Foods', claim: '長期ストレスケア', ingredients: ['アダプトゲン複合', 'B群', 'VC'], tradeoff: '副腎疲労に特化、3-6ヶ月の長期使用。', kw: 'now foods adrenal stress end' },
-  'stress.neurotransmitter': { name: 'Omega-3 High EPA', brand: 'Sports Research', claim: '気分サポート + 神経伝達機能の改善', ingredients: ['EPA(高濃度)', 'DHA'], tradeoff: 'うつ症状改善のメタ解析あり、医師相談前提。', kw: 'sports research omega 3 high epa' },
-  'stress.nutrition': { name: 'AG1 (Athletic Greens)', brand: 'Athletic Greens', claim: '神経栄養を一杯で', ingredients: ['野菜エキス', 'プロバイオティクス', 'B群', 'マグネシウム'], tradeoff: '価格高めだが栄養不足型のメンタルケアに包括的。', kw: 'athletic greens AG1' },
+  'stress.acute_stress': { name: 'KSM-66 Ashwagandha', brand: "Doctor's Best", claim: '急性ストレス + コルチゾール低下', ingredients: ['アシュワガンダ KSM-66', 'BioPerine'], tradeoff: '即効性◎、2-3週間で実感。', kw: 'doctors best ashwagandha ksm-66', kw_amazon: "Doctor's Best アシュワガンダ KSM-66" },
+  'stress.chronic_stress': { name: 'Adrenal Stress End', brand: 'NOW Foods', claim: '長期ストレスケア', ingredients: ['アダプトゲン複合', 'B群', 'VC'], tradeoff: '副腎疲労に特化、3-6ヶ月の長期使用。', kw: 'now foods adrenal stress end', kw_amazon: 'NOW Foods Adrenal Stress' },
+  'stress.neurotransmitter': { name: 'Omega-3 High EPA', brand: 'Sports Research', claim: '気分サポート + 神経伝達機能の改善', ingredients: ['EPA(高濃度)', 'DHA'], tradeoff: 'うつ症状改善のメタ解析あり、医師相談前提。', kw: 'sports research omega 3 high epa', kw_amazon: 'Sports Research オメガ3 EPA' },
+  'stress.nutrition': { name: 'Vitamin Code Men/Women', brand: 'Garden of Life', claim: '神経栄養を網羅', ingredients: ['ホールフードビタミン', 'ミネラル', 'プロバイオティクス'], tradeoff: '栄養由来のメンタルケアに包括的。', kw: 'garden of life vitamin code', kw_amazon: 'Garden of Life Vitamin Code' },
 
   // 食事リズム
-  'stability_irregular.circadian_disruption': { name: 'Melatonin + Magnesium Sleep', brand: 'NOW Foods', claim: '体内時計の同期化', ingredients: ['メラトニン', 'マグネシウム', 'B6'], tradeoff: '時間固定が本筋、サプリは助走。', kw: 'now foods melatonin magnesium' },
-  'stability_irregular.blood_sugar_management': { name: 'Berberine + Chromium', brand: "Doctor's Best", claim: '血糖変動の安定化', ingredients: ['ベルベリン', 'クロム', 'シナモン'], tradeoff: '食事量がばらつく時の血糖管理に。', kw: 'doctors best berberine chromium' },
-  'stability_irregular.nutritional_completeness': { name: 'AG1 (Athletic Greens)', brand: 'Athletic Greens', claim: '1日1杯で栄養が完結', ingredients: ['75種の栄養素', 'プロバイオティクス', '酵素'], tradeoff: '価格は高いが食事内容のばらつきを補完。', kw: 'athletic greens AG1' },
+  'stability_irregular.circadian_disruption': { name: 'Sleep', brand: 'NOW Foods', claim: '体内時計の同期化', ingredients: ['メラトニン', 'マグネシウム', 'B6'], tradeoff: '時間固定が本筋、サプリは助走。', kw: 'now foods sleep', kw_amazon: 'NOW Foods スリープ' },
+  'stability_irregular.blood_sugar_management': { name: 'Berberine + Chromium', brand: "Doctor's Best", claim: '血糖変動の安定化', ingredients: ['ベルベリン', 'クロム', 'シナモン'], tradeoff: '食事量がばらつく時の血糖管理に。', kw: 'doctors best berberine chromium', kw_amazon: "Doctor's Best ベルベリン クロム" },
+  'stability_irregular.nutritional_completeness': { name: 'Vitamin Code Multi', brand: 'Garden of Life', claim: 'ホールフードで栄養完結', ingredients: ['ホールフード由来ビタミン', 'ミネラル', 'プロバイオティクス', '酵素'], tradeoff: '食事内容のばらつきを包括的に補完。', kw: 'garden of life vitamin code', kw_amazon: 'Garden of Life Vitamin Code' },
 
   // 肌
-  'skin.inflammation_skin': { name: 'Skin, Hair & Nails', brand: 'NOW Foods', claim: '肌・髪・爪の総合サポート', ingredients: ['亜鉛', 'ビオチン', 'B6', 'シリカ', 'ビタミン全般'], tradeoff: '肌炎症ベースのケアを1本に。', kw: 'now foods skin hair nails' },
-  'skin.glycation': { name: 'Astaxanthin Complex', brand: 'Sports Research', claim: '抗酸化 + 抗糖化 + UV ケア', ingredients: ['アスタキサンチン(藻類由来)', 'ココナッツオイル(吸収UP)'], tradeoff: 'シングル成分だが強力、3-6ヶ月で実感。', kw: 'sports research astaxanthin' },
-  'skin.dryness': { name: 'Collagen Peptides Plus', brand: 'Sports Research', claim: 'コラーゲン + 水分保持 + 弾力', ingredients: ['コラーゲンペプチド', 'ビタミンC', 'ヒアルロン酸'], tradeoff: '皮膚の三大栄養素を1本に、3ヶ月継続。', kw: 'sports research collagen peptides plus' },
-  'skin.sebum': { name: 'Skin, Hair & Nails', brand: 'NOW Foods', claim: '皮脂・毛穴ケア + 髪の栄養', ingredients: ['亜鉛', 'B6', 'ビオチン', 'シリカ'], tradeoff: '皮脂調整に必要な栄養素を1本に。', kw: 'now foods skin hair nails' },
+  'skin.inflammation_skin': { name: 'Skin, Hair & Nails', brand: 'NOW Foods', claim: '肌・髪・爪の総合サポート', ingredients: ['亜鉛', 'ビオチン', 'B6', 'シリカ', 'ビタミン全般'], tradeoff: '肌炎症ベースのケアを1本に。', kw: 'now foods skin hair nails', kw_amazon: 'NOW Foods Skin Hair Nails' },
+  'skin.glycation': { name: 'Astaxanthin Complex', brand: 'Sports Research', claim: '抗酸化 + 抗糖化 + UV ケア', ingredients: ['アスタキサンチン(藻類由来)', 'ココナッツオイル(吸収UP)'], tradeoff: 'シングル成分だが強力、3-6ヶ月で実感。', kw: 'sports research astaxanthin', kw_amazon: 'Sports Research アスタキサンチン' },
+  'skin.dryness': { name: 'Collagen Peptides Plus', brand: 'Sports Research', claim: 'コラーゲン + 水分保持 + 弾力', ingredients: ['コラーゲンペプチド', 'ビタミンC', 'ヒアルロン酸'], tradeoff: '皮膚の三大栄養素を1本に、3ヶ月継続。', kw: 'sports research collagen peptides plus', kw_amazon: 'Sports Research コラーゲン ペプチド' },
+  'skin.sebum': { name: 'Skin, Hair & Nails', brand: 'NOW Foods', claim: '皮脂・毛穴ケア + 髪の栄養', ingredients: ['亜鉛', 'B6', 'ビオチン', 'シリカ'], tradeoff: '皮脂調整に必要な栄養素を1本に。', kw: 'now foods skin hair nails', kw_amazon: 'NOW Foods Skin Hair Nails' },
 
   // 髪
-  'hair.nutrition_hair': { name: 'Hair, Skin & Nails Extra Strength', brand: "Nature's Bounty", claim: '髪の栄養素を総合サポート', ingredients: ['ビオチン 5000mcg', 'コラーゲン', 'ビタミンA・C・E', '亜鉛'], tradeoff: 'ガミー型で続けやすい、3-6ヶ月で実感。', kw: 'natures bounty hair skin nails extra strength' },
-  'hair.dht_overdrive': { name: 'Hair Renew Formula', brand: 'NOW Foods', claim: '男性型脱毛(AGA)サポート', ingredients: ['ノコギリヤシ', '亜鉛', 'ビオチン', 'パンプキンシード'], tradeoff: '本格対応はAGAクリニック、サプリは予防・補助。', kw: 'now foods hair renew' },
-  'hair.stress_shedding': { name: 'Stress + Cortisol Manager', brand: 'Garden of Life', claim: 'コルチゾール低下 + リラックス', ingredients: ['アシュワガンダ KSM-66', 'L-テアニン', 'マグネシウム'], tradeoff: 'ストレス由来の脱毛緩和、ビオチンは別途。', kw: 'garden of life stress cortisol manager' },
+  'hair.nutrition_hair': { name: 'Hair, Skin & Nails Extra Strength', brand: "Nature's Bounty", claim: '髪の栄養素を総合サポート', ingredients: ['ビオチン 5000mcg', 'コラーゲン', 'ビタミンA・C・E', '亜鉛'], tradeoff: 'ガミー型で続けやすい、3-6ヶ月で実感。', kw: 'natures bounty hair skin nails extra strength', kw_amazon: "Nature's Bounty Hair Skin Nails" },
+  'hair.dht_overdrive': { name: 'Hair Renew Formula', brand: 'NOW Foods', claim: '男性型脱毛(AGA)サポート', ingredients: ['ノコギリヤシ', '亜鉛', 'ビオチン', 'パンプキンシード'], tradeoff: '本格対応はAGAクリニック、サプリは予防・補助。', kw: 'now foods hair renew', kw_amazon: 'NOW Foods Hair Renew' },
+  'hair.stress_shedding': { name: 'Stress + Cortisol Manager', brand: 'Garden of Life', claim: 'コルチゾール低下 + リラックス', ingredients: ['アシュワガンダ KSM-66', 'L-テアニン', 'マグネシウム'], tradeoff: 'ストレス由来の脱毛緩和、ビオチンは別途。', kw: 'garden of life stress cortisol manager', kw_amazon: 'Garden of Life Cortisol Manager' },
 
   // 体型
-  'body.fat_absorption': { name: 'Lean Mode', brand: 'Evlution Nutrition', claim: '食事の脂質・糖質管理 + 軽い代謝促進', ingredients: ['CLA', 'ガルシニア', '緑茶EGCG', 'L-カルニチン'], tradeoff: 'スティム無しで日中OK、食事と共に。', kw: 'evlution lean mode' },
-  'body.visceral_fat': { name: 'OxyShred Thermogenic', brand: 'EHPlabs', claim: '脂肪燃焼 + 覚醒 + エネルギー + 集中', ingredients: ['L-カルニチン', '緑茶EGCG', 'L-チロシン', 'カフェイン少量', 'B群'], tradeoff: 'カフェイン入りで午前限定、効率◎。', kw: 'oxyshred ehplabs' },
-  'body.muscle_decline': { name: 'Whey + Creatine Bundle', brand: 'Optimum Nutrition', claim: '筋合成の材料 + 筋出力 + 筋分解抑制', ingredients: ['WPI ホエイ 25g', 'クレアチン 5g', 'BCAA'], tradeoff: '筋トレと組み合わせて最大効果。', kw: 'optimum nutrition whey creatine bundle' },
+  'body.fat_absorption': { name: 'Lean Mode', brand: 'Evlution Nutrition', claim: '食事の脂質・糖質管理 + 軽い代謝促進', ingredients: ['CLA', 'ガルシニア', '緑茶EGCG', 'L-カルニチン'], tradeoff: 'スティム無しで日中OK、食事と共に。', kw: 'evlution lean mode', kw_amazon: 'Evlution Lean Mode' },
+  'body.visceral_fat': { name: 'Hydroxycut Hardcore Elite', brand: 'Hydroxycut', claim: '脂肪燃焼 + 覚醒 + 集中(複合燃焼)', ingredients: ['カフェイン無水', '緑茶EGCG', 'L-カルニチン', 'コレウスフォルスコリ'], tradeoff: '「オキシカット」の元祖、Amazon JPでも安定流通。カフェイン高めで午前限定。', kw: 'hydroxycut hardcore elite', kw_amazon: 'ハイドロキシカット Hardcore' },
+  'body.muscle_decline': { name: 'Whey + Creatine Bundle', brand: 'Optimum Nutrition', claim: '筋合成の材料 + 筋出力 + 筋分解抑制', ingredients: ['WPI ホエイ 25g', 'クレアチン 5g', 'BCAA'], tradeoff: '筋トレと組み合わせて最大効果。', kw: 'optimum nutrition whey creatine bundle', kw_amazon: 'Optimum Nutrition ホエイ クレアチン' },
 
   // 健診
-  'bloodwork.ldl': { name: 'Plant Sterols Complex', brand: "Doctor's Best", claim: 'LDL対策の総合サポート', ingredients: ['プラントステロール', 'サイリウム', 'ベルガモット'], tradeoff: 'コレステロール吸収抑制の包括アプローチ。', kw: 'doctors best plant sterols complex' },
-  'bloodwork.tg': { name: 'Omega-3 High EPA', brand: 'Sports Research', claim: '中性脂肪 + 脂質代謝', ingredients: ['EPA(高濃度 1000mg+)', 'DHA'], tradeoff: 'TG低下のエビデンス最強。', kw: 'sports research omega 3 high epa' },
-  'bloodwork.liver': { name: 'Silymarin Liver Detox', brand: 'NOW Foods', claim: '肝機能総合サポート', ingredients: ['シリマリン', 'NAC', 'クルクミン', 'タウリン'], tradeoff: '肝臓ケアの定番、飲酒後・季節の変わり目に。', kw: 'now foods silymarin liver detox' },
-  'bloodwork.glucose': { name: 'Berberine 500mg', brand: "Doctor's Best", claim: '血糖管理の最有力候補', ingredients: ['ベルベリン HCL', 'BioPerine'], tradeoff: '単成分だが効果メタ解析最強、メトホルミン類似。', kw: 'doctors best berberine' },
-  'bloodwork.uric': { name: 'Quercetin with Bromelain', brand: 'NOW Foods', claim: '尿酸 + 抗炎症', ingredients: ['ケルセチン', 'ブロメライン'], tradeoff: '尿酸低下 + 抗炎症のセット、痛風予防に。', kw: 'now foods quercetin bromelain' }
+  'bloodwork.ldl': { name: 'Plant Sterols Complex', brand: "Doctor's Best", claim: 'LDL対策の総合サポート', ingredients: ['プラントステロール', 'サイリウム', 'ベルガモット'], tradeoff: 'コレステロール吸収抑制の包括アプローチ。', kw: 'doctors best plant sterols complex', kw_amazon: "Doctor's Best プラントステロール" },
+  'bloodwork.tg': { name: 'Omega-3 High EPA', brand: 'Sports Research', claim: '中性脂肪 + 脂質代謝', ingredients: ['EPA(高濃度 1000mg+)', 'DHA'], tradeoff: 'TG低下のエビデンス最強。', kw: 'sports research omega 3 high epa', kw_amazon: 'Sports Research オメガ3 EPA' },
+  'bloodwork.liver': { name: 'Silymarin Liver Detox', brand: 'NOW Foods', claim: '肝機能総合サポート', ingredients: ['シリマリン', 'NAC', 'クルクミン', 'タウリン'], tradeoff: '肝臓ケアの定番、飲酒後・季節の変わり目に。', kw: 'now foods silymarin liver detox', kw_amazon: 'NOW Foods シリマリン' },
+  'bloodwork.glucose': { name: 'Berberine 500mg', brand: "Doctor's Best", claim: '血糖管理の最有力候補', ingredients: ['ベルベリン HCL', 'BioPerine'], tradeoff: '単成分だが効果メタ解析最強、メトホルミン類似。', kw: 'doctors best berberine', kw_amazon: "Doctor's Best ベルベリン" },
+  'bloodwork.uric': { name: 'Quercetin with Bromelain', brand: 'NOW Foods', claim: '尿酸 + 抗炎症', ingredients: ['ケルセチン', 'ブロメライン'], tradeoff: '尿酸低下 + 抗炎症のセット、痛風予防に。', kw: 'now foods quercetin bromelain', kw_amazon: 'NOW Foods ケルセチン' }
 };
 
 // ------------------------------------------------------------
@@ -3930,8 +3930,8 @@ function renderResult() {
       </div>
       <div class="efficient-tradeoff">${efficient.tradeoff}</div>
       <div class="supp-links">
-        <a class="supp-link" href="${amazonLink(efficient.kw)}" target="_blank" rel="noopener">Amazonで探す →</a>
-        <a class="supp-link secondary" href="${iherbLink(efficient.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
+        <a class="supp-link" href="${iherbLink(efficient.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
+        <a class="supp-link secondary" href="${amazonLink(efficient.kw, efficient.kw_amazon)}" target="_blank" rel="noopener">Amazonでも探す</a>
         <button class="save-btn${isEfficientSaved ? ' saved' : ''}" onclick="toggleSaveEfficient('${comboKey}')" type="button">${isEfficientSaved ? '✓ 保存済み' : '+ 保存'}</button>
       </div>
     </div>
