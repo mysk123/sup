@@ -3885,6 +3885,16 @@ function buildOnboardUrl(problem, type, efficient) {
   return 'https://app.sup-app.org/onboard?' + params.toString();
 }
 
+// 単品(個別のサプリ or efficient 1つ)を Stack に送る URL を組む
+function buildOnboardUrlForOne(problem, item) {
+  const target = TARGET_MAP_FOR_APP[problem.category] || 'focus';
+  const params = new URLSearchParams();
+  params.set('targets', target);
+  params.set('items', JSON.stringify([item]));
+  params.set('from', 'sup-app.org');
+  return 'https://app.sup-app.org/onboard?' + params.toString();
+}
+
 function renderResult() {
   const problem = PROBLEMS[state.problemId];
   const typeKey = problem.classify(state.answers);
@@ -3900,6 +3910,7 @@ function renderResult() {
   `).join('');
   const supps = type.supplements.map((s, i) => {
     const isSaved = savedState.items.some(it => it.kw === s.kw);
+    const onboardOneUrl = buildOnboardUrlForOne(problem, { name: s.name, dosage: s.dosage || '' });
     return `
     <div class="supp-card${i === 0 ? ' primary' : ''}">
       ${i === 0 ? '<div class="supp-badge">FIRST PICK / 最初の一本</div>' : ''}
@@ -3910,6 +3921,7 @@ function renderResult() {
         <a class="supp-link" href="${amazonLink(s.kw)}" target="_blank" rel="noopener">Amazonで探す →</a>
         <a class="supp-link secondary" href="${iherbLink(s.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
         <button class="save-btn${isSaved ? ' saved' : ''}" onclick="toggleSave('${s.kw}')" type="button">${isSaved ? '✓ 保存済み' : '+ 保存'}</button>
+        <a class="supp-link to-stack" href="${onboardOneUrl}" target="_blank" rel="noopener" style="background:#0f5b3e;color:#fff;border:1px solid #0f5b3e;font-weight:700;">↗ Stackに追加</a>
       </div>
     </div>
     `;
@@ -3963,6 +3975,7 @@ function renderResult() {
         <a class="supp-link" href="${iherbLink(efficient.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
         <a class="supp-link secondary" href="${amazonLink(efficient.kw, efficient.kw_amazon)}" target="_blank" rel="noopener">Amazonでも探す</a>
         <button class="save-btn${isEfficientSaved ? ' saved' : ''}" onclick="toggleSaveEfficient('${comboKey}')" type="button">${isEfficientSaved ? '✓ 保存済み' : '+ 保存'}</button>
+        <a class="supp-link to-stack" href="${buildOnboardUrlForOne(problem, { name: efficient.name + ' (' + efficient.brand + ')', dosage: '' })}" target="_blank" rel="noopener" style="background:#0f5b3e;color:#fff;border:1px solid #0f5b3e;font-weight:700;">↗ Stackに追加</a>
       </div>
     </div>
     ` : ''}
