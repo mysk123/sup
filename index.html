@@ -3855,6 +3855,36 @@ function renderIntake() {
   `;
 }
 
+// ------------------------------------------------------------
+// app.sup-app.org (Sup. App) の /onboard へ診断結果を渡す URL を組む
+// ------------------------------------------------------------
+const TARGET_MAP_FOR_APP = {
+  performance: 'focus',
+  recovery: 'recovery',
+  stability: 'stability',
+  impression: 'appearance',
+  bloodwork: 'numbers'
+};
+
+function buildOnboardUrl(problem, type, efficient) {
+  const target = TARGET_MAP_FOR_APP[problem.category] || 'focus';
+  const items = type.supplements.map(s => ({
+    name: s.name,
+    dosage: s.dosage || ''
+  }));
+  if (efficient) {
+    items.push({
+      name: efficient.name + ' (' + efficient.brand + ')',
+      dosage: ''
+    });
+  }
+  const params = new URLSearchParams();
+  params.set('targets', target);
+  params.set('items', JSON.stringify(items));
+  params.set('from', 'sup-app.org');
+  return 'https://app.sup-app.org/onboard?' + params.toString();
+}
+
 function renderResult() {
   const problem = PROBLEMS[state.problemId];
   const typeKey = problem.classify(state.answers);
@@ -3946,6 +3976,14 @@ function renderResult() {
 
     <div class="section-label">LIFESTYLE INTERVENTION — 生活習慣の介入</div>
     <ul class="lifestyle-list">${lifestyle}</ul>
+
+    <div class="section-label">CONTINUE — 続けて最適化する</div>
+    <a class="action-btn onboard-btn" href="${buildOnboardUrl(problem, type, efficient)}" target="_blank" rel="noopener" style="text-decoration:none;display:block;text-align:center;background:#0f5b3e;color:#fff;padding:14px 24px;border-radius:12px;font-weight:700;font-size:14px;margin-top:8px;">
+      この推奨を Sup. App の My Stack に送る →
+    </a>
+    <div style="font-size:12px;color:#666;line-height:1.7;margin-top:10px;padding:0 4px;">
+      Sup. App はサプリの管理 + Optimization Score でスタックの完成度を 0-100 で可視化する継続型アプリ。上の推奨が一括登録される(無料で使える、Pro ¥980/月で全機能)。
+    </div>
 
     <div class="disclaimer">本提案は一般的な栄養学・サプリメント研究に基づくガイドであり、医療行為や診断ではありません。特に健診数値の改善は医師の指導下で取り組むことが前提です。既往歴・服薬中・妊娠中の方は必ず医師・薬剤師にご相談ください。</div>
 
