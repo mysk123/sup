@@ -81,7 +81,7 @@ body {
 
 /* === Mobile anchor nav === */
 .lp-nav {
-  display: none;
+  display: flex;
   gap: 6px;
   overflow-x: auto;
   padding: 12px 24px;
@@ -114,9 +114,7 @@ body {
   color: var(--accent);
   background: var(--accent-light);
 }
-@media (max-width: 600px) {
-  .lp-nav { display: flex; }
-}
+/* lp-nav はデフォルト display:flex(上で定義済み)、スマホでも表示 */
 
 .hero {
   position: relative;
