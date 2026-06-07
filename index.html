@@ -3628,10 +3628,15 @@ function renderHome() {
     `;
   }).join('');
   return `
-    <button class="brand" onclick="goHome()" type="button">
-      <span class="brand-logo">Sup<span class="dot">.</span></span>
-      <span class="brand-tagline">知的生産者の身体メンテ</span>
-    </button>
+    <div style="display:flex;justify-content:space-between;align-items:center;gap:12px;margin-bottom:16px;flex-wrap:wrap;">
+      <button class="brand" onclick="goHome()" type="button" style="margin-bottom:0;">
+        <span class="brand-logo">Sup<span class="dot">.</span></span>
+        <span class="brand-tagline">知的生産者の身体メンテ</span>
+      </button>
+      <a href="https://app.sup-app.org/my-stack" style="display:inline-flex;align-items:center;gap:6px;background:#0f5b3e;color:#fff;text-decoration:none;padding:8px 16px;border-radius:8px;font-size:13px;font-weight:700;white-space:nowrap;">
+        My Stack →
+      </a>
+    </div>
 
     <nav class="lp-nav">
       <a href="#vision">VISION</a>
@@ -3640,7 +3645,6 @@ function renderHome() {
       <a href="#how">HOW</a>
       <a href="#diagnose">DIAGNOSE</a>
       <a href="#faq">FAQ</a>
-      <a href="https://app.sup-app.org/my-stack" style="color:#0f5b3e;font-weight:700;">MY STACK →</a>
     </nav>
 
     <div class="hero">
