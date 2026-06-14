@@ -3507,6 +3507,43 @@ window.toggleSave = (kw) => {
   persistSaved();
   render();
 };
+// 外部リンク(Amazon/iHerbで探す)クリック時に「必ず追加」する冪等保存
+window.saveIfNew = (kw) => {
+  if (savedState.items.some(it => it.kw === kw)) { render(); return; }
+  const problem = PROBLEMS[state.problemId];
+  if (!problem) return;
+  const typeKey = problem.classify(state.answers);
+  const type = problem.types[typeKey];
+  const supp = type.supplements.find(s => s.kw === kw);
+  if (!supp) return;
+  savedState.items.push({
+    kw: supp.kw,
+    name: supp.name,
+    dosage: supp.dosage,
+    context: `${problem.title} / ${type.name}`,
+    savedAt: Date.now()
+  });
+  persistSaved();
+  render();
+};
+window.saveEfficientIfNew = (typeKey) => {
+  const efficient = EFFICIENT_ROUTE[typeKey];
+  if (!efficient) return;
+  if (savedState.items.some(it => it.kw === efficient.kw)) { render(); return; }
+  const problem = PROBLEMS[state.problemId];
+  if (!problem) return;
+  const tk = problem.classify(state.answers);
+  const type = problem.types[tk];
+  savedState.items.push({
+    kw: efficient.kw,
+    name: `${efficient.brand} ${efficient.name}`,
+    dosage: '製品ラベル参照',
+    context: `${problem.title} / ${type.name} [効率ルート]`,
+    savedAt: Date.now()
+  });
+  persistSaved();
+  render();
+};
 window.removeSaved = (kw) => {
   savedState.items = savedState.items.filter(it => it.kw !== kw);
   persistSaved();
@@ -3925,8 +3962,8 @@ function renderResult() {
       <div class="supp-dosage">推奨用量: ${s.dosage}</div>
       <div class="supp-reason">${s.reason}</div>
       <div class="supp-links">
-        <a class="supp-link" href="${amazonLink(s.kw)}" target="_blank" rel="noopener">Amazonで探す →</a>
-        <a class="supp-link secondary" href="${iherbLink(s.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
+        <a class="supp-link" href="${amazonLink(s.kw)}" target="_blank" rel="noopener" onclick="saveIfNew('${s.kw}')">Amazonで探す →</a>
+        <a class="supp-link secondary" href="${iherbLink(s.kw)}" target="_blank" rel="noopener" onclick="saveIfNew('${s.kw}')">iHerbで探す →</a>
         <button class="save-btn${isSaved ? ' saved' : ''}" onclick="toggleSave('${s.kw}')" type="button">${isSaved ? '✓ 保存済み' : '+ 保存'}</button>
         <a class="supp-link to-stack" href="${onboardOneUrl}" target="_blank" rel="noopener" style="background:#0f5b3e;color:#fff;border:1px solid #0f5b3e;font-weight:700;">↗ Stackに追加</a>
       </div>
@@ -3979,8 +4016,8 @@ function renderResult() {
       </div>
       <div class="efficient-tradeoff">${efficient.tradeoff}</div>
       <div class="supp-links">
-        <a class="supp-link" href="${iherbLink(efficient.kw)}" target="_blank" rel="noopener">iHerbで探す →</a>
-        <a class="supp-link secondary" href="${amazonLink(efficient.kw, efficient.kw_amazon)}" target="_blank" rel="noopener">Amazonでも探す</a>
+        <a class="supp-link" href="${iherbLink(efficient.kw)}" target="_blank" rel="noopener" onclick="saveEfficientIfNew('${comboKey}')">iHerbで探す →</a>
+        <a class="supp-link secondary" href="${amazonLink(efficient.kw, efficient.kw_amazon)}" target="_blank" rel="noopener" onclick="saveEfficientIfNew('${comboKey}')">Amazonでも探す</a>
         <button class="save-btn${isEfficientSaved ? ' saved' : ''}" onclick="toggleSaveEfficient('${comboKey}')" type="button">${isEfficientSaved ? '✓ 保存済み' : '+ 保存'}</button>
         <a class="supp-link to-stack" href="${buildOnboardUrlForOne(problem, { name: efficient.name + ' (' + efficient.brand + ')', dosage: '' })}" target="_blank" rel="noopener" style="background:#0f5b3e;color:#fff;border:1px solid #0f5b3e;font-weight:700;">↗ Stackに追加</a>
       </div>
@@ -4002,7 +4039,7 @@ function renderResult() {
       この推奨を Sup. App の My Stack に送る →
     </a>
     <div style="font-size:12px;color:#666;line-height:1.7;margin-top:10px;padding:0 4px;">
-      Sup. App はサプリの管理 + Optimization Score でスタックの完成度を 0-100 で可視化する継続型アプリ。上の推奨が一括登録される(無料で使える、Pro ¥980/月で全機能)。
+      Sup. App はサプリの管理 + Optimization Score でスタックの完成度を 0-100 で可視化する継続型アプリ。上の推奨が一括登録される(無料で使える / Pro は<s style="color:#999;">通常¥980/月</s>のところ<strong style="color:#0f5b3e;">今だけ¥600/月</strong>で全機能)。
     </div>
 
     <div class="disclaimer">本提案は一般的な栄養学・サプリメント研究に基づくガイドであり、医療行為や診断ではありません。特に健診数値の改善は医師の指導下で取り組むことが前提です。既往歴・服薬中・妊娠中の方は必ず医師・薬剤師にご相談ください。</div>
