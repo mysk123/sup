@@ -1239,34 +1239,30 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .hero-sketch { display: none; }
 .hero-eyebrow-row { margin-bottom: 22px; }
 .product-teaser { position: relative; margin: 26px 0 0; overflow: hidden; border-radius: 4px; background: radial-gradient(ellipse at 65% 45%, #fff 0%, #f3f8f5 42%, #deebe5 100%); }
-.concept-motion { display: block; width: 100%; height: auto; aspect-ratio: 720 / 340; }
-.concept-particle { animation: concept-connect 14s cubic-bezier(.42,0,.2,1) infinite; }
-.concept-body { animation: concept-body 14s ease-in-out infinite; }
-.concept-network { animation: concept-network 14s ease-in-out infinite; }
-.concept-halo { transform-origin: 360px 170px; animation: concept-halo 14s ease-in-out infinite; }
-.concept-capsule { animation: concept-capsule 14s ease-in-out infinite; }
-.concept-fragments { transform-origin: 360px 170px; animation: concept-fragments 14s ease-in-out infinite; }
+.vitality-motion { display: block; width: 100%; height: auto; aspect-ratio: 720 / 340; }
+.vitality-particle { opacity: 0; animation: vitality-match 15s ease-in-out infinite; }
+.vitality-input { animation: vitality-input 15s ease-in-out infinite; }
+.vitality-ribbon { animation: vitality-ribbon 15s ease-in-out infinite; }
+.vitality-daylight, .vitality-inner, .vitality-rays { animation: vitality-light 15s ease-in-out infinite; }
+.vitality-arm { transform-origin: 532px 135px; animation: vitality-reach 15s ease-in-out infinite; }
+.vitality-person { animation: vitality-step 15s ease-in-out infinite; }
 .teaser-caption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px 15px; }
 .teaser-caption p { color: #49675a; font-size: 10px; letter-spacing: .12em; }
 .teaser-toggle { flex-shrink: 0; min-height: 36px; padding: 7px 10px; border: 1px solid #b8c7bd; border-radius: 4px; background: rgba(255,255,255,.7); font-family: inherit; font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--accent); cursor: pointer; }
-@keyframes concept-connect {
-  0%, 15%, 100% { transform: translate(var(--sx), var(--sy)); opacity: .62; }
-  42% { transform: translate(var(--mx), var(--my)); opacity: .85; }
-  68%, 88% { transform: translate(0, 0); opacity: .92; }
-}
-@keyframes concept-fragments { 0%, 15%, 100% { opacity: .5; transform: scale(1); } 42%, 88% { opacity: 0; transform: scale(.6); } }
-@keyframes concept-body { 0%, 15%, 100% { opacity: .22; } 65%, 88% { opacity: .85; } }
-@keyframes concept-network { 0%, 15%, 100% { opacity: .08; } 42% { opacity: .3; } 68%, 88% { opacity: .85; } }
-@keyframes concept-halo { 0%, 20%, 100% { opacity: .05; transform: scale(.8); } 68%, 88% { opacity: .35; transform: scale(1); } }
-@keyframes concept-capsule { 0%, 15%, 100% { opacity: .4; } 30%, 55% { opacity: 1; } 68%, 88% { opacity: .6; } }
-.product-teaser[data-paused="true"] .concept-motion * { animation-play-state: paused; }
+@keyframes vitality-match { 0%, 18% { opacity: .6; transform: translate(0,0); } 40% { opacity: .85; transform: translate(var(--mx),var(--my)); } 58%, 100% { opacity: 0; transform: translate(var(--tx),var(--ty)); } }
+@keyframes vitality-input { 0%, 20%, 100% { opacity: 1; } 58%, 88% { opacity: .45; } }
+@keyframes vitality-ribbon { 0%, 18%, 100% { opacity: .15; } 60%, 88% { opacity: .9; } }
+@keyframes vitality-light { 0%, 20%, 100% { opacity: .05; } 60%, 88% { opacity: .8; } }
+@keyframes vitality-reach { 0%, 25%, 100% { transform: rotate(50deg); } 65%, 88% { transform: rotate(0deg); } }
+@keyframes vitality-step { 0%, 25%, 100% { transform: translateX(0); } 65%, 88% { transform: translateX(8px); } }
+.product-teaser[data-paused="true"] .vitality-motion * { animation-play-state: paused; }
 @media (max-width: 600px) {
   .hero-title { font-size: 28px; line-height: 1.65; letter-spacing: 0; }
   .teaser-caption { padding: 7px 12px 12px; }
   .teaser-caption p { font-size: 9px; letter-spacing: .06em; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .concept-motion * { animation: none; transform: none; }
+  .vitality-motion * { animation: none; transform: none; }
   .teaser-toggle { display: none; }
 }
 </style>
@@ -3749,57 +3745,49 @@ function setState(updates) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-// Original abstract concept, not an anatomical or efficacy diagram.
-// Static stage export uses the same points as the CSS animation for review.
-function renderConceptMotion(stage = 'live') {
-  const nodes = [[360,57],[360,91],[336,104],[384,104],[319,137],[401,137],[305,167],[415,167],[295,195],[425,195],[346,127],[374,127],[360,151],[345,177],[375,177],[346,207],[374,207],[344,244],[376,244],[341,281],[379,281]];
-  const edges = [[0,1],[1,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6,8],[7,9],[1,10],[1,11],[10,12],[11,12],[12,13],[12,14],[13,15],[14,16],[15,17],[16,18],[17,19],[18,20],[10,13],[11,14]];
-  const phases = {scatter:[.22,.08,.05,.4], integrating:[.5,.3,.17,1], whole:[.85,.85,.35,.6]};
-  const phase = phases[stage] || phases.whole;
-  const fixed = stage !== 'live';
-  const style = n => fixed ? `style="animation:none;opacity:${phase[n]}"` : '';
-  const particles = Array.from({length:115}, (_, i) => {
-    const [a,b] = edges[i % edges.length].map(n=>nodes[n]);
-    const t = ((i * 7) % 19) / 18;
-    const x = a[0] + (b[0]-a[0])*t;
-    const y = a[1] + (b[1]-a[1])*t;
-    const angle = i * 2.399963;
-    const sx = 360 + Math.cos(angle) * (150 + (i % 5)*18);
-    const sy = 165 + Math.sin(angle) * (85 + (i % 4)*13);
-    const mx = 360 + Math.cos(angle) * (20 + (i % 4)*8);
-    const my = 153 + Math.sin(angle) * (25 + (i % 5)*5);
-    const px = stage === 'scatter' ? sx : stage === 'integrating' ? mx : x;
-    const py = stage === 'scatter' ? sy : stage === 'integrating' ? my : y;
-    const color = i % 4 === 0 ? '#b77f4f' : i % 3 === 0 ? '#599590' : '#23694d';
-    return `<circle class="concept-particle" cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${i%4===0?2.4:1.7}" fill="${color}" style="${fixed?'animation:none;':''}--sx:${(sx-x).toFixed(1)}px;--sy:${(sy-y).toFixed(1)}px;--mx:${(mx-x).toFixed(1)}px;--my:${(my-y).toFixed(1)}px"/>`;
-  }).join('');
-  const lines = edges.map(([a,b]) => {
-    const [x1,y1] = nodes[a], [x2,y2] = nodes[b];
-    return `<path d="M${x1} ${y1} Q${x1} ${(y1+y2)/2} ${x2} ${y2}"/>`;
-  }).join('');
-  return `<svg class="concept-motion" id="concept-motion" viewBox="0 0 720 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-    <defs><radialGradient id="concept-glow"><stop stop-color="#bcdccb" stop-opacity=".8"/><stop offset="1" stop-color="#dceee3" stop-opacity="0"/></radialGradient></defs>
-    <ellipse class="concept-halo" ${style(2)} cx="360" cy="170" rx="155" ry="165" fill="url(#concept-glow)"/>
-    <g class="concept-body" ${style(0)} fill="#e0eee5" stroke="#3f7b64" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="360" cy="53" r="18"/>
-      <path d="M351 78V85Q333 88 326 100Q315 121 306 143L284 190Q280 199 288 203Q296 207 300 198L329 144L332 183Q332 191 334 201L328 278Q327 291 338 292Q349 293 350 280L358 211H362L370 280Q371 293 382 292Q393 291 392 278L386 201Q388 191 388 183L391 144L420 198Q424 207 432 203Q440 199 436 190L414 143Q405 121 394 100Q387 88 369 85V78"/>
-    </g>
-    <g class="concept-network" ${style(1)} fill="none" stroke="#458a6e" stroke-width="1.2" stroke-linecap="round">${lines}</g>
-    <g class="concept-capsule" ${style(3)}>
-      <path d="M192 170C221 143 256 159 287 159" fill="none" stroke="#8aaf9b" stroke-width="1" stroke-dasharray="3 6"/>
-      <g transform="translate(162 173) rotate(-28)">
-        <defs><clipPath id="concept-capsule-clip"><rect x="-28" y="-12" width="56" height="24" rx="12"/></clipPath></defs>
-        <rect x="-28" y="-12" width="56" height="24" rx="12" fill="#ffffff"/>
-        <rect x="0" y="-12" width="28" height="24" fill="#8eaf9e" clip-path="url(#concept-capsule-clip)"/>
-        <rect x="-28" y="-12" width="56" height="24" rx="12" fill="none" stroke="#436f5b" stroke-width="1.5"/>
-        <path d="M0-12V12" stroke="#436f5b" stroke-width="1.2"/>
-      </g>
-    </g>
-    <g class="concept-fragments" opacity="0" ${fixed ? `style="animation:none;opacity:${stage === 'scatter' ? .5 : 0}"` : ''} fill="none" stroke="#649a8c" stroke-width="1" stroke-linecap="round">
-      <path d="M211 89l18 5 9-15m-9 15 4 16M472 85l15 13 17-3m-17 3-4 14M191 244l20-7 7 13m-7-13-6-14M501 234l-13-10 8-15m-8 15-15 2M295 50l12 10 16-5M453 278l-12-10-17 6"/>
-    </g>
-    ${particles}
-  </svg>`;
+// Original editorial metaphor: personal fit, inner light, a more lively day.
+// Not a physiological diagram or a promise of supplement effects.
+function renderVitalityMotion() {
+  return `<svg class="vitality-motion" id="vitality-motion" viewBox="0 0 720 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+<defs><radialGradient id="vitality-warm"><stop stop-color="#f0d79d" stop-opacity=".8"/><stop offset="1" stop-color="#f7eedb" stop-opacity="0"/></radialGradient><linearGradient id="vitality-ribbon-gradient"><stop stop-color="#d4e5c9" stop-opacity=".1"/><stop offset=".6" stop-color="#c0d8aa" stop-opacity=".5"/><stop offset="1" stop-color="#ead8a6" stop-opacity=".4"/></linearGradient></defs>
+<rect width="720" height="340" fill="#f8f8f1"/>
+<circle class="vitality-daylight" cx="529" cy="142" r="155" fill="url(#vitality-warm)" opacity=".85"/>
+<path d="M42 276Q204 265 334 280T684 277" fill="none" stroke="#dce2d3" stroke-width="1"/>
+<ellipse cx="536" cy="285" rx="70" ry="6" fill="#e6e9da"/>
+<path class="vitality-ribbon" d="M81 175C206 258 291 74 428 158S585 216 671 98" fill="none" stroke="url(#vitality-ribbon-gradient)" stroke-width="33" opacity="0.9"/>
+<path d="M151 165C259 218 325 102 446 146" fill="none" stroke="#a8c39a" stroke-width="1.3" stroke-dasharray="2 9" opacity="0.75"/>
+<g class="vitality-input" opacity=".45">
+<circle cx="92" cy="104" r="4" fill="#c5c6d1"/><circle cx="246" cy="226" r="3" fill="#d4d4ce"/><circle cx="108" cy="214" r="5" fill="#c5c6d1"/>
+<ellipse cx="167" cy="163" rx="36" ry="36" fill="#edf1e5"/>
+<g transform="translate(167 163) rotate(-32)"><rect x="-25" y="-11" width="50" height="22" rx="11" fill="#fff" stroke="#5f8169" stroke-width="1.4"/><path d="M0-10H14a10 10 0 0 1 0 20H0Z" fill="#abc79c"/><path d="M0-11V11" stroke="#5f8169" stroke-width="1.2"/></g></g>
+
+<circle class="vitality-particle" cx="206.0" cy="153.0" r="3" fill="#87ae80" style="--mx:119.0px;--my:-10.0px;--tx:320.0px;--ty:-3.0px;animation-delay:0.00s"/><circle class="vitality-particle" cx="130.4" cy="186.1" r="4" fill="#d8b174" style="--mx:194.6px;--my:-28.0px;--tx:395.6px;--ty:-36.1px;animation-delay:0.08s"/><circle class="vitality-particle" cx="173.6" cy="90.2" r="5" fill="#b8ce9e" style="--mx:151.4px;--my:69.1px;--tx:352.4px;--ty:59.8px;animation-delay:0.16s"/><circle class="vitality-particle" cx="214.8" cy="180.8" r="3" fill="#87ae80" style="--mx:110.2px;--my:-35.2px;--tx:311.2px;--ty:-30.8px;animation-delay:0.24s"/><circle class="vitality-particle" cx="130.6" cy="144.5" r="4" fill="#d8b174" style="--mx:194.4px;--my:-15.1px;--tx:395.4px;--ty:5.5px;animation-delay:0.32s"/><circle class="vitality-particle" cx="211.0" cy="119.2" r="5" fill="#b8ce9e" style="--mx:114.0px;--my:6.6px;--tx:315.0px;--ty:30.8px;animation-delay:0.40s"/><circle class="vitality-particle" cx="151.4" cy="186.8" r="3" fill="#87ae80" style="--mx:173.6px;--my:-48.8px;--tx:374.6px;--ty:-36.8px;animation-delay:0.48s"/><circle class="vitality-particle" cx="132.5" cy="109.5" r="4" fill="#d8b174" style="--mx:192.5px;--my:45.3px;--tx:393.5px;--ty:40.5px;animation-delay:0.56s"/><circle class="vitality-particle" cx="203.7" cy="174.6" r="5" fill="#b8ce9e" style="--mx:121.3px;--my:-13.8px;--tx:322.3px;--ty:-24.6px;animation-delay:0.64s"/><circle class="vitality-particle" cx="120.9" cy="166.4" r="3" fill="#87ae80" style="--mx:204.1px;--my:-15.9px;--tx:405.1px;--ty:-16.4px;animation-delay:0.72s"/><circle class="vitality-particle" cx="195.1" cy="108.6" r="4" fill="#d8b174" style="--mx:129.9px;--my:24.6px;--tx:330.9px;--ty:41.4px;animation-delay:0.80s"/><circle class="vitality-particle" cx="191.0" cy="213.1" r="5" fill="#b8ce9e" style="--mx:134.0px;--my:-88.1px;--tx:335.0px;--ty:-63.1px;animation-delay:0.88s"/><circle class="vitality-particle" cx="135.1" cy="135.5" r="3" fill="#87ae80" style="--mx:189.9px;--my:-2.1px;--tx:390.9px;--ty:14.5px;animation-delay:0.96s"/><circle class="vitality-particle" cx="217.8" cy="142.5" r="4" fill="#d8b174" style="--mx:107.2px;--my:8.1px;--tx:308.2px;--ty:7.5px;animation-delay:1.04s"/><circle class="vitality-particle" cx="131.2" cy="204.5" r="5" fill="#b8ce9e" style="--mx:193.8px;--my:-43.7px;--tx:394.8px;--ty:-54.5px;animation-delay:1.12s"/><circle class="vitality-particle" cx="158.1" cy="118.3" r="3" fill="#87ae80" style="--mx:166.9px;--my:36.4px;--tx:367.9px;--ty:31.7px;animation-delay:1.20s"/>
+<!-- Original editorial figure in a side-on walking pose. -->
+<g class="vitality-person" stroke-linejoin="round" stroke-linecap="round">
+<!-- relaxed far arm -->
+<path d="M526 132Q508 148 491 176L476 169" fill="none" stroke="#b9c9ac" stroke-width="13"/>
+<path d="M477 170l-9-5" fill="none" stroke="#dcb99c" stroke-width="8"/>
+<!-- rear trouser leg, walking backwards -->
+<path d="M532 190Q522 218 506 244L488 272L504 278L533 251Q550 226 551 199Z" fill="#80977d"/>
+<path d="M489 269l15 7-2 8-26-1q-5-2-1-6z" fill="#294e40"/>
+<!-- forward trouser leg -->
+<path d="M540 190L563 191Q564 218 576 244L590 269L575 276L553 249Q536 223 540 190Z" fill="#3d6956"/>
+<path d="M576 270l15-4 8 11 10 3q5 6-1 7l-25-1z" fill="#294e40"/>
+<!-- soft linen top with shaped shoulder -->
+<path d="M531 118Q546 113 555 123L568 155L564 197Q544 205 522 192L526 151L517 138Q518 126 531 118Z" fill="#e8d7af" stroke="#cfbb90" stroke-width="1.1"/>
+<g class="vitality-arm"><path d="M532 135Q551 129 566 116L578 101" fill="none" stroke="#e8d7af" stroke-width="14"/>
+<path d="M578 101l5-9" fill="none" stroke="#dcb99c" stroke-width="8"/></g>
+<path d="M531 185q14 6 28 4" fill="none" stroke="#cfbb90" stroke-width="1"/>
+<ellipse class="vitality-inner" cx="544" cy="157" rx="23" ry="37" fill="url(#vitality-warm)" opacity="0.8"/>
+<!-- neck, profile, cropped hair -->
+<path d="M534 105L533 119Q540 125 547 120L544 103" fill="#dcb99c"/>
+<path d="M529 86Q530 71 544 76Q556 78 555 92L559 98L553 100Q551 111 540 109Q529 104 529 86Z" fill="#e4c4a7"/>
+<path d="M530 95Q522 89 526 78Q530 66 544 69Q557 70 557 82L541 82L536 94L532 90Z" fill="#2d5142"/>
+<circle cx="551" cy="91" r="1" fill="#3e5144"/>
+</g>
+
+<g class="vitality-rays" fill="none" stroke="#d9be87" stroke-width="1.1" opacity="0.65"><path d="M609 146q14-23 15-42"/><path d="M623 155q20-22 22-41"/><path d="M632 168q24-15 31-32"/></g>
+</svg>`;
 }
 
 function renderHome() {
@@ -3870,11 +3858,11 @@ function renderHome() {
       </div>
       <h1 class="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。</h1>
       <p class="hero-sub">5分の問診で、型 → 動かす数値 → 効く成分 → 含むサプリまで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
-      <figure class="product-teaser" id="product-teaser" data-paused="false" aria-label="散らばった粒子がつながり、人の輪郭の中を巡るコンセプトイメージ。実際の身体の仕組みや効果を示すものではありません。">
-        ${renderConceptMotion()}
+      <figure class="product-teaser" id="product-teaser" data-paused="false" aria-label="自分に合う選択から、内側の明るさ、軽やかな日常へ。コンセプトイメージであり、実際の身体の仕組みや効果を示すものではありません。">
+        ${renderVitalityMotion()}
         <figcaption class="teaser-caption">
           <p>コンセプトイメージ<br>身体の仕組みや効果を示すものではありません</p>
-          <button class="teaser-toggle" type="button" onclick="toggleTeaser(this)" aria-controls="concept-motion" aria-pressed="false">動きを止める</button>
+          <button class="teaser-toggle" type="button" onclick="toggleTeaser(this)" aria-controls="vitality-motion" aria-pressed="false">動きを止める</button>
         </figcaption>
       </figure>
       <div class="hero-assurance" aria-label="診断の利用条件">
