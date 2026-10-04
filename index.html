@@ -1156,6 +1156,38 @@ body {
   .container { padding-bottom: 100px; }
   .lp-section, .category-section { scroll-margin-top: 64px; }
 }
+/* Entry preview: keep the existing palette and diagnosis flow. */
+.hero { margin-bottom: 32px; }
+.hero-assurance { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.hero-assurance span { background: var(--accent-light); color: var(--accent); border-radius: 6px; padding: 4px 10px; font-size: 13px; font-weight: 700; }
+.entry-note { color: var(--text-sub); font-size: 12px; line-height: 1.8; margin-top: 12px; }
+.selector-intro { color: var(--text-sub); font-size: 14px; margin: -8px 0 24px; }
+.lp-section, .category-section { scroll-margin-top: 80px; }
+#diagnose { margin-top: 24px; }
+#diagnose .problem-card { padding: 16px 18px; }
+.sample-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
+.sample-heading { padding: 24px; background: var(--accent-light); }
+.sample-kicker { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .06em; }
+.sample-heading h3 { font-size: 24px; margin: 8px 0; }
+.sample-heading p { font-size: 13px; color: var(--text-sub); }
+.sample-details { padding: 0 24px; }
+.sample-details > div { padding: 18px 0; border-bottom: 1px solid var(--border); }
+.sample-details > div:last-child { border-bottom: 0; }
+.sample-details dt { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .04em; margin-bottom: 6px; }
+.sample-details dd { font-size: 15px; font-weight: 500; }
+.sample-footnote { padding: 18px 24px; background: var(--bg); color: var(--text-sub); font-size: 12px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--warm-accent); outline-offset: 4px; }
+@media (max-width: 600px) {
+  .hero-cta-row { flex-direction: column; }
+  .hero-cta, .cta-secondary { justify-content: center; text-align: center; line-height: 1.5; padding: 14px 16px; }
+  .hero-assurance { margin-top: 18px; }
+  .hero-deco { right: -18px; }
+  .category-desc { flex-basis: 100%; }
+  .sample-heading, .sample-details, .sample-footnote { padding-left: 20px; padding-right: 20px; }
+  .sample-heading h3 { font-size: 22px; }
+  .mobile-cta-bar .cta-btn { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
 </style>
 </head>
 <body>
@@ -3637,6 +3669,11 @@ function setState(updates) {
 }
 
 function renderHome() {
+  const problemCount = Object.keys(PROBLEMS).length;
+  const typeCount = Object.values(PROBLEMS).reduce((sum, p) => sum + Object.keys(p.types).length, 0);
+  // Read the sample labels from the same data as the real result screen.
+  const sampleProblem = PROBLEMS.focus;
+  const sampleType = sampleProblem.types.sleep;
   const groups = CATEGORIES.map(cat => {
     const probs = Object.values(PROBLEMS).filter(p => p.category === cat.id);
     if (probs.length === 0) return '';
@@ -3674,28 +3711,60 @@ function renderHome() {
     </div>
 
     <nav class="lp-nav">
+      <a href="#diagnose">悩みを選ぶ</a>
+      <a href="#sample">結果サンプル</a>
       <a href="#vision">VISION</a>
       <a href="#logic">LOGIC</a>
       <a href="#why">WHY</a>
       <a href="#how">HOW</a>
-      <a href="#diagnose">DIAGNOSE</a>
       <a href="#faq">FAQ</a>
     </nav>
 
     <div class="hero">
       <div class="hero-deco">${ICONS.heroDeco}</div>
-      <div class="hero-eyebrow">7つの悩み / 28型診断 / エビデンスベース</div>
+      <div class="hero-eyebrow">${problemCount}の悩み / ${typeCount}のタイプ / セルフケアガイド</div>
       <h1 class="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。</h1>
       <p class="hero-sub">5分の問診で、型 → 動かす数値 → 効く成分 → 含むサプリまで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
-      <div class="hero-cta-row">
-        <a href="#diagnose" class="hero-cta">いま気になる悩みから診断 →</a>
-        <a href="#why" class="cta-secondary">Sup. のロジックを見る</a>
+      <div class="hero-assurance" aria-label="診断の利用条件">
+        <span>診断は無料</span><span>会員登録・ログイン不要</span>
       </div>
+      <div class="hero-cta-row">
+        <a href="#diagnose" class="hero-cta">無料で悩みを選んでみる →</a>
+        <a href="#sample" class="cta-secondary">先に結果サンプルを見る</a>
+      </div>
+      <p class="entry-note">セルフケアの選択肢を整理するガイドです。医療上の診断・治療を行うものではありません。</p>
       <div style="margin-top:18px;font-size:13px;color:#666;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
         <span>すでにサプリ飲んでる人は</span>
         <a href="https://app.sup-app.org/my-stack" style="color:#0f5b3e;font-weight:700;text-decoration:underline;">My Stack で管理 →</a>
       </div>
     </div>
+
+    <div id="diagnose" class="lp-section">
+      <div class="section-label">DIAGNOSE</div>
+      <h2 class="lp-title-v2">いま気になる悩みから、診断。</h2>
+      <p class="selector-intro">まずは1つ選んでください。質問に答えると、タイプ・着目する指標・成分の候補を確認できます。</p>
+      ${groups}
+    </div>
+
+    <section class="lp-section" id="sample" aria-labelledby="sample-title">
+      <div class="section-label">RESULT SAMPLE</div>
+      <h2 class="lp-title-v2" id="sample-title">答えた先に、何がわかる？</h2>
+      <p class="selector-intro">「${sampleProblem.title}」の結果の一例です。回答によって表示内容は変わります。</p>
+      <div class="sample-card">
+        <div class="sample-heading">
+          <div class="sample-kicker">表示例 / あなたの結果ではありません</div>
+          <h3>${sampleType.name}</h3>
+          <p>悩みをタイプに整理し、セルフケアを考える手がかりを提示します。</p>
+        </div>
+        <dl class="sample-details">
+          <div><dt>01 / 着目する指標</dt><dd>${sampleType.targetMetric.label}</dd></div>
+          <div><dt>02 / 成分の候補</dt><dd>${sampleType.activeIngredients.slice(0, 2).map(ing => ing.name).join(' / ')}</dd></div>
+          <div><dt>03 / 結果画面で確認できること</dt><dd>サプリ製品の候補・生活習慣・利用上の注意</dd></div>
+        </dl>
+        <p class="sample-footnote">既存の結果データから抜粋した表示サンプルです。検査値の測定や病気の診断ではなく、効果を保証するものでもありません。服薬中・既往歴のある方は、利用前に医師・薬剤師にご相談ください。</p>
+      </div>
+      <div class="hero-cta-row"><a href="#diagnose" class="hero-cta">自分の悩みで試してみる →</a></div>
+    </section>
 
     <div class="lp-section" id="vision">
       <div class="section-label">VISION</div>
@@ -3804,7 +3873,7 @@ function renderHome() {
         <div class="step-card">
           <div class="step-num">STEP 01</div>
           <div class="step-name">悩みを選ぶ</div>
-          <div class="step-desc">7つの悩み × 4つの強化軸から、いま気になるものを1つ選ぶ。</div>
+          <div class="step-desc">${problemCount}の悩みから、いま気になるものを1つ選ぶ。</div>
         </div>
         <div class="step-card">
           <div class="step-num">STEP 02</div>
@@ -3825,12 +3894,6 @@ function renderHome() {
         <h2 class="dark-statement">サプリを通じて、<br><em>自分をマネジメント</em>する。</h2>
         <p class="dark-text">「飲めば良くなる」ではなく、動かす数値に効く成分を。<br>Sup. はその思考の補助線。あなたの身体は、設計できる。</p>
       </div>
-    </div>
-
-    <div id="diagnose" class="lp-section">
-      <div class="section-label">DIAGNOSE</div>
-      <h2 class="lp-title-v2">いま気になる悩みから、診断。</h2>
-      ${groups}
     </div>
 
     <div class="lp-section" id="faq">
@@ -4055,7 +4118,7 @@ function renderMobileCta() {
   if (state.screen !== 'home') return '';
   return `
     <div class="mobile-cta-bar">
-      <a href="#diagnose" class="cta-btn">いま気になる悩みから診断 →</a>
+      <a href="#diagnose" class="cta-btn">無料・登録不要で診断をはじめる →</a>
     </div>
   `;
 }
