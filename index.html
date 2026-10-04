@@ -1244,8 +1244,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .vitality-input { animation: vitality-input 15s ease-in-out infinite; }
 .vitality-ribbon { animation: vitality-ribbon 15s ease-in-out infinite; }
 .vitality-daylight, .vitality-inner, .vitality-rays { animation: vitality-light 15s ease-in-out infinite; }
-.vitality-arm { transform-origin: 532px 135px; animation: vitality-reach 15s ease-in-out infinite; }
-.vitality-person { animation: vitality-step 15s ease-in-out infinite; }
+.vitality-upper-arm { transform-origin: 0 0; animation: vitality-shoulder 15s ease-in-out infinite; }
+.vitality-forearm { transform-origin: 0 0; animation: vitality-elbow 15s ease-in-out infinite; }
 .teaser-caption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px 15px; }
 .teaser-caption p { color: #49675a; font-size: 10px; letter-spacing: .12em; }
 .teaser-toggle { flex-shrink: 0; min-height: 36px; padding: 7px 10px; border: 1px solid #b8c7bd; border-radius: 4px; background: rgba(255,255,255,.7); font-family: inherit; font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--accent); cursor: pointer; }
@@ -1253,8 +1253,8 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 @keyframes vitality-input { 0%, 20%, 100% { opacity: 1; } 58%, 88% { opacity: .45; } }
 @keyframes vitality-ribbon { 0%, 18%, 100% { opacity: .15; } 60%, 88% { opacity: .9; } }
 @keyframes vitality-light { 0%, 20%, 100% { opacity: .05; } 60%, 88% { opacity: .8; } }
-@keyframes vitality-reach { 0%, 25%, 100% { transform: rotate(50deg); } 65%, 88% { transform: rotate(0deg); } }
-@keyframes vitality-step { 0%, 25%, 100% { transform: translateX(0); } 65%, 88% { transform: translateX(8px); } }
+@keyframes vitality-shoulder { 0%, 25%, 100% { transform: rotate(4deg); } 65%, 88% { transform: rotate(-4deg); } }
+@keyframes vitality-elbow { 0%, 25%, 100% { transform: rotate(0deg); } 65%, 88% { transform: rotate(-7deg); } }
 .product-teaser[data-paused="true"] .vitality-motion * { animation-play-state: paused; }
 @media (max-width: 600px) {
   .hero-title { font-size: 28px; line-height: 1.65; letter-spacing: 0; }
@@ -3765,7 +3765,7 @@ function renderVitalityMotion() {
 <!-- Original editorial figure in a side-on walking pose. -->
 <g class="vitality-person" stroke-linejoin="round" stroke-linecap="round">
 <!-- relaxed far arm -->
-<path d="M526 132Q508 148 491 176L476 169" fill="none" stroke="#b9c9ac" stroke-width="13"/>
+<path d="M526 132Q508 148 491 176L476 169" fill="none" stroke="#d9cba9" stroke-width="13"/>
 <path d="M477 170l-9-5" fill="none" stroke="#dcb99c" stroke-width="8"/>
 <!-- rear trouser leg, walking backwards -->
 <path d="M532 190Q522 218 506 244L488 272L504 278L533 251Q550 226 551 199Z" fill="#80977d"/>
@@ -3775,8 +3775,20 @@ function renderVitalityMotion() {
 <path d="M576 270l15-4 8 11 10 3q5 6-1 7l-25-1z" fill="#294e40"/>
 <!-- soft linen top with shaped shoulder -->
 <path d="M531 118Q546 113 555 123L568 155L564 197Q544 205 522 192L526 151L517 138Q518 126 531 118Z" fill="#e8d7af" stroke="#cfbb90" stroke-width="1.1"/>
-<g class="vitality-arm"><path d="M532 135Q551 129 566 116L578 101" fill="none" stroke="#e8d7af" stroke-width="14"/>
-<path d="M578 101l5-9" fill="none" stroke="#dcb99c" stroke-width="8"/></g>
+<!-- Stable shoulder anchor, then elbow-local motion; hand follows forearm. -->
+<g transform="translate(548 130)">
+  <g class="vitality-upper-arm">
+    <path d="M0 0Q3 15 14 27" fill="none" stroke="#cfbb90" stroke-width="15.5"/>
+    <path d="M0 0Q3 15 14 27" fill="none" stroke="#e8d7af" stroke-width="14"/>
+    <g transform="translate(14 27)">
+      <g class="vitality-forearm">
+        <path d="M0 0L24-9" fill="none" stroke="#cfbb90" stroke-width="13.5"/>
+        <path d="M0 0L24-9" fill="none" stroke="#e8d7af" stroke-width="12"/>
+        <path d="M24-9L30-11.25" fill="none" stroke="#dcb99c" stroke-width="7"/>
+      </g>
+    </g>
+  </g>
+</g>
 <path d="M531 185q14 6 28 4" fill="none" stroke="#cfbb90" stroke-width="1"/>
 <ellipse class="vitality-inner" cx="544" cy="157" rx="23" ry="37" fill="url(#vitality-warm)" opacity="0.8"/>
 <!-- neck, profile, cropped hair -->
