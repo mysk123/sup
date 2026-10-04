@@ -1239,26 +1239,15 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
 .hero-sketch { display: none; }
 .hero-eyebrow-row { margin-bottom: 22px; }
 .product-teaser { position: relative; margin: 26px 0 0; overflow: hidden; border-radius: 4px; background: radial-gradient(ellipse at 65% 45%, #fff 0%, #f3f8f5 42%, #deebe5 100%); }
-.concept-motion { display: block; width: 100%; height: auto; aspect-ratio: 720 / 340; }
-.concept-particle { animation: concept-connect 14s cubic-bezier(.42,0,.2,1) infinite; }
-.concept-body { animation: concept-body 14s ease-in-out infinite; }
-.concept-network { animation: concept-network 14s ease-in-out infinite; }
-.concept-halo { transform-origin: 360px 170px; animation: concept-halo 14s ease-in-out infinite; }
-.concept-capsule { animation: concept-capsule 14s ease-in-out infinite; }
-.concept-fragments { transform-origin: 360px 170px; animation: concept-fragments 14s ease-in-out infinite; }
+.concept-motion { display: block; width: 100%; height: auto; aspect-ratio: 720 / 400; background: #061d30; }
+.flow-trail { animation: performance-flow 9s linear infinite; }
+.flow-link { animation: performance-flow 12s linear infinite, performance-connect 16s ease-in-out infinite; }
+.flow-detail { animation: performance-connect 16s ease-in-out infinite; }
 .teaser-caption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px 15px; }
 .teaser-caption p { color: #49675a; font-size: 10px; letter-spacing: .12em; }
 .teaser-toggle { flex-shrink: 0; min-height: 36px; padding: 7px 10px; border: 1px solid #b8c7bd; border-radius: 4px; background: rgba(255,255,255,.7); font-family: inherit; font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--accent); cursor: pointer; }
-@keyframes concept-connect {
-  0%, 15%, 100% { transform: translate(var(--sx), var(--sy)); opacity: .62; }
-  42% { transform: translate(var(--mx), var(--my)); opacity: .85; }
-  68%, 88% { transform: translate(0, 0); opacity: .92; }
-}
-@keyframes concept-fragments { 0%, 15%, 100% { opacity: .5; transform: scale(1); } 42%, 88% { opacity: 0; transform: scale(.6); } }
-@keyframes concept-body { 0%, 15%, 100% { opacity: .22; } 65%, 88% { opacity: .85; } }
-@keyframes concept-network { 0%, 15%, 100% { opacity: .08; } 42% { opacity: .3; } 68%, 88% { opacity: .85; } }
-@keyframes concept-halo { 0%, 20%, 100% { opacity: .05; transform: scale(.8); } 68%, 88% { opacity: .35; transform: scale(1); } }
-@keyframes concept-capsule { 0%, 15%, 100% { opacity: .4; } 30%, 55% { opacity: 1; } 68%, 88% { opacity: .6; } }
+@keyframes performance-flow { to { stroke-dashoffset: -180; } }
+@keyframes performance-connect { 0%, 12%, 100% { opacity: .25; } 48%, 86% { opacity: .9; } }
 .product-teaser[data-paused="true"] .concept-motion * { animation-play-state: paused; }
 @media (max-width: 600px) {
   .hero-title { font-size: 28px; line-height: 1.65; letter-spacing: 0; }
@@ -3749,56 +3738,73 @@ function setState(updates) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
-// Original abstract concept, not an anatomical or efficacy diagram.
-// Static stage export uses the same points as the CSS animation for review.
+// Original brain and body artwork. Streamlines are an illustrative metaphor,
+// not measured nervous-system, nutrient, or physiological data.
 function renderConceptMotion(stage = 'live') {
-  const nodes = [[360,57],[360,91],[336,104],[384,104],[319,137],[401,137],[305,167],[415,167],[295,195],[425,195],[346,127],[374,127],[360,151],[345,177],[375,177],[346,207],[374,207],[344,244],[376,244],[341,281],[379,281]];
-  const edges = [[0,1],[1,2],[1,3],[2,4],[3,5],[4,6],[5,7],[6,8],[7,9],[1,10],[1,11],[10,12],[11,12],[12,13],[12,14],[13,15],[14,16],[15,17],[16,18],[17,19],[18,20],[10,13],[11,14]];
-  const phases = {scatter:[.22,.08,.05,.4], integrating:[.5,.3,.17,1], whole:[.85,.85,.35,.6]};
-  const phase = phases[stage] || phases.whole;
   const fixed = stage !== 'live';
-  const style = n => fixed ? `style="animation:none;opacity:${phase[n]}"` : '';
-  const particles = Array.from({length:115}, (_, i) => {
-    const [a,b] = edges[i % edges.length].map(n=>nodes[n]);
-    const t = ((i * 7) % 19) / 18;
-    const x = a[0] + (b[0]-a[0])*t;
-    const y = a[1] + (b[1]-a[1])*t;
-    const angle = i * 2.399963;
-    const sx = 360 + Math.cos(angle) * (150 + (i % 5)*18);
-    const sy = 165 + Math.sin(angle) * (85 + (i % 4)*13);
-    const mx = 360 + Math.cos(angle) * (20 + (i % 4)*8);
-    const my = 153 + Math.sin(angle) * (25 + (i % 5)*5);
-    const px = stage === 'scatter' ? sx : stage === 'integrating' ? mx : x;
-    const py = stage === 'scatter' ? sy : stage === 'integrating' ? my : y;
-    const color = i % 4 === 0 ? '#b77f4f' : i % 3 === 0 ? '#599590' : '#23694d';
-    return `<circle class="concept-particle" cx="${px.toFixed(1)}" cy="${py.toFixed(1)}" r="${i%4===0?2.4:1.7}" fill="${color}" style="${fixed?'animation:none;':''}--sx:${(sx-x).toFixed(1)}px;--sy:${(sy-y).toFixed(1)}px;--mx:${(mx-x).toFixed(1)}px;--my:${(my-y).toFixed(1)}px"/>`;
+  const level = stage === 'scatter' ? .3 : stage === 'integrating' ? .65 : .9;
+  const freeze = fixed ? `style="animation:none;opacity:${level}"` : '';
+  const phase = stage === 'scatter' ? 0 : stage === 'integrating' ? -60 : -120;
+  const body = 'M-8 60L-9 70C-17 77-34 74-44 85C-55 97-66 111-78 123L-112 151L-119 163L-113 163L-108 157L-106 163L-102 157L-101 152C-87 143-71 133-59 120L-40 105C-36 121-31 141-30 154L-34 181C-32 203-26 227-25 244L-34 304L-44 315C-47 320-34 322-24 319L-17 308L-9 250L-3 207C-2 201 2 201 3 207L9 250L17 308L24 319C34 322 47 320 44 315L34 304L25 244C26 227 32 203 34 181L30 154C31 141 36 121 40 105L59 120C71 133 87 143 101 152L102 157L106 163L108 157L113 163L119 163L112 151L78 123C66 111 55 97 44 85C34 74 17 77 9 70L8 60Z';
+  const brain = 'M188 102C172 87 151 92 147 105C130 102 117 115 119 130C101 134 99 153 108 165C94 181 102 201 116 206C112 224 127 237 143 235C148 252 168 254 183 244L190 253L197 244C212 254 232 252 237 235C253 237 268 224 264 206C278 201 286 181 272 165C281 153 279 134 261 130C263 115 250 102 233 105C229 92 208 87 192 102Z';
+  const folds = [
+    'M188 107C178 124 194 140 185 158S196 190 187 211S195 232 190 245',
+    'M157 110C142 116 139 130 148 140S166 146 158 157S138 166 142 182',
+    'M172 115C181 125 175 136 166 137',
+    'M124 137C139 136 142 147 132 157S119 168 125 178',
+    'M113 183C126 175 137 185 129 197S132 220 146 220',
+    'M171 150C177 163 164 170 158 179S160 197 172 194',
+    'M147 202C163 200 169 214 159 224S162 240 177 238',
+    'M178 204C184 215 174 225 180 231',
+    'M223 110C238 116 241 130 232 140S214 146 222 157S242 166 238 182',
+    'M208 115C199 125 205 136 214 137',
+    'M256 137C241 136 238 147 248 157S261 168 255 178',
+    'M267 183C254 175 243 185 251 197S248 220 234 220',
+    'M209 150C203 163 216 170 222 179S220 197 208 194',
+    'M233 202C217 200 211 214 221 224S218 240 203 238',
+    'M202 204C196 215 206 225 200 231'
+  ];
+  const colors = ['#42b9b4','#67d5be','#91d49c','#b9d777','#50a5c4'];
+  const background = Array.from({length:28},(_,i)=>{
+    const y=36+i*12;
+    return `<path d="M-40 ${y}C120 ${y-55} 233 ${y+68} 380 ${y-8}S615 ${y-55} 765 ${y+16}" stroke="${colors[i%5]}" opacity=".08"/>`;
   }).join('');
-  const lines = edges.map(([a,b]) => {
-    const [x1,y1] = nodes[a], [x2,y2] = nodes[b];
-    return `<path d="M${x1} ${y1} Q${x1} ${(y1+y2)/2} ${x2} ${y2}"/>`;
+  const brainFlows = Array.from({length:30},(_,i)=>{
+    const y=91+i*5.5;
+    return `<path class="flow-trail" d="M85 ${y}C130 ${y-35} 162 ${y+32} 190 ${y}S250 ${y-32} 294 ${y+8}" stroke="${colors[i%5]}" stroke-width="${i%3===0?1.3:.7}" stroke-dasharray="${12+i%7} ${25+i%11}" stroke-dashoffset="${phase-i*4}" style="${fixed?'animation:none;':''}animation-delay:-${i%9}s"/>`;
   }).join('');
-  return `<svg class="concept-motion" id="concept-motion" viewBox="0 0 720 340" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
-    <defs><radialGradient id="concept-glow"><stop stop-color="#bcdccb" stop-opacity=".8"/><stop offset="1" stop-color="#dceee3" stop-opacity="0"/></radialGradient></defs>
-    <ellipse class="concept-halo" ${style(2)} cx="360" cy="170" rx="155" ry="165" fill="url(#concept-glow)"/>
-    <g class="concept-body" ${style(0)} fill="#e0eee5" stroke="#3f7b64" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round">
-      <circle cx="360" cy="53" r="18"/>
-      <path d="M351 78V85Q333 88 326 100Q315 121 306 143L284 190Q280 199 288 203Q296 207 300 198L329 144L332 183Q332 191 334 201L328 278Q327 291 338 292Q349 293 350 280L358 211H362L370 280Q371 293 382 292Q393 291 392 278L386 201Q388 191 388 183L391 144L420 198Q424 207 432 203Q440 199 436 190L414 143Q405 121 394 100Q387 88 369 85V78"/>
+  const bodyFlows = Array.from({length:46},(_,i)=>{
+    const x=384+i*5.4;
+    return `<path class="flow-trail" d="M${x} 28C${x-24} 103 ${x+30} 130 ${x} 191S${x-27} 266 ${x+8} 348" stroke="${colors[i%5]}" stroke-width="${i%4===0?1.25:.7}" stroke-dasharray="${13+i%9} ${28+i%13}" stroke-dashoffset="${phase-i*3}" style="${fixed?'animation:none;':''}animation-delay:-${i%9}s"/>`;
+  }).join('');
+  const links = Array.from({length:8},(_,i)=>`<path class="flow-link" ${freeze} d="M263 ${150+i*5}C333 ${117+i*6} 363 ${91+i*12} 448 ${104+i*6}" stroke="${colors[i%5]}" stroke-width=".9" stroke-dasharray="16 24" stroke-dashoffset="${phase-i*5}"/>`).join('');
+  return `<svg class="concept-motion" id="concept-motion" viewBox="0 0 720 400" preserveAspectRatio="xMidYMid meet" aria-hidden="true" focusable="false">
+    <defs>
+      <radialGradient id="performance-bg"><stop stop-color="#143e4d"/><stop offset="1" stop-color="#061d30"/></radialGradient>
+      <linearGradient id="body-fill" x1="0" x2="1"><stop stop-color="#286779" stop-opacity=".55"/><stop offset=".48" stop-color="#b6e2de" stop-opacity=".25"/><stop offset="1" stop-color="#2c7387" stop-opacity=".6"/></linearGradient>
+      <radialGradient id="brain-fill"><stop stop-color="#23576b"/><stop offset="1" stop-color="#153c53"/></radialGradient>
+      <clipPath id="brain-field"><path d="${brain}"/></clipPath>
+      <clipPath id="body-field"><path d="${body}" transform="translate(507 17)"/><ellipse cx="507" cy="59" rx="13" ry="21"/></clipPath>
+    </defs>
+    <rect width="720" height="400" fill="url(#performance-bg)"/>
+    <g fill="none" stroke-width=".6">${background}</g>
+    <g fill="none">${links}</g>
+    <path d="${brain}" fill="url(#brain-fill)" stroke="#7dbbc2" stroke-width="1.3"/>
+    <g clip-path="url(#brain-field)" fill="none" opacity=".6">${brainFlows}</g>
+    <g fill="none" stroke="#a0d3d0" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">${folds.map(d=>`<path d="${d}"/>`).join('')}</g>
+    <g fill="url(#body-fill)" stroke="#79b7c1" stroke-width="1.1" stroke-linejoin="round">
+      <ellipse cx="507" cy="59" rx="13" ry="21"/>
+      <path d="${body}" transform="translate(507 17)"/>
     </g>
-    <g class="concept-network" ${style(1)} fill="none" stroke="#458a6e" stroke-width="1.2" stroke-linecap="round">${lines}</g>
-    <g class="concept-capsule" ${style(3)}>
-      <path d="M192 170C221 143 256 159 287 159" fill="none" stroke="#8aaf9b" stroke-width="1" stroke-dasharray="3 6"/>
-      <g transform="translate(162 173) rotate(-28)">
-        <defs><clipPath id="concept-capsule-clip"><rect x="-28" y="-12" width="56" height="24" rx="12"/></clipPath></defs>
-        <rect x="-28" y="-12" width="56" height="24" rx="12" fill="#ffffff"/>
-        <rect x="0" y="-12" width="28" height="24" fill="#8eaf9e" clip-path="url(#concept-capsule-clip)"/>
-        <rect x="-28" y="-12" width="56" height="24" rx="12" fill="none" stroke="#436f5b" stroke-width="1.5"/>
-        <path d="M0-12V12" stroke="#436f5b" stroke-width="1.2"/>
-      </g>
+    <g clip-path="url(#body-field)" fill="none" opacity=".85">${bodyFlows}</g>
+    <g class="flow-detail" ${freeze} fill="none" stroke="#7fb8bd" stroke-width=".8" stroke-linecap="round">
+      <path d="M507 102V190M473 115Q489 108 503 119M511 119Q525 108 541 115M487 145Q507 155 527 145M489 164Q507 173 525 164M488 182Q507 192 526 182M491 211L483 258L479 318M523 211L531 258L535 318M469 111L447 143L415 168M545 111L567 143L599 168"/>
     </g>
-    <g class="concept-fragments" opacity="0" ${fixed ? `style="animation:none;opacity:${stage === 'scatter' ? .5 : 0}"` : ''} fill="none" stroke="#649a8c" stroke-width="1" stroke-linecap="round">
-      <path d="M211 89l18 5 9-15m-9 15 4 16M472 85l15 13 17-3m-17 3-4 14M191 244l20-7 7 13m-7-13-6-14M501 234l-13-10 8-15m-8 15-15 2M295 50l12 10 16-5M453 278l-12-10-17 6"/>
+    <g font-family="Inter, sans-serif" fill="#a6c7c9" font-size="10" letter-spacing="3" text-anchor="middle"><text x="190" y="309">BRAIN</text><text x="507" y="370">BODY</text></g>
+    <g transform="translate(322 279) rotate(-25)" stroke="#8ac2b5" stroke-width="1.2">
+      <rect x="-18" y="-8" width="36" height="16" rx="8" fill="#154c50"/><path d="M0-8V8"/><path d="M5-4H10" stroke="#b8d8a0" stroke-linecap="round"/>
     </g>
-    ${particles}
+    <path class="flow-link" ${freeze} d="M338 270C378 249 394 195 451 181" fill="none" stroke="#93c8a1" stroke-width="1" stroke-dasharray="10 20" stroke-dashoffset="${phase}"/>
   </svg>`;
 }
 
@@ -3870,7 +3876,7 @@ function renderHome() {
       </div>
       <h1 class="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。</h1>
       <p class="hero-sub">5分の問診で、型 → 動かす数値 → 効く成分 → 含むサプリまで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
-      <figure class="product-teaser" id="product-teaser" data-paused="false" aria-label="散らばった粒子がつながり、人の輪郭の中を巡るコンセプトイメージ。実際の身体の仕組みや効果を示すものではありません。">
+      <figure class="product-teaser" id="product-teaser" data-paused="false" aria-label="脳と全身を流れる光のラインで、思考と身体のつながりを表すコンセプトイメージ。実際の身体の仕組みや効果を示すものではありません。">
         ${renderConceptMotion()}
         <figcaption class="teaser-caption">
           <p>コンセプトイメージ<br>身体の仕組みや効果を示すものではありません</p>
