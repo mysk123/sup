@@ -24,6 +24,9 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600&amp;display=swap&amp;text=%E6%82%A9%E3%81%BF%E3%82%92%E3%80%81%E3%80%8C%E5%8B%95%E3%81%8B%E3%81%99%E6%95%B0%E5%80%A4%E3%80%8D%E3%81%AB%E7%BF%BB%E8%A8%B3%E3%81%99%E3%82%8B%E3%80%82" rel="stylesheet">
+<!-- Shippori Mincho, SIL Open Font License 1.1: https://github.com/fontdasu/ShipporiMincho . Headline-only Google Fonts subset. -->
+
 <style>
 html { scroll-behavior: smooth; }
 :root {
@@ -1156,6 +1159,221 @@ body {
   .container { padding-bottom: 100px; }
   .lp-section, .category-section { scroll-margin-top: 64px; }
 }
+/* Entry preview: keep the existing palette and diagnosis flow. */
+.hero { margin-bottom: 32px; }
+.hero-assurance { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 22px; }
+.hero-assurance span { background: var(--accent-light); color: var(--accent); border-radius: 6px; padding: 4px 10px; font-size: 13px; font-weight: 700; }
+.entry-note { color: var(--text-sub); font-size: 12px; line-height: 1.8; margin-top: 12px; }
+.selector-intro { color: var(--text-sub); font-size: 14px; margin: -8px 0 24px; }
+.lp-section, .category-section { scroll-margin-top: 80px; }
+#diagnose { margin-top: 24px; }
+#diagnose .problem-card { padding: 16px 18px; }
+.sample-card { background: var(--card-bg); border: 1px solid var(--border); border-radius: 18px; overflow: hidden; box-shadow: var(--shadow); }
+.sample-heading { padding: 24px; background: var(--accent-light); }
+.sample-kicker { color: var(--accent); font-size: 12px; font-weight: 700; letter-spacing: .06em; }
+.sample-heading h3 { font-size: 24px; margin: 8px 0; }
+.sample-heading p { font-size: 13px; color: var(--text-sub); }
+.sample-details { padding: 0 24px; }
+.sample-details > div { padding: 18px 0; border-bottom: 1px solid var(--border); }
+.sample-details > div:last-child { border-bottom: 0; }
+.sample-details dt { font-size: 11px; font-weight: 700; color: var(--accent); letter-spacing: .04em; margin-bottom: 6px; }
+.sample-details dd { font-size: 15px; font-weight: 500; }
+.sample-footnote { padding: 18px 24px; background: var(--bg); color: var(--text-sub); font-size: 12px; }
+a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--warm-accent); outline-offset: 4px; }
+@media (max-width: 600px) {
+  .hero-cta-row { flex-direction: column; }
+  .hero-cta, .cta-secondary { justify-content: center; text-align: center; line-height: 1.5; padding: 14px 16px; }
+  .hero-assurance { margin-top: 18px; }
+  .hero-deco { right: -18px; }
+  .category-desc { flex-basis: 100%; }
+  .sample-heading, .sample-details, .sample-footnote { padding-left: 20px; padding-right: 20px; }
+  .sample-heading h3 { font-size: 22px; }
+  .mobile-cta-bar .cta-btn { font-size: 14px; }
+}
+@media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+/* A little playfulness: paper-like accents, not extra steps. */
+.hero-eyebrow-row { display: flex; align-items: center; justify-content: space-between; gap: 14px; margin-bottom: 14px; }
+.hero-eyebrow-row .hero-eyebrow { margin-bottom: 0; }
+.hero-sketch { width: 112px; height: 44px; flex: 0 0 auto; }
+.hero-title .accent { background: linear-gradient(transparent 82%, #e4edbb 82%, #e4edbb 96%, transparent 96%); }
+.hero-assurance span:first-child { border-radius: 10px 10px 10px 2px; }
+.hero-assurance span:last-child { background: #f6ecdf; color: #745135; border-radius: 10px 10px 2px 10px; }
+.category-section { --category-tint: #e8f0eb; --category-ink: #0f5b3e; }
+.category-icon { width: 34px; height: 34px; padding: 6px; background: var(--category-tint); color: var(--category-ink); border-radius: 10px 10px 10px 3px; }
+.category-code { color: var(--category-ink); }
+#diagnose .problem-card { border-top: 3px solid var(--category-tint); transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease; }
+.problem-icon { display: grid; place-items: center; width: 46px; height: 46px; background: var(--category-tint); border-radius: 50% 50% 42% 50%; font-size: 25px; transition: transform .18s ease; }
+.problem-arrow { color: var(--category-ink); transition: transform .18s ease; }
+@media (hover: hover) {
+  #diagnose .problem-card:hover { transform: translateY(-3px); border-color: var(--category-ink); }
+  .problem-card:hover .problem-icon { transform: rotate(-7deg); }
+  .problem-card:hover .problem-arrow { transform: translateX(3px); }
+}
+.problem-card:active { transform: scale(.985); }
+.sample-card { border-radius: 22px 22px 22px 5px; }
+.sample-heading { position: relative; background: radial-gradient(circle at 1px 1px, rgba(15,91,62,.10) 1px, transparent 1.5px) 0 0 / 12px 12px, var(--accent-light); padding-right: 104px; }
+.sample-stamp { position: absolute; top: 25px; right: 22px; display: grid; place-items: center; width: 62px; height: 62px; border: 1px dashed var(--accent); border-radius: 50%; background: var(--bg); color: var(--accent); font: 700 10px/1.4 "Inter", sans-serif; letter-spacing: .08em; transform: rotate(9deg); }
+.sample-details > div { position: relative; padding-left: 18px; }
+.sample-details > div::before { content: ''; position: absolute; top: 23px; left: 0; width: 7px; height: 7px; border-radius: 50%; background: var(--warm-accent); }
+.sample-details > div:nth-child(2)::before { background: #7e90b6; }
+.sample-details > div:nth-child(3)::before { background: var(--accent); }
+@media (max-width: 600px) {
+  .hero-eyebrow-row { gap: 8px; }
+  .hero-eyebrow-row .hero-eyebrow { font-size: 10px; letter-spacing: .03em; }
+  .hero-sketch { width: 72px; height: 34px; }
+  .sample-heading { padding-right: 85px; }
+  .sample-stamp { width: 48px; height: 48px; right: 18px; font-size: 8px; }
+  .problem-icon { width: 40px; height: 40px; font-size: 23px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .problem-card, .problem-icon, .problem-arrow, .hero-cta, .q-option { transition: none; }
+  #diagnose .problem-card:hover, .problem-card:active, .problem-card:hover .problem-icon, .problem-card:hover .problem-arrow, .hero-cta:hover { transform: none; }
+}
+/* Editorial Mincho and an abstract whole-body concept animation. */
+.hero-title { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; font-weight: 600; line-height: 1.55; letter-spacing: .015em; font-size: 42px; }
+.hero-title .accent { background: none; }
+.hero-sketch { display: none; }
+.hero-eyebrow-row { margin-bottom: 22px; }
+.product-teaser { position: relative; margin: 26px 0 0; overflow: hidden; border-radius: 4px; background: radial-gradient(ellipse at 65% 45%, #fff 0%, #f3f8f5 42%, #deebe5 100%); }
+.teaser-caption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px 15px; }
+.teaser-caption p { color: #49675a; font-size: 10px; letter-spacing: .12em; }
+.teaser-toggle { flex-shrink: 0; min-height: 36px; padding: 7px 10px; border: 1px solid #b8c7bd; border-radius: 4px; background: rgba(255,255,255,.7); font-family: inherit; font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--accent); cursor: pointer; }
+@media (max-width: 600px) {
+  .hero-title { font-size: 28px; line-height: 1.65; letter-spacing: 0; }
+  .teaser-caption { padding: 7px 12px 12px; }
+  .teaser-caption p { font-size: 9px; letter-spacing: .06em; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .neural-light path { animation: none; }
+  .teaser-toggle { display: none; }
+}
+/* Whole-page visual system: ivory, forest green, pale gold. */
+:root { --bg:#faf9f5; --text-main:#183f34; --text-sub:#65736a; --text-soft:#829187; --accent:#164f3d; --accent-light:#eef2e9; --accent-dark:#103d2f; --border:#e1e4d9; --warm-accent:#b69b5e; --shadow:0 4px 22px rgba(33,62,45,.035); }
+.home-view { max-width:1160px; padding:30px 32px 100px; }
+.home-view .brand-logo { font-family:Georgia,serif; font-weight:400; font-size:36px; letter-spacing:-.05em; }
+.home-view .brand-tagline { color:var(--text-sub); font-size:11px; }
+.home-view .lp-nav { background:rgba(250,249,245,.96); margin:0 0 20px; padding:15px 0; gap:24px; border-bottom:1px solid #ccd5c9; }
+.home-view .lp-nav a { padding:5px 0; border:0; border-radius:0; background:none; color:#496253; font-size:10px; letter-spacing:.12em; }
+.home-view .lp-nav a:hover { color:var(--accent); text-decoration:underline; text-underline-offset:6px; }
+.home-view .hero { display:grid; grid-template-columns:.9fr 1.1fr; gap:44px; align-items:center; margin:0; padding:38px 0 25px; }
+.home-view .hero-title { font-size:42px; line-height:1.6; font-weight:600; margin:20px 0 24px; letter-spacing:0; }
+.home-view .hero-title .accent { white-space:normal; background:none; }
+.home-view .hero-sub { font-size:14px; line-height:2; }
+.home-view .hero-eyebrow { font-size:10px; font-weight:500; letter-spacing:.2em; color:#616848; }
+.home-view .hero-assurance { gap:6px 14px; margin-top:24px; }
+.home-view .hero-assurance span { background:none; color:var(--accent); padding:0; border-radius:0; font-size:11px; font-weight:600; }
+.home-view .hero-assurance span::before { content:'✓'; color:#a98b4d; margin-right:6px; }
+.home-view .hero-cta-row { gap:16px; margin-top:18px; align-items:center; }
+.home-view .hero-cta { border-radius:4px; font-size:13px; padding:16px 20px; min-height:48px; justify-content:space-between; gap:18px; }
+.home-view .cta-secondary { border:0; border-radius:0; padding:10px 0; font-size:12px; color:var(--accent); text-decoration:underline; text-underline-offset:6px; }
+.home-view .entry-note { font-size:10px; max-width:400px; margin-top:20px; }
+.home-view .product-teaser { margin:0; border:0; border-radius:3px; background:#f0eee6; overflow:hidden; }
+.neural-art { position:relative; overflow:hidden; aspect-ratio:4/3; }
+.neural-art img { display:block; width:100%; height:100%; object-fit:cover; object-position:center; }
+.neural-light { position:absolute; inset:0; width:100%; height:100%; pointer-events:none; mix-blend-mode:screen; }
+.neural-light path { fill:none; stroke:#fff1bf; stroke-width:1.5; stroke-linecap:round; stroke-dasharray:8 130; opacity:.6; animation:neural-flow 14s linear infinite; }
+.neural-light path:nth-child(2) { animation-duration:18s; animation-delay:-6s; opacity:.4; }
+.neural-light path:nth-child(3) { animation-duration:16s; animation-delay:-9s; }
+@keyframes neural-flow { to { stroke-dashoffset:-690; } }
+.product-teaser[data-paused="true"] .neural-light path { animation-play-state:paused; }
+.home-view .teaser-caption { padding:12px 16px; background:#f4f2e9; align-items:center; }
+.home-view .teaser-caption p { font-size:9px; letter-spacing:.06em; color:#6b7568; line-height:1.7; }
+.home-view .teaser-toggle { background:transparent; border-color:#d5d2c0; font-size:10px; border-radius:3px; }
+.hero-route { display:flex; gap:18px; align-items:center; justify-content:flex-end; color:var(--text-sub); font-size:11px; padding:0 0 32px; border-bottom:1px solid #ccd5c9; }
+.hero-route a { color:var(--accent); text-underline-offset:4px; }
+.home-view .lp-section { margin:70px 0; }
+.home-view #diagnose { margin-top:48px; }
+.home-view .section-label { color:#77612f; font-size:10px; letter-spacing:.17em; margin-bottom:13px; }
+.home-view .lp-title-v2 { font-size:30px; font-weight:500; line-height:1.5; letter-spacing:.02em; margin-bottom:22px; }
+.home-view .selector-intro { font-size:13px; line-height:1.9; max-width:680px; margin-bottom:30px; }
+.diagnose-groups { display:grid; grid-template-columns:1fr 1fr; gap:26px; }
+.home-view .category-section { background:#fff; border:1px solid var(--border); border-radius:5px; padding:22px; margin:0; --category-tint:#f1efe4; --category-ink:#446a51; }
+.home-view .category-section:last-child { grid-column:1/-1; }
+.home-view .category-header { gap:8px; padding-bottom:16px; margin-bottom:4px; }
+.home-view .category-name { font-size:15px; font-weight:600; }
+.home-view .category-code { font-size:9px; letter-spacing:.13em; color:#616848; }
+.home-view .category-desc { flex-basis:100%; font-size:11px; margin-left:42px; color:#5e6c62; }
+.home-view .category-icon { border-radius:50%; width:30px; height:30px; padding:7px; }
+.home-view .problem-list { display:grid; grid-template-columns:1fr; gap:0; }
+.home-view #diagnose .problem-card { border:0; border-bottom:1px solid #edf0e8; border-radius:0; padding:17px 0; box-shadow:none; gap:15px; background:transparent; }
+.home-view #diagnose .problem-card:last-child { border-bottom:0; }
+.home-view #diagnose .problem-card:hover { transform:translateX(3px); }
+.problem-number { font-family:Georgia,serif; color:#ab955d; font-size:21px; width:27px; flex-shrink:0; font-weight:400; }
+.home-view .problem-title { font-size:14px; font-weight:500; }
+.home-view .problem-sub { font-size:11px; }
+.home-view .problem-arrow { font-size:17px; color:#9aaa92; }
+.home-view #sample { padding:36px; background:#eef2e9; border-top:1px solid #c1cfb9; border-bottom:1px solid #c1cfb9; }
+.home-view .sample-card { display:grid; grid-template-columns:.9fr 1.1fr; border:1px solid #d4ddca; border-radius:4px; box-shadow:none; }
+.home-view .sample-heading { padding:30px; background:linear-gradient(145deg,#f8f8ee,#e4ead8); }
+.home-view .sample-heading h3 { font-size:25px; margin:18px 0; font-weight:500; }
+.home-view .sample-kicker { font-size:10px; font-weight:500; color:#53663f; }
+.home-view .sample-stamp { display:none; }
+.home-view .sample-details { padding:10px 30px; }
+.home-view .sample-details dt { font-size:10px; color:#77612f; font-weight:500; }
+.home-view .sample-details dd { font-size:14px; font-weight:500; }
+.home-view .sample-details > div::before { width:4px;height:4px;background:#b69b5e; }
+.home-view .sample-footnote { grid-column:1/-1; font-size:10px; background:#fafbf6; padding:16px 26px; border-top:1px solid #e6e9dd; }
+.home-view .vision-grid { grid-template-columns:repeat(4,1fr); gap:16px; }
+.home-view .vision-card { border-radius:4px; padding:26px 22px; box-shadow:none; border-color:var(--border); background:#fff; }
+.home-view .vision-title { font-size:20px; font-weight:500; }
+.home-view .vision-icon { width:36px;height:36px; color:#79946e; }
+.home-view .vision-label { color:#77612f; font-size:10px; }
+.home-view .vision-desc { font-size:12px; }
+.home-view .flow-step, .home-view .feature-card, .home-view .step-card { border-radius:4px; box-shadow:none; background:#fff; border-color:var(--border); }
+.home-view .step-num { color:#77612f; }
+.home-view .step-name, .home-view .feature-name { font-size:16px; font-weight:500; }
+.home-view .lp-section-dark { border-radius:4px; background:#103e32; margin:70px 0; padding:70px 40px; }
+.home-view .dark-statement { font-weight:500; font-size:32px; }
+.home-view .dark-statement em { color:#d8c78e; display:inline; }
+.home-view .dark-eyebrow { color:#c6b479; }
+.home-view .faq-list { border-top:1px solid #ccd5c9; }
+.home-view .faq-item { border-radius:0; background:transparent; border:0; border-bottom:1px solid #dce2d7; padding:21px 4px; }
+.home-view .faq-item summary { font-size:14px; font-weight:500; }
+.home-view .faq-item p { font-size:12px; max-width:850px; }
+.home-view .lp-footer { display:grid; grid-template-columns:1fr 1fr; gap:22px 50px; border-top:1px solid #ccd5c9; padding-top:34px; }
+.home-view .lp-footer-section { margin:0; }
+.home-view .disclaimer-lp { grid-column:1/-1; font-size:10px; }
+@media(max-width:850px) { .home-view .hero { gap:24px; } .home-view .hero-title { font-size:34px; } .home-view .vision-grid { grid-template-columns:1fr 1fr; } .home-view .category-code { display:none; } }
+@media(max-width:600px) {
+  .home-view { padding:20px 18px 110px; }
+  .home-view .brand-logo { font-size:30px; }
+  .home-view .brand-tagline { font-size:9px; }
+  .home-view .lp-nav { gap:23px; margin:0 -18px 8px; padding:13px 18px; }
+  .home-view .hero { grid-template-columns:1fr; gap:24px; padding:26px 0 20px; }
+  .home-view .hero-title { font-size:31px; line-height:1.6; margin:17px 0; max-width:360px; }
+  .home-view .hero-sub { font-size:12px; }
+  .home-view .hero-cta-row { flex-direction:row; align-items:center; flex-wrap:wrap; gap:15px; }
+  .home-view .hero-cta { justify-content:center; font-size:12px; padding:15px 16px; }
+  .home-view .cta-secondary { font-size:11px; }
+  .home-view .hero-assurance { margin-top:20px; }
+  .home-view .entry-note { font-size:9px; margin-top:17px; }
+  .neural-art { aspect-ratio:4/3; }
+  .hero-route { font-size:10px; justify-content:space-between; gap:8px; padding-bottom:24px; }
+  .home-view .lp-section { margin:44px 0; }
+  .home-view #diagnose { margin-top:36px; }
+  .home-view .lp-title-v2 { font-size:24px; line-height:1.6; margin-bottom:18px; }
+  .home-view .selector-intro { font-size:11px; margin-bottom:22px; }
+  .diagnose-groups { grid-template-columns:1fr; gap:16px; }
+  .home-view .category-section { padding:19px; }
+  .home-view .category-name { font-size:14px; }
+  .home-view .category-desc { font-size:10px; }
+  .home-view #diagnose .problem-card { padding:16px 0; }
+  .home-view .problem-title { font-size:13px; }
+  .home-view .problem-sub { font-size:10px; }
+  .home-view #sample { margin:44px -18px; padding:28px 18px; }
+  .home-view .sample-card { grid-template-columns:1fr; }
+  .home-view .sample-heading { padding:24px; }
+  .home-view .sample-details { padding:2px 24px; }
+  .home-view .sample-footnote { padding:15px 22px; font-size:9px; }
+  .home-view .vision-grid { gap:12px; }
+  .home-view .vision-card { padding:21px 16px; }
+  .home-view .vision-title { font-size:17px; }
+  .home-view .vision-desc { font-size:11px; }
+  .home-view .lp-section-dark { margin:44px 0; padding:44px 24px; }
+  .home-view .dark-statement { font-size:23px; }
+  .home-view .lp-footer { grid-template-columns:1fr; }
+}
+@media(prefers-reduced-motion:reduce) { .neural-light path { animation:none; opacity:.25; } .home-view #diagnose .problem-card:hover, .home-view .vision-card:hover, .home-view .hero-cta:hover { transform:none; } }
 </style>
 </head>
 <body>
@@ -3636,13 +3854,30 @@ function setState(updates) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
+// Approved generated concept artwork with a light, optional animated overlay.
+function renderNeuralVisual() {
+  return `<div class="neural-art" id="neural-visual">
+    <img src="assets/sup-neural-hero.png" width="1448" height="1086" alt="透明なカプセルを中心に、深緑と淡い金色の糸がつながるコンセプトアート" fetchpriority="high" decoding="async">
+    <svg class="neural-light" viewBox="0 0 720 480" aria-hidden="true" focusable="false" preserveAspectRatio="xMidYMid slice">
+      <path d="M-30 366C102 344 190 234 354 246S575 153 758 96"/>
+      <path d="M-25 124C129 168 241 278 369 244S548 329 755 366"/>
+      <path d="M-20 316C125 295 221 250 356 245S537 235 756 174"/>
+    </svg>
+  </div>`;
+}
+
 function renderHome() {
+  const problemCount = Object.keys(PROBLEMS).length;
+  const typeCount = Object.values(PROBLEMS).reduce((sum, p) => sum + Object.keys(p.types).length, 0);
+  // Read the sample labels from the same data as the real result screen.
+  const sampleProblem = PROBLEMS.focus;
+  const sampleType = sampleProblem.types.sleep;
   const groups = CATEGORIES.map(cat => {
     const probs = Object.values(PROBLEMS).filter(p => p.category === cat.id);
     if (probs.length === 0) return '';
-    const cards = probs.map(p => `
+    const cards = probs.map((p, index) => `
       <button class="problem-card" onclick="startProblem('${p.id}')">
-        <div class="problem-icon">${p.icon}</div>
+        <div class="problem-number" aria-hidden="true">${String(index + 1).padStart(2, '0')}</div>
         <div class="problem-text">
           <div class="problem-title">${p.title}</div>
           <div class="problem-sub">${p.subtitle}</div>
@@ -3674,28 +3909,61 @@ function renderHome() {
     </div>
 
     <nav class="lp-nav">
+      <a href="#diagnose">悩みを選ぶ</a>
+      <a href="#sample">結果サンプル</a>
       <a href="#vision">VISION</a>
       <a href="#logic">LOGIC</a>
       <a href="#why">WHY</a>
       <a href="#how">HOW</a>
-      <a href="#diagnose">DIAGNOSE</a>
       <a href="#faq">FAQ</a>
     </nav>
 
-    <div class="hero">
-      <div class="hero-deco">${ICONS.heroDeco}</div>
-      <div class="hero-eyebrow">7つの悩み / 28型診断 / エビデンスベース</div>
-      <h1 class="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。</h1>
-      <p class="hero-sub">5分の問診で、型 → 動かす数値 → 効く成分 → 含むサプリまで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
-      <div class="hero-cta-row">
-        <a href="#diagnose" class="hero-cta">いま気になる悩みから診断 →</a>
-        <a href="#why" class="cta-secondary">Sup. のロジックを見る</a>
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-copy">
+        <div class="hero-eyebrow">PERSONAL FIT. EVERYDAY FLOW.</div>
+        <h1 class="hero-title" id="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。</h1>
+        <p class="hero-sub">5分の問診で、型 → 動かす数値 → 成分 → サプリの候補へ。<br>"なんとなく"の選択を、自分に合う選択に。</p>
+        <div class="hero-assurance" aria-label="診断の利用条件"><span>診断は無料</span><span>会員登録・ログイン不要</span></div>
+        <div class="hero-cta-row">
+          <a href="#diagnose" class="hero-cta">無料で悩みを選んでみる <span aria-hidden="true">↗</span></a>
+          <a href="#sample" class="cta-secondary">結果サンプルを見る →</a>
+        </div>
+        <p class="entry-note">${problemCount}の悩み / ${typeCount}のタイプ<br>セルフケアの選択肢を整理するガイドです。医療上の診断・治療を行うものではありません。</p>
       </div>
-      <div style="margin-top:18px;font-size:13px;color:#666;display:flex;gap:6px;align-items:center;flex-wrap:wrap;">
-        <span>すでにサプリ飲んでる人は</span>
-        <a href="https://app.sup-app.org/my-stack" style="color:#0f5b3e;font-weight:700;text-decoration:underline;">My Stack で管理 →</a>
-      </div>
+      <figure class="product-teaser" id="product-teaser" data-paused="false">
+        ${renderNeuralVisual()}
+        <figcaption class="teaser-caption"><p>CONCEPT IMAGE<br>身体の仕組みや効果を示すものではありません</p><button class="teaser-toggle" type="button" onclick="toggleTeaser(this)" aria-controls="neural-visual" aria-pressed="false">動きを止める</button></figcaption>
+      </figure>
+    </section>
+    <div class="hero-route"><span>すでにサプリを飲んでいる方へ</span><a href="https://app.sup-app.org/my-stack">My Stack で管理する ↗</a></div>
+
+    <div id="diagnose" class="lp-section">
+      <div class="section-label">DIAGNOSE</div>
+      <h2 class="lp-title-v2">いま気になる悩みから、診断。</h2>
+      <p class="selector-intro">まずは1つ選んでください。質問に答えると、タイプ・着目する指標・成分の候補を確認できます。</p>
+      <div class="diagnose-groups">${groups}</div>
     </div>
+
+    <section class="lp-section" id="sample" aria-labelledby="sample-title">
+      <div class="section-label">RESULT SAMPLE</div>
+      <h2 class="lp-title-v2" id="sample-title">答えた先に、何がわかる？</h2>
+      <p class="selector-intro">「${sampleProblem.title}」の結果の一例です。回答によって表示内容は変わります。</p>
+      <div class="sample-card">
+        <div class="sample-heading">
+          <span class="sample-stamp" aria-hidden="true">RESULT<br>SAMPLE</span>
+          <div class="sample-kicker">表示例 / あなたの結果ではありません</div>
+          <h3>${sampleType.name}</h3>
+          <p>悩みをタイプに整理し、セルフケアを考える手がかりを提示します。</p>
+        </div>
+        <dl class="sample-details">
+          <div><dt>01 / 着目する指標</dt><dd>${sampleType.targetMetric.label}</dd></div>
+          <div><dt>02 / 成分の候補</dt><dd>${sampleType.activeIngredients.slice(0, 2).map(ing => ing.name).join(' / ')}</dd></div>
+          <div><dt>03 / 結果画面で確認できること</dt><dd>サプリ製品の候補・生活習慣・利用上の注意</dd></div>
+        </dl>
+        <p class="sample-footnote">既存の結果データから抜粋した表示サンプルです。検査値の測定や病気の診断ではなく、効果を保証するものでもありません。服薬中・既往歴のある方は、利用前に医師・薬剤師にご相談ください。</p>
+      </div>
+      <div class="hero-cta-row"><a href="#diagnose" class="hero-cta">自分の悩みで試してみる →</a></div>
+    </section>
 
     <div class="lp-section" id="vision">
       <div class="section-label">VISION</div>
@@ -3738,7 +4006,7 @@ function renderHome() {
           <div class="flow-num">01</div>
           <div class="flow-icon">${ICONS.worry}</div>
           <div class="flow-title">悩み</div>
-          <div class="flow-desc">7つから選ぶ</div>
+          <div class="flow-desc">${problemCount}の悩みから選ぶ</div>
         </div>
         <div class="flow-arrow">→</div>
         <div class="flow-step">
@@ -3804,7 +4072,7 @@ function renderHome() {
         <div class="step-card">
           <div class="step-num">STEP 01</div>
           <div class="step-name">悩みを選ぶ</div>
-          <div class="step-desc">7つの悩み × 4つの強化軸から、いま気になるものを1つ選ぶ。</div>
+          <div class="step-desc">${problemCount}の悩みから、いま気になるものを1つ選ぶ。</div>
         </div>
         <div class="step-card">
           <div class="step-num">STEP 02</div>
@@ -3825,12 +4093,6 @@ function renderHome() {
         <h2 class="dark-statement">サプリを通じて、<br><em>自分をマネジメント</em>する。</h2>
         <p class="dark-text">「飲めば良くなる」ではなく、動かす数値に効く成分を。<br>Sup. はその思考の補助線。あなたの身体は、設計できる。</p>
       </div>
-    </div>
-
-    <div id="diagnose" class="lp-section">
-      <div class="section-label">DIAGNOSE</div>
-      <h2 class="lp-title-v2">いま気になる悩みから、診断。</h2>
-      ${groups}
     </div>
 
     <div class="lp-section" id="faq">
@@ -4055,7 +4317,7 @@ function renderMobileCta() {
   if (state.screen !== 'home') return '';
   return `
     <div class="mobile-cta-bar">
-      <a href="#diagnose" class="cta-btn">いま気になる悩みから診断 →</a>
+      <a href="#diagnose" class="cta-btn">無料・登録不要で診断をはじめる →</a>
     </div>
   `;
 }
@@ -4066,8 +4328,17 @@ function render() {
   if (state.screen === 'home') content = renderHome();
   else if (state.screen === 'intake') content = renderIntake();
   else if (state.screen === 'result') content = renderResult();
+  app.className = state.screen === 'home' ? 'container home-view' : 'container';
   app.innerHTML = content + renderSavedFab() + renderSavedModal() + renderMobileCta();
 }
+
+window.toggleTeaser = (button) => {
+  const teaser = document.getElementById('product-teaser');
+  const paused = teaser.getAttribute('data-paused') !== 'true';
+  teaser.setAttribute('data-paused', String(paused));
+  button.setAttribute('aria-pressed', String(paused));
+  button.textContent = paused ? '動きを再開する' : '動きを止める';
+};
 
 window.startProblem = (id) => setState({ screen: 'intake', problemId: id, questionIndex: 0, answers: {} });
 
