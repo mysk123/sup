@@ -24,8 +24,8 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Noto+Sans+JP:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
-<link href="https://fonts.googleapis.com/css2?family=Klee+One:wght@600&amp;display=swap&amp;text=%E6%82%A9%E3%81%BF%E3%82%92%E3%80%81%E3%80%8C%E5%8B%95%E3%81%8B%E3%81%99%E6%95%B0%E5%80%A4%E3%80%8D%E3%81%AB%E7%BF%BB%E8%A8%B3%E3%81%99%E3%82%8B%E3%80%82" rel="stylesheet">
-<!-- Klee One by Fontworks, SIL Open Font License 1.1: https://github.com/fontworks-fonts/Klee/blob/master/OFL.txt . Headline-only Google Fonts subset. -->
+<link href="https://fonts.googleapis.com/css2?family=Shippori+Mincho:wght@600&amp;display=swap&amp;text=%E6%82%A9%E3%81%BF%E3%82%92%E3%80%81%E3%80%8C%E5%8B%95%E3%81%8B%E3%81%99%E6%95%B0%E5%80%A4%E3%80%8D%E3%81%AB%E7%BF%BB%E8%A8%B3%E3%81%99%E3%82%8B%E3%80%82" rel="stylesheet">
+<!-- Shippori Mincho, SIL Open Font License 1.1: https://github.com/fontdasu/ShipporiMincho . Headline-only Google Fonts subset. -->
 
 <style>
 html { scroll-behavior: smooth; }
@@ -1233,36 +1233,32 @@ a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px soli
   .problem-card, .problem-icon, .problem-arrow, .hero-cta, .q-option { transition: none; }
   #diagnose .problem-card:hover, .problem-card:active, .problem-card:hover .problem-icon, .problem-card:hover .problem-arrow, .hero-cta:hover { transform: none; }
 }
-/* Handwritten headline + silent, illustrative product teaser. */
-.hero-title { font-family: "Klee One", "Noto Sans JP", sans-serif; font-weight: 600; line-height: 1.45; letter-spacing: -.045em; }
-.product-teaser { margin: 24px 0 0; padding: 18px; border: 1px solid var(--border); border-radius: 16px; background: #f4f3ed; }
-.teaser-caption { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 14px; }
-.teaser-caption p { color: var(--text-sub); font-size: 11px; line-height: 1.6; }
-.teaser-caption strong { display: block; color: var(--accent); font-size: 12px; letter-spacing: .04em; }
-.teaser-toggle { flex-shrink: 0; min-height: 36px; padding: 7px 10px; border: 1px solid #b8c7bd; border-radius: 8px; background: var(--bg); font-family: inherit; font-size: 11px; line-height: 1.5; font-weight: 600; color: var(--accent); cursor: pointer; }
-.teaser-scenes { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.teaser-scene { min-width: 0; padding: 14px 12px; border: 1px solid #d9e1da; border-radius: 11px; background: var(--card-bg); animation: teaser-highlight 9s ease-in-out infinite; }
-.teaser-scene:nth-child(2) { animation-delay: 3s; }
-.teaser-scene:nth-child(3) { animation-delay: 6s; }
-.teaser-step { display: flex; align-items: center; gap: 6px; color: var(--accent); font-size: 11px; font-weight: 700; margin-bottom: 12px; }
-.teaser-step span { display: grid; place-items: center; width: 21px; height: 21px; background: var(--accent-light); border-radius: 50%; font-size: 10px; }
-.teaser-content { color: var(--text-main); font-size: 12px; line-height: 1.7; }
-.teaser-choice { display: block; margin-top: 7px; padding: 6px 8px; border-radius: 6px; color: var(--accent-dark); background: #edf1e6; font-size: 11px; }
-.teaser-result { color: var(--accent); font-size: 17px; font-weight: 700; }
-.teaser-note { margin-top: 12px; color: var(--text-sub); font-size: 10px; line-height: 1.7; }
-@keyframes teaser-highlight { 0%, 30%, 100% { transform: translateY(0); box-shadow: none; } 8%, 22% { transform: translateY(-3px); box-shadow: 0 5px 0 #dbe7b8; border-color: #739582; } }
-.product-teaser[data-paused="true"] .teaser-scene { animation-play-state: paused; }
+/* Editorial Mincho and an original Sup particle wordmark. */
+.hero-title { font-family: "Shippori Mincho", "Hiragino Mincho ProN", "Yu Mincho", serif; font-weight: 600; line-height: 1.55; letter-spacing: .015em; font-size: 42px; }
+.hero-title .accent { background: none; }
+.hero-sketch { display: none; }
+.hero-eyebrow-row { margin-bottom: 22px; }
+.product-teaser { position: relative; margin: 26px 0 0; overflow: hidden; border-radius: 4px; background: radial-gradient(ellipse at 65% 45%, #fff 0%, #f3f8f5 42%, #deebe5 100%); }
+.brand-motion { display: block; width: 100%; height: auto; aspect-ratio: 720 / 300; }
+.brand-particle { animation: sup-gather 12s cubic-bezier(.45,0,.2,1) infinite; }
+.brand-orbit { transform-origin: 360px 150px; animation: sup-orbit 24s linear infinite; }
+.teaser-caption { display: flex; align-items: center; justify-content: space-between; gap: 12px; padding: 10px 18px 15px; }
+.teaser-caption p { color: #49675a; font-size: 10px; letter-spacing: .12em; }
+.teaser-toggle { flex-shrink: 0; min-height: 36px; padding: 7px 10px; border: 1px solid #b8c7bd; border-radius: 4px; background: rgba(255,255,255,.7); font-family: inherit; font-size: 11px; line-height: 1.5; font-weight: 500; color: var(--accent); cursor: pointer; }
+@keyframes sup-gather {
+  0%, 100% { transform: translate(var(--sx), var(--sy)); opacity: var(--depth); }
+  20% { transform: translate(var(--rx), var(--ry)); opacity: var(--depth); }
+  49%, 75% { transform: translate(0, 0); opacity: .85; }
+}
+@keyframes sup-orbit { to { transform: rotate(360deg); } }
+.product-teaser[data-paused="true"] .brand-particle, .product-teaser[data-paused="true"] .brand-orbit { animation-play-state: paused; }
 @media (max-width: 600px) {
-  .hero-title { font-size: 29px; }
-  .product-teaser { padding: 14px; }
-  .teaser-scenes { grid-template-columns: 1fr; gap: 8px; }
-  .teaser-scene { display: grid; grid-template-columns: 93px minmax(0, 1fr); align-items: center; gap: 8px; padding: 10px 12px; }
-  .teaser-step { margin: 0; }
-  .teaser-choice { margin-top: 3px; padding: 3px 6px; }
-  .teaser-result { font-size: 15px; }
+  .hero-title { font-size: 28px; line-height: 1.65; letter-spacing: 0; }
+  .teaser-caption { padding: 7px 12px 12px; }
+  .teaser-caption p { font-size: 9px; letter-spacing: .06em; }
 }
 @media (prefers-reduced-motion: reduce) {
-  .teaser-scene { animation: none; transform: none; }
+  .brand-particle, .brand-orbit { animation: none; transform: none; }
   .teaser-toggle { display: none; }
 }
 </style>
@@ -3745,6 +3741,31 @@ function setState(updates) {
   window.scrollTo({ top: 0, behavior: 'instant' });
 }
 
+// Original Sup wordmark point coordinates, generated from our own text artwork.
+// CSS animates SVG circles; no WebGL, canvas runtime, video, or third-party assets.
+function renderBrandMotion() {
+  const points = [[200,72],[206,72],[212,72],[218,72],[224,72],[230,72],[236,72],[242,72],[248,72],[254,72],[194,78],[200,78],[206,78],[212,78],[218,78],[224,78],[230,78],[236,78],[242,78],[248,78],[254,78],[188,84],[194,84],[200,84],[206,84],[212,84],[218,84],[224,84],[230,84],[236,84],[242,84],[248,84],[254,84],[182,90],[188,90],[194,90],[200,90],[206,90],[248,90],[254,90],[182,96],[188,96],[194,96],[200,96],[206,96],[446,96],[452,96],[458,96],[182,102],[188,102],[194,102],[200,102],[206,102],[290,102],[296,102],[302,102],[308,102],[314,102],[350,102],[356,102],[362,102],[368,102],[398,102],[404,102],[410,102],[416,102],[422,102],[434,102],[440,102],[446,102],[452,102],[458,102],[464,102],[470,102],[182,108],[188,108],[194,108],[200,108],[206,108],[212,108],[290,108],[296,108],[302,108],[308,108],[314,108],[350,108],[356,108],[362,108],[368,108],[398,108],[404,108],[410,108],[416,108],[422,108],[428,108],[434,108],[440,108],[446,108],[452,108],[458,108],[464,108],[470,108],[476,108],[188,114],[194,114],[200,114],[206,114],[212,114],[218,114],[224,114],[230,114],[236,114],[290,114],[296,114],[302,114],[308,114],[314,114],[350,114],[356,114],[362,114],[368,114],[398,114],[404,114],[410,114],[416,114],[422,114],[428,114],[434,114],[446,114],[452,114],[458,114],[464,114],[470,114],[476,114],[188,120],[194,120],[200,120],[206,120],[212,120],[218,120],[224,120],[230,120],[236,120],[242,120],[248,120],[254,120],[290,120],[296,120],[302,120],[308,120],[314,120],[350,120],[356,120],[362,120],[368,120],[398,120],[404,120],[410,120],[416,120],[422,120],[458,120],[464,120],[470,120],[476,120],[482,120],[194,126],[200,126],[206,126],[212,126],[218,126],[224,126],[230,126],[236,126],[242,126],[248,126],[254,126],[260,126],[290,126],[296,126],[302,126],[308,126],[314,126],[350,126],[356,126],[362,126],[368,126],[398,126],[404,126],[410,126],[416,126],[422,126],[458,126],[464,126],[470,126],[476,126],[482,126],[212,132],[218,132],[224,132],[230,132],[236,132],[242,132],[248,132],[254,132],[260,132],[290,132],[296,132],[302,132],[308,132],[314,132],[350,132],[356,132],[362,132],[368,132],[398,132],[404,132],[410,132],[416,132],[422,132],[458,132],[464,132],[470,132],[476,132],[482,132],[236,138],[242,138],[248,138],[254,138],[260,138],[290,138],[296,138],[302,138],[308,138],[314,138],[350,138],[356,138],[362,138],[368,138],[398,138],[404,138],[410,138],[416,138],[422,138],[464,138],[470,138],[476,138],[482,138],[242,144],[248,144],[254,144],[260,144],[266,144],[290,144],[296,144],[302,144],[308,144],[314,144],[350,144],[356,144],[362,144],[368,144],[398,144],[404,144],[410,144],[416,144],[422,144],[458,144],[464,144],[470,144],[476,144],[482,144],[182,150],[242,150],[248,150],[254,150],[260,150],[266,150],[290,150],[296,150],[302,150],[308,150],[314,150],[344,150],[350,150],[356,150],[362,150],[368,150],[398,150],[404,150],[410,150],[416,150],[422,150],[458,150],[464,150],[470,150],[476,150],[482,150],[182,156],[188,156],[194,156],[242,156],[248,156],[254,156],[260,156],[290,156],[296,156],[302,156],[308,156],[314,156],[344,156],[350,156],[356,156],[362,156],[368,156],[398,156],[404,156],[410,156],[416,156],[422,156],[428,156],[458,156],[464,156],[470,156],[476,156],[482,156],[512,156],[518,156],[524,156],[530,156],[182,162],[188,162],[194,162],[200,162],[206,162],[212,162],[218,162],[224,162],[230,162],[236,162],[242,162],[248,162],[254,162],[260,162],[296,162],[302,162],[308,162],[314,162],[320,162],[326,162],[332,162],[338,162],[344,162],[350,162],[356,162],[362,162],[368,162],[398,162],[404,162],[410,162],[416,162],[422,162],[428,162],[434,162],[440,162],[446,162],[452,162],[458,162],[464,162],[470,162],[476,162],[512,162],[518,162],[524,162],[530,162],[182,168],[188,168],[194,168],[200,168],[206,168],[212,168],[218,168],[224,168],[230,168],[236,168],[242,168],[248,168],[254,168],[296,168],[302,168],[308,168],[314,168],[320,168],[326,168],[332,168],[338,168],[344,168],[350,168],[356,168],[362,168],[368,168],[398,168],[404,168],[410,168],[416,168],[422,168],[428,168],[434,168],[440,168],[446,168],[452,168],[458,168],[464,168],[470,168],[512,168],[518,168],[524,168],[530,168],[188,174],[194,174],[200,174],[206,174],[212,174],[218,174],[224,174],[230,174],[236,174],[242,174],[248,174],[302,174],[308,174],[314,174],[320,174],[326,174],[332,174],[350,174],[356,174],[362,174],[368,174],[398,174],[404,174],[410,174],[416,174],[422,174],[434,174],[440,174],[446,174],[452,174],[458,174],[464,174],[512,174],[518,174],[524,174],[530,174],[218,180],[224,180],[230,180],[314,180],[320,180],[398,180],[404,180],[410,180],[416,180],[422,180],[446,180],[452,180],[398,186],[404,186],[410,186],[416,186],[422,186],[398,192],[404,192],[410,192],[416,192],[422,192],[398,198],[404,198],[410,198],[416,198],[422,198],[398,204],[404,204],[410,204],[416,204],[422,204],[398,210],[404,210],[410,210],[416,210],[422,210]];
+  const particles = points.map(([x, y], i) => {
+    const z = 1 - 2 * (i + .5) / points.length;
+    const radius = Math.sqrt(1 - z * z);
+    const angle = i * 2.399963;
+    const sx = 360 + 115 * radius * Math.cos(angle);
+    const sy = 150 + 112 * z;
+    const rx = 360 + 115 * radius * Math.cos(angle + .85);
+    const ry = 150 + 104 * z + 14 * radius * Math.sin(angle + .85);
+    const depth = (.3 + .6 * (Math.sin(angle) + 1) / 2).toFixed(2);
+    const color = x > 485 ? '#4b9877' : (i % 7 === 0 ? '#80aa99' : '#174d39');
+    return `<circle class="brand-particle" cx="${x}" cy="${y}" r="${i % 4 === 0 ? 1.8 : 1.45}" fill="${color}" style="--sx:${(sx-x).toFixed(1)}px;--sy:${(sy-y).toFixed(1)}px;--rx:${(rx-x).toFixed(1)}px;--ry:${(ry-y).toFixed(1)}px;--depth:${depth}"/>`;
+  }).join('');
+  return `<svg class="brand-motion" id="brand-motion" viewBox="0 0 720 300" aria-hidden="true" focusable="false">
+    <g class="brand-orbit" fill="none" stroke="#a8c3b5" stroke-width=".65" opacity=".32">
+      <ellipse cx="360" cy="150" rx="170" ry="112" transform="rotate(-22 360 150)"/>
+      <ellipse cx="360" cy="150" rx="204" ry="134" transform="rotate(18 360 150)"/>
+    </g>
+    ${particles}
+  </svg>`;
+}
+
 function renderHome() {
   const problemCount = Object.keys(PROBLEMS).length;
   const typeCount = Object.values(PROBLEMS).reduce((sum, p) => sum + Object.keys(p.types).length, 0);
@@ -3813,27 +3834,13 @@ function renderHome() {
       </div>
       <h1 class="hero-title">悩みを、<span class="accent">「動かす数値」</span>に翻訳する。</h1>
       <p class="hero-sub">5分の問診で、型 → 動かす数値 → 効く成分 → 含むサプリまで一気通貫で。<br>"なんとなく"のサプリ選びを、卒業する。</p>
-      <section class="product-teaser" id="product-teaser" data-paused="false" aria-labelledby="teaser-title">
-        <div class="teaser-caption">
-          <p><strong id="teaser-title">こんなふうに、選択肢が見えてくる。</strong>操作のイメージ / 回答・結果は一例です</p>
-          <button class="teaser-toggle" type="button" onclick="toggleTeaser(this)" aria-controls="teaser-scenes" aria-pressed="false">動きを止める</button>
-        </div>
-        <div class="teaser-scenes" id="teaser-scenes">
-          <div class="teaser-scene">
-            <div class="teaser-step"><span>01</span>悩みを選ぶ</div>
-            <div class="teaser-content">${sampleProblem.title}<span class="teaser-choice">${sampleProblem.icon} 気になる悩みを1つ</span></div>
-          </div>
-          <div class="teaser-scene">
-            <div class="teaser-step"><span>02</span>質問に答える</div>
-            <div class="teaser-content">${sampleProblem.questions[1].text}<span class="teaser-choice">${sampleProblem.questions[1].options[0].label}</span></div>
-          </div>
-          <div class="teaser-scene">
-            <div class="teaser-step"><span>03</span>結果を知る</div>
-            <div class="teaser-content"><span class="teaser-result">${sampleType.name}</span><br>指標・成分・生活習慣を確認</div>
-          </div>
-        </div>
-        <p class="teaser-note">表示例です。あなたの状態の測定・診断や、効果の保証ではありません。</p>
-      </section>
+      <figure class="product-teaser" id="product-teaser" data-paused="false" aria-label="Sup.のブランドアニメーション。粒子が集まり、Sup.の文字になるイメージ。">
+        ${renderBrandMotion()}
+        <figcaption class="teaser-caption">
+          <p>SUP. / ブランドイメージ</p>
+          <button class="teaser-toggle" type="button" onclick="toggleTeaser(this)" aria-controls="brand-motion" aria-pressed="false">動きを止める</button>
+        </figcaption>
+      </figure>
       <div class="hero-assurance" aria-label="診断の利用条件">
         <span>診断は無料</span><span>会員登録・ログイン不要</span>
       </div>
